@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <title>墨子</title>
+ <style type="text/css">
+ body{ margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; font-size:12px; background-color:#ececec;}
+ #x_div, #y_div { position:fixed; top:0;left:0; background-color:blue; width:100%; height:2px; }
+ #y_div { height:100%; width:2px; }
+ #Mouse{ position:fixed; display:none;color:blue;}
+ #Mouse strong{ color:#f00;}
+ </style>
+ </head>
+ 
+ <body>
+ <div id="Mouse">X轴:<strong id="XXX"></strong> & Y轴:<strong id="YYY"></strong></div>
+ 
+ <div id="x_div"></div>
+ <div id="y_div"></div>
+ 
+ 
+ <script>
+ 
+ function mouseMove(event){
+    var event = window.event || event;
+     var x_div = document.getElementById("x_div"),
+         y_div = document.getElementById("y_div"),
+         Mouse = document.getElementById("Mouse"),
+         top = event.clientY > (window.screen.availHeight/2) ? -30 : 10,
+         left = event.clientX > (window.screen.availWidth/2) ? -120 : 20;
+     
+     document.getElementById("XXX").innerHTML = event.clientX; 
+     document.getElementById("YYY").innerHTML = event.clientY;
+     
+     Mouse.style.top = event.clientY + top + "px";
+     Mouse.style.left = event.clientX + left + "px";
+     Mouse.style.display = "block";
+     
+     x_div.style.top = event.clientY + "px";
+     y_div.style.left = event.clientX + "px";
+ }
+ 
+ document.onmousemove = mouseMove; 
+ </script>
+ </body>
+ </html>
