@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "盲人辅助工具",
   "scripts": {
-    "dev": "rollup --config rollup.config.js --watch",
+    "start": "rollup --config rollup.config.js --watch",
     "build": "rollup --config rollup.config.js"
   },
   "repository": {
@@ -32,6 +32,8 @@
     "rollup-plugin-eslint": "^7.0.0"
   },
   "dependencies": {
-    "@babel/plugin-transform-classes": "^7.13.0"
+    "@babel/plugin-transform-classes": "^7.13.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-sass": "^1.2.2"
   }
 }

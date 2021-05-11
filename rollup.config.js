@@ -2,10 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const babelPlugin = require('rollup-plugin-babel');
 const json = require('@rollup/plugin-json');
+
 //const { eslint } = require('rollup-plugin-eslint');
 const cwd = process.cwd();
+import sass from 'rollup-plugin-sass';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import copy from 'rollup-plugin-copy'
 
 
 
@@ -20,6 +23,7 @@ function generateWebConfig(isBrowser) {
             },
         ],
         plugins: [
+            sass(),
             json(),
             babelPlugin({
                 exclude: 'node_modules/**',
@@ -32,6 +36,11 @@ function generateWebConfig(isBrowser) {
                 browser: isBrowser,
             }),
             commonjs(),
+            copy({
+                targets: [
+                  { src: 'src/assets/**/*', dest: 'dist/assets' }
+                ]
+              })
         ],
     };
 }

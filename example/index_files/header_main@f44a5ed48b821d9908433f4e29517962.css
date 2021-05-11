@@ -1,0 +1,236 @@
+.q_header ul,.q_header ol{list-style:none}
+.q_header img{border:0}
+.q_header ul,.q_header ol,.q_header dl,.q_header dd{margin:0;padding:0}
+.q_header a{text-decoration:none}
+.q_header{margin:0 auto -427px;width:100%;min-width:980px;height:500px;font:normal 12px/1.5 tahoma,arial,sans-serif;background:url(//source.qunarzz.com/common/hf/header_v16.png) 0 -401px repeat-x}
+.q_header .q_header_main{margin:0 auto;width:980px;height:73px;*z-index:10}
+.q_header .q_header_logo{float:left;display:inline;margin:15px 0 0 0;width:128px;height:50px;position:relative}
+.q_header .q_header_logo a{display:block;width:136px;height:54px;overflow:hidden;outline:0}
+.q_header .q_header_logo a span{z-index:-1;position:relative;color:#0086a0}
+.q_header .q_header_app_logo{position:relative;left:8px;_left:16px;display:block;height:36px;width:94px;float:right;margin-top:17px}
+.q_header_max .q_header_main{width:1200px}
+.q_header_max .q_header_app_logo{position:static!important;width:140px}
+@media screen and (min-width:1340px){}
+.home_header_201909_4004{background:0}
+.home_header_201909_4004 .q_header_main{position:relative;height:116px;width:1200px;background:#fff}
+.home_header_201909_4004 .q_header_main .q_header_tnav #__loginInfo_u__ a,#__loginInfo_r__ a{color:#00bcd4}
+.home_header_201909_4004 .q_header_main .q_header_tnav ul .wx_phone_icon{font-family:homenode!important;position:relative;color:#00bcd4;font-size:15px}
+.home_header_201909_4004 .q_header_main .q_header_tnav ul .wx_phone_icon i{cursor:pointer}
+.home_header_201909_4004 .q_header_main .q_header_tnav ul .wx_phone_icon .picture{width:144px;height:183px;position:absolute;border:1px solid #c4c4c4;z-index:10;text-align:center;box-shadow:0 2px 5px#c4c4c4;display:none}
+.home_header_201909_4004 .q_header_main .q_header_tnav ul .wx_phone_icon .phone_picture{left:-125px}
+.home_header_201909_4004 .q_header_main .q_header_tnav ul .wx_phone_icon .wx_picture{left:-90px}
+.home_header_201909_4004 .q_header_main .q_header_tnav ul .wx_phone_icon .picture .content_div{width:100%;height:100%;background-color:#fff}
+.home_header_201909_4004 .q_header_main .q_header_tnav ul .wx_phone_icon .picture .content_div img{width:112px;height:112px;padding-top:16px}
+.home_header_201909_4004 .q_header_main .q_header_tnav ul .wx_phone_icon .picture .content_div .words_grey{color:#616161;font-weight:500;font-size:12px;line-height:normal;margin-top:4px}
+.home_header_201909_4004 .q_header_main .q_header_tnav ul .wx_phone_icon .picture .content_div .get_gift{color:#ff7043;font-weight:500;font-size:12px;line-height:normal}
+.home_header_201909_4004 .q_header_main .q_header_tnav ul .wx_phone_icon .phone_icon{padding-right:21px}
+.home_header_201909_4004 .q_header_main .search_input_div{width:568px;height:42px;position:absolute;top:55px;left:300px}
+.home_header_201909_4004 .q_header_main .search_input_div .left_input_div{width:480px;height:42px;border:2px solid #00d0d4;border-radius:5px 0 0 5px;display:inline-block;position:absolute;padding-left:16px}
+.home_header_201909_4004 .q_header_main .search_input_div .left_input_div .left_input{display:inline-block;width:100%;height:20px;border:0;margin-top:11px;font-size:14px;color:#9e9e9e}
+.home_header_201909_4004 .q_header_main .search_input_div .icon-search{font-family:homenode!important;display:inline-block;width:68px;height:46px;background:linear-gradient(116deg,#00d0d4 5%,#00c5c3 51%,#9effa4 100%);background:#00bcd4\0;font-size:20px;text-align:center;line-height:42px;color:#fff;border-radius:0 5px 5px 0;position:absolute;left:500px;cursor:pointer}
+.home_header_201909_4004 .q_header_main .search_input_div .search_results{position:absolute;top:46px;background:#fff;z-index:3001;width:497px;border:1px solid #00d0d4;border-top:0;border-bottom:0;overflow:hidden}
+.home_header_201909_4004 .q_header_main .search_input_div .search_results li{height:26px;line-height:26px;font-size:12px;color:#616161;padding-left:12px;cursor:pointer}
+.home_header_201909_4004 .q_header_main .search_input_div .search_results li.li_item_hover{background:rgba(0,188,212,0.12)}
+.home_header_201909_4004 .div_mnav{width:100%;background:linear-gradient(90deg,#00d0d4 19%,#00c5c3 58%,#9effa4 100%);background:#00d0d4\0;height:44px;margin:0 auto}
+.home_header_201909_4004 .div_mnav .q_header_mnav{display:block;width:1200px;height:44px;padding:0;float:none;margin-right:0;margin:0 auto}
+.home_header_201909_4004 .div_mnav .q_header_sub_mnav{display:inline-block;height:42px;text-align:left}
+.home_header_201909_4004 .div_mnav .q_header_sub_mnav .q_header_sub_remark{display:inline-block;color:#fff;font-weight:400;font-size:12px;line-height:18px;background-color:#00d0d4;padding:0 8px}
+.home_header_201909_4004 .div_mnav .q_header_sub_mnav .q_header_sub_tran{display:inline-block;width:0;height:0;border-width:4px;border-style:solid;border-color:transparent transparent transparent #00d0d4}
+.home_header_201909_4004 .div_mnav .q_header_sub_mnav .q_header_sub_con{display:inline-block;font-weight:400;font-size:12px;line-height:42px;padding:0 8px}
+.home_header_201909_4004 .div_mnav .q_header_sub_mnav .q_header_sub_con a{position:relative}
+.home_header_201909_4004 .div_mnav .q_header_sub_mnav .q_header_sub_con a i{font-family:homenode!important;color:#00d0d4}
+.home_header_201909_4004 .div_mnav .q_header_sub_mnav .q_header_sub_con a span{color:#616161}
+.home_header_201909_4004 .div_mnav .q_header_sub_mnav .q_header_sub_con a .tagImg{display:inline-block;font-size:0;position:absolute;right:-9px;top:-4px;width:9px;height:9px;line-height:0}
+.home_header_201909_4004 .div_mnav .q_header_mnav #__header_aside_tuan__{left:100px!important}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul{width:auto}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul li{height:44px;width:60px}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul .qhf_cur{background:#00bcd4}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul .qhf_navmore .q_header_navmore-con li{width:auto;height:auto;float:none}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul .qhf_navmore{width:68px}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul .qhf_navmore a{width:100%}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul .qhf_navmore a i{top:20px;left:55px}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul li .q_header_navmore-con{background:#fff;top:44px}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul li .q_header_navmore-con a{width:100%;height:38px;line-height:38px;display:inline-block}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul li .q_header_navmore-con a span{margin-left:0!important}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_navmore-con{padding-bottom:0}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_navmore-con b{color:#666;font-size:14px}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul li a:hover{background:#00bcd4!important}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_navmore-con a:hover{background:rgba(0,188,212,0.12)!important}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_navmore-con a:hover b{color:#666}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul li a{display:inline-block;width:60px;height:100%;text-align:center}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul li a:hover span b{color:#fff}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul li a span{margin:0;display:inline-block;width:100%;height:100%}
+.home_header_201909_4004 .div_mnav .q_header_mnav ul li a span b{color:#fff;display:inline-block;width:100%;height:44px;text-align:center;line-height:44px}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_tags img{top:-10px;z-index:3000}
+.home_header_201909_4004.q_header_max .div_mnav .q_header_mnav .q_header_tags .qhf_tag_piao{left:362px}
+.home_header_201909_4004.q_header_max .div_mnav .q_header_mnav .q_header_tags .qhf_tag_local{left:542px}
+.home_header_201909_4004.q_header_max .div_mnav .q_header_mnav .q_header_tags .qhf_tag_card{left:784px}
+.home_header_201909_4004.q_header_max .div_mnav .q_header_mnav .q_header_tags .qhf_tag_bjcx{left:664px}
+.home_header_201909_4004.q_header_max .div_mnav .q_header_mnav .q_header_tags .qhf_tag_car{left:604px}
+.home_header_201909_4004.q_header_max .q_header_mnav .q_header_tags .qhf_tag_haiwai{left:722px}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_tags .qhf_tag_piao{left:362px}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_tags .qhf_tag_local{left:542px}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_tags .qhf_tag_bjcx{left:664px}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_tags .qhf_tag_car{left:604px}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_tags .qhf_tag_card{left:730px}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_tags .qhf_tag_haiwai{left:730px}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_aside{border:1px solid #00bcd4;padding:0;height:42px;bottom:-44px}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_aside a{display:inline-block;height:100%;padding:0 12px;line-height:42px}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_aside a:hover{background:rgba(0,188,212,0.12);text-decoration:none;color:#666}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_aside .blank,.q_header_blank{display:none}
+.home_header_201909_4004 .div_mnav .q_header_mnav .q_header_navlink.hover{background:0}
+.home_header_201909_4004 .q_header_main .custom_div{width:211px;height:50px;position:absolute;top:55px;left:963px}
+.home_header_201909_4004 .q_header_main .custom_div .left_custom{display:inline-block;height:44px;width:46px;background:#fdf5ec;float:left}
+.home_header_201909_4004 .q_header_main .custom_div .left_custom .icon-custom{display:block;width:46px;height:22px;text-align:center;font-family:homenode!important;font-size:22px;color:#ff8300;line-height:22px;margin-top:2px}
+.home_header_201909_4004 .q_header_main .custom_div .left_custom .custom_24{display:block;width:46px;text-align:center;font-size:12px;color:#ff8300}
+.home_header_201909_4004 .q_header_main .custom_div .right_custom{display:inline-block;width:160px;height:44px}
+.home_header_201909_4004 .q_header_main .custom_div .right_custom .item_custom{margin-left:8px;height:22px;line-height:22px}
+.home_header_201909_4004 .q_header_main .custom_div .right_custom .item_custom .item_custom_words{font-size:12px;color:#757575;line-height:22px}
+.home_header_201909_4004 .q_header_main .custom_div .right_custom .item_custom .item_custom_num{float:right;color:#00d0d4;line-height:22px}
+.q_header .q_header_mnav li.qhf_navmore.q_header_hover a:hover i{background-position:-152px -39px!important}
+.q_header .q_header_tnav{*overflow:hidden;float:right;display:inline;padding:6px 0 0 0;width:688px;height:14px}
+.q_header .q_header_tnav ul{float:right;display:inline;line-height:14px;font-family:tahoma,arial,sans-serif}
+.q_header .q_header_tnav li{float:left;display:inline;padding:0 11px 0 10px;background:url(//source.qunarzz.com/common/hf/header_new_v7.png) 100% -98px no-repeat;background-position:100% -100px\0;*background-position:100% -100px}
+.q_header .q_header_tnav li.q_header_tnav_menu{padding:0 1px 0 0}
+.q_header .q_header_tnav li.q_header_username{padding-right:0;background:0}
+.q_header .q_header_tnav li.q_header_register{padding-left:5px}
+.q_header .q_header_tnav li.q_header_username span,.q_header .q_header_tnav li.q_header_register span{margin-right:5px}
+.q_header .q_header_tnav li.q_header_username a,.q_header .q_header_tnav li.q_header_register a{color:#0084bb}
+.q_header .q_header_tnav li.q_header_register .q_header_logout{color:#666}
+.q_header .q_header_tnav li.q_header_register .q_header_logout:hover{color:#00a3d2}
+.q_header .q_header_tnav li.last{padding-right:0;background:0}
+.q_header .q_header_tnav li a{text-decoration:none;color:#666}
+.q_header .q_header_tnav li a:hover{text-decoration:none;color:#00a3d2}
+.q_header .q_header_tnav li a.q_header_uname{font-family:tahoma;overflow:hidden;text-align:right;text-overflow:ellipsis;width:135px;white-space:nowrap;display:inline-block;*display:inline;*zoom:1}
+.q_header .q_header_tnav_menu{position:relative;z-index:2000;width:84px;height:14px}
+.q_header .q_header_tnav_menu dl{position:absolute;z-index:1;top:-4px;left:0;margin:0;width:84px}
+.q_header .q_header_tnav_menu dt{margin:0 5px;padding:4px 5px;cursor:default}
+.q_header .q_header_tnav_menu dt b{position:absolute;z-index:1;top:10px;right:10px;display:block;width:7px;height:4px;background:url(//source.qunarzz.com/common/hf/header_new_v7.png) -152px -21px no-repeat;overflow:hidden}
+.q_header .q_header_tnav_menu dd{display:none}
+.q_header .q_header_tnav_menu dd a{display:block;padding:0 6px 0 10px;line-height:22px}
+.q_header .q_header_tnav_menu dd a:hover{background-color:#4b7bda;color:#fff}
+.q_header .q_header_tnav_menu_hover{z-index:2001}
+.q_header .q_header_tnav_menu_hover dl{margin:-1px -1px 0;padding:0 0 5px;border:1px solid #d6d6d6;background:#fff;color:#00a3d2}
+.q_header .q_header_tnav_menu_hover dt{border-bottom:1px solid #d6d6d6}
+.q_header .q_header_tnav_menu_hover dt b{background-position:-152px -29px!important}
+.q_header .q_header_tnav_menu_hover dd{display:block}
+.q_header .q_header_tnav_menu:hover{z-index:2001}
+.q_header .q_header_tnav_menu:hover dl{margin:-1px -1px 0;padding:0 0 5px;border:1px solid #d6d6d6;background:#fff;color:#00a3d2}
+.q_header .q_header_tnav_menu:hover dt{border-bottom:1px solid #d6d6d6}
+.q_header .q_header_tnav_menu:hover dt b{background-position:-152px -29px}
+.q_header .q_header_tnav_menu:hover dd{display:block}
+.q_header .q_header_tnav li.q_header_tnav_omenu{margin:0 0 -5px -1px;padding:0 1px 0 0}
+.q_header .q_header_tnav_omenu dl{position:relative}
+.q_header .q_header_tnav_omenu dt{position:relative;top:-4px;margin:0 0 -4px 1px;padding:0 5px}
+.q_header .q_header_tnav_omenu dd{position:absolute;top:17px;left:0;_left:-6px;display:none;padding:0 0 5px;border:1px solid #d6d6d6;background:#fff;z-index:99}
+.q_header .q_header_tnav_omenu .q_header_tnav_omenu_link{display:block}
+.q_header .q_header_tnav_omenu .q_header_tnav_omenu_title{display:block;margin-bottom:-5px;padding:4px 17px 5px 5px;cursor:default;cursor:pointer}
+.q_header .q_header_tnav_omenu .q_header_tnav_omenu_title em{position:relative;top:0;*left:4px;z-index:1;display:inline-block;margin-left:4px;padding:0 0 0 4px;font:normal 12px/14px tahoma,arial,sans-serif;vertical-align:top;background:url(//source.qunarzz.com/common/hf/header_v16.png) 0 -376px no-repeat;color:#fff;overflow:hidden}
+.q_header .q_header_tnav_omenu .q_header_tnav_omenu_title em span{display:inline-block;padding:0 4px 0 0;background:url(//source.qunarzz.com/common/hf/header_v16.png) 100% -376px no-repeat}
+.q_header .q_header_tnav_omenu .q_header_tnav_omenu_title b{position:absolute;top:10px;top:7px\0;right:10px;z-index:1;display:block;width:7px;height:4px;background:url(//source.qunarzz.com/common/hf/header_new_v7.png) -152px -21px no-repeat;overflow:hidden}
+.q_header .q_header_tnav_omenu .q_header_tnav_omenu_close{position:absolute;top:0;right:0;z-index:1;display:block;width:22px;height:22px;background:url(//source.qunarzz.com/common/hf/header_v16.png) -17px -55px no-repeat;cursor:pointer}
+.q_header .q_header_tnav_omenu .q_header_tnav_omenu_item a{display:block;padding:0 5px;line-height:22px;white-space:nowrap;word-break:break-all;background:#fff;text-align:left;color:#666}
+.q_header .q_header_tnav_omenu .q_header_tnav_omenu_item a.q_header_tnav_omenu_m:hover{background-color:#4b7bda;color:#fff}
+.q_header .q_header_tnav_omenu .q_header_tnav_omenu_item a.q_header_tnav_omenu_m:hover em{color:#fff}
+.q_header .q_header_tnav_omenu .q_header_tnav_omenu_item em{display:inline-block;padding:0 0 0 8px;width:16px;font-weight:700;color:#00a3d2;cursor:pointer}
+.q_header .q_header_tnav_omenu .q_header_tnav_omenu_item .q_header_tnav_omenu_ordertips{padding:0 5px;cursor:pointer}
+.q_header .q_header_tnav li.q_header_tnav_omenu_hover{margin-bottom:-6px;padding-right:0}
+.q_header .q_header_tnav_omenu_hover dl{z-index:2010}
+.q_header .q_header_tnav_omenu_hover dt{position:relative;z-index:100;top:-5px;margin:0 0 -4px;border:1px solid #d6d6d6;border-bottom:0 none;background-color:#fff}
+.q_header .q_header_tnav_omenu_hover dd{display:block}
+.q_header .q_header_tnav_omenu_hover .q_header_tnav_omenu_title{padding-bottom:4px;background-color:#fff;color:#00a3d2}
+.q_header .q_header_tnav .q_header_tnav_omenu_hover .q_header_tnav_omenu_title b{background-position:-152px -29px}
+.q_header .q_header_mnav{float:left;display:inline;padding:17px 0 0 10px;position:relative;*z-index:1200;margin-right:-50px}
+.q_header .q_header_mnav ul{width:760px;margin-right:-50px}
+.q_header .q_header_mnav li{float:left;height:36px}
+.q_header .q_header_mnav li .q_header_navlink{float:left;cursor:pointer;height:100%;text-decoration:none}
+.q_header .q_header_mnav li .q_header_navlink span{margin:12px 10px 0 10px;width:33px;height:16px;display:block;color:#3c3c3c;*overflow:hidden}
+.q_header .q_header_mnav li .q_header_navlink span b{vertical-align:top;font-size:16px;white-space:nowrap;line-height:1;_line-height:1.2;font-weight:bold;font-family:"Hiragino Sans GB W3","Microsoft Yahei",\5b8b\4f53;*font-family:\5b8b\4f53;position:relative}
+.q_header .q_header_mnav li .q_header_navlink:hover span b,.q_header .q_header_mnav li .q_header_navlink.q_header_hover span b{color:#0088a4}
+.q_header .q_header_mnav li em{float:left;margin:7px -10px 0 0;width:10px;height:10px;font-size:9px;background:url(//source.qunarzz.com/common/hf/header_v16.png) -78px -59px no-repeat;color:#fe0053;overflow:hidden}
+.q_header .q_header_mnav li em.qhf_new{background-position:-93px -59px;color:#098483}
+.q_header .q_header_mnav li em i{position:relative;z-index:-1;line-height:10px;font-style:normal}
+.q_header .q_header_mnav li.qhf_train .q_header_navlink span,.q_header .q_header_mnav li.qhf_ddr .q_header_navlink span,.q_header .q_header_mnav li.qhf_app .q_header_navlink span,.q_header .q_header_mnav li.qhf_guide .q_header_navlink span,.q_header .q_header_mnav li.qhf_navmore .q_header_navlink span,.q_header .q_header_mnav li.qhf_bus .q_header_navlink span{width:50px}
+.q_header .q_header_mnav .q_header_hover .q_header_navlink_more{background:url(//source.qunarzz.com/common/hf/header_new_v7.png) -70px -60px no-repeat}
+.q_header .q_header_mnav li.q_header_hover{z-index:2010}
+.q_header .q_header_mnav li a.q_header_hover{z-index:2010;border:0}
+.q_header .q_header_mnav li.qhf_navmore{border:0}
+.q_header .q_header_mnav li.qhf_navmore{position:relative;left:1px;text-align:left}
+.q_header .q_header_mnav li.qhf_navmore.q_header_hover i{background-position:-152px -39px}
+.q_header .q_header_mnav li.qhf_navmore.q_header_hover a:hover i{background-position:-152px -29px}
+.q_header .q_header_mnav li.qhf_navmore i{position:absolute;top:18px;*top:20px;left:46px;z-index:1;display:block;width:7px;height:4px;background:url(//source.qunarzz.com/common/hf/header_new_v7.png) -152px -21px no-repeat;overflow:hidden}
+.q_header .q_header_mnav .q_header_navmore-con{display:none;position:absolute;background:#fff;top:35px;border:1px solid #ccc;border-top:0;left:1px;width:66px;overflow:hidden;padding-bottom:10px;box-shadow:0 7px 10px rgba(0,0,0,0.1)}
+.q_header .q_header_mnav .q_header_navmore-con span{margin-left:9px!important}
+.q_header .q_header_mnav li.qhf_card{display:none}
+.q_header .q_header_mnav li.qhf_jr{display:none}
+.q_header .q_header_mnav li.qhf_haiwai{display:none}
+.q_header .q_header_mnav li.qhf_mice{display:none}
+.q_header_max .q_header_mnav li.qhf_haiwai,.q_header_max .q_header_mnav li.qhf_jr,.q_header_max .q_header_mnav li.guide,.q_header_max .q_header_mnav li.qhf_card,.q_header_max .q_header_mnav li.qhf_mice{display:block}
+.q_header_max .q_header_mnav li.qhf_navmore{display:none}
+.q_header_max .q_header_mnav ul{width:923px}
+.q_header .q_header_aside{white-space:nowrap;width:auto;_width:auto!important;box-shadow:0 7px 10px rgba(0,0,0,0.1);display:none;font-size:12px;z-index:9999;position:absolute;background:#fff;border:1px solid #ccc;padding:8px;bottom:-48px}
+.q_header .q_header_aside .q_header_blank{height:3px;font-size:0;background:#fff;position:absolute}
+.q_header .q_header_aside a{display:inline-block;*display:inline;zoom:1;line-height:1.2;padding:8px 12px;color:#666;position:relative}
+.q_header .q_header_aside a:hover{color:#00a3d2;text-decoration:underline;background:#e0f4ff}
+.q_header .q_header_aside a.qhf_hot{color:#f55}
+.q_header .q_header_aside a i{font-size:0;position:absolute;right:2px;top:2px;width:9px;height:9px;line-height:0;background:url(//source.qunarzz.com/common/hf/header_new_v7.png) no-repeat -151px 0}
+.q_header .q_header_aside a i.qhf_hot{background-position:-151px -9px}
+.q_header .q_header_aside a span{font-weight:bold;white-space:nowrap}
+.q_header .q_header_mnav li .q_header_navlink.q_header_hover{background:url(//source.qunarzz.com/common/hf/header_new_v7.png) 0 -60px no-repeat}
+.q_header .q_header_mnav li.qhf_ddr .q_header_navlink.q_header_hover{background:url(//source.qunarzz.com/common/hf/header_new_v7.png) -70px -60px no-repeat}
+.q_header .q_header_mnav .q_header_aside .q_header_blank{width:49px;font-size:0;left:99px;top:-1px}
+.q_header .q_header_mnav .q_header_aside .q_header_blank_ddr{width:66px;font-size:0;left:99px;top:-1px}
+.q_header .q_header_mnav .q_header_aside .q_header_blank_card{width:49px;font-size:0;left:42px;top:-1px}
+.q_header_hotel .q_header_mnav li.qhf_hotel .q_header_navlink span{background-position:-82px -75px}
+.q_header_tags img{position:absolute;display:block;top:8px;display:none}
+.q_header_tags .qhf_tag_gongyu{left:454px}
+.q_header_tags .qhf_tag_guide{left:636px}
+.q_header_tags .qhf_tag_piao{left:330px}
+.q_header_tags .qhf_tag_package{left:225px}
+.q_header_tags .qhf_tag_local{left:512px}
+.q_header_tags .qhf_tag_card{left:698px}
+.q_header_tags .qhf_tag_bjcx{left:636px}
+.q_header_tags .qhf_tag_jr{left:698px}
+.q_header_tags .qhf_tag_car{left:576px}
+.q_header_tags .qhf_tag_haiwai{left:698px}
+.q_header_max .q_header_tags .qhf_tag_haiwai{left:698px}
+.q_header_max .q_header_tags .qhf_tag_jr{left:804px}
+.q_header_max .q_header_tags .qhf_tag_card{left:752px}
+.q_header .q_header_mnav li.qhf_cur span{color:#0088a4}
+.qhf_sysnotice{margin:0 auto;height:26px;background-color:#e8f8f7}
+.qhf_sysnotice a{text-decoration:none;color:#0069ca}
+.qhf_sysnotice a:hover{text-decoration:none;color:#f60}
+.qhf_sysnotice_info{margin:0 auto;padding:4px;width:980px;font:normal 12px/1.5 tahoma,arial,sans-serif;text-align:center;color:#098483}
+.qhf_sysnotice_close{float:right;display:inline;width:18px;height:18px;background:url(//source.qunarzz.com/common/hf/header_v16.png) 0 -56px no-repeat}
+.q_header .q_header_tnav li.q_header_message{min-width:76px;*width:76px;position:relative;left:-1px;top:-1px;height:19px;border:0 solid black;position:relative;padding-left:0;padding-right:0;display:inline-block}
+.q_header .q_header_tnav li.q_header_message.q_has_message{min-width:88px;*width:88px}
+.q_header .q_header_tnav li.q_header_message.q_header_qm_hover,.q_header .q_header_tnav li.q_header_message.q_header_qm_autoshow{z-index:2000}
+.q_header .q_header_tnav .q_header_message.q_header_message_number{padding-right:21px}
+.q_header .q_header_tnav .q_header_message i{position:relative;_top:4px;display:inline-block;*display:inline;*zoom:1;background:url(//source.qunarzz.com/common/hf/header_v13.png) -30px -153px no-repeat;width:11px;height:8px;display:inline-block;overflow-x:hidden;margin-right:5px}
+.q_header .q_header_tnav .q_header_message i.q_header_message_red{background:url(//source.qunarzz.com/common/hf/header_v13.png) -18px -153px no-repeat}
+.q_header .q_header_tnav .q_header_message b{font-weight:bold;display:inline-block;*display:inline;*zoom:1;font-family:Tahoma;color:#f55;vertical-align:baseline}
+.q_header .q_header_tnav .q_header_message .q_header_message_n{position:relative;_top:2px;display:inline-block;width:12px;height:10px;background:url(//source.qunarzz.com/common/hf/header_v13.png) -41px -151px no-repeat}
+.q_header .q_header_tnav .q_header_message .q_header_message_count small{font:lighter 12px arial}
+.q_header .q_header_tnav .q_header_message .q_header_qm_arrow{display:inline-block;*display:inline;*zoom:1;position:relative;left:6px;right:10px;z-index:1;width:6px;height:6px;background:url(//source.qunarzz.com/common/hf/header_new_v7.png) -153px -21px no-repeat;overflow:hidden}
+.q_header .q_header_tnav .q_header_message.q_header_qm_autoshow .q_header_qm_arrow,.q_header .q_header_tnav .q_header_message.q_header_qm_hover .q_header_qm_arrow{background-position:-153px -38px}
+.q_header .q_header_tnav .q_header_message .q_header_qm_close{position:absolute;top:11px;right:10px;z-index:1;display:block;width:11px;height:11px;background:url(//source.qunarzz.com/common/hf/message/cross.png);overflow:hidden;cursor:pointer}
+.q_header .q_header_tnav .q_header_qm_red{color:#f55}
+.q_header .q_header_tnav .q_header_qm_word{margin-left:5px;color:#555}
+.q_header .q_header_tnav .q_header_qm_dp{display:none;width:240px;text-align:left;background:#fff;position:absolute;top:19px;top:17px\0;right:0;*right:2px;z-index:2000;border:1px solid #ccc;-webkit-box-shadow:0 0 10px rgba(0,0,0,0.2);box-shadow:0 0 10px rgba(0,0,0,0.2)}
+.q_header .q_header_tnav .q_header_qm_autoshow .q_header_qm_dp.qm_dp_autoshow,.q_header .q_header_tnav .q_header_qm_hover .q_header_qm_dp.q_header_qm_dp_hover{display:inline-block;*display:inline;*zoom:1}
+.q_header .q_header_tnav .q_header_qm_hover .q_header_qm_dp.qm_dp_autoshow{display:none}
+.q_header .q_header_tnav .q_header_qm_hover .q_header_qm_body{padding:7px 0}
+.q_header .q_header_tnav .q_header_qm_body .q_header_qm_no_msg{text-align:center;color:#999;margin:30px auto}
+.q_header .q_header_tnav .q_header_qm_body .q_header_qm_item{font:normal 12px/1.5 '宋体',sans-serif;padding-left:20px;padding:7px 7px 7px 15px;display:block;position:relative}
+.q_header .q_header_tnav .q_header_qm_body .q_header_qm_none{padding:30px 0 30px 0;text-align:center;color:#999}
+.q_header .q_header_tnav .q_header_qm_body .q_header_qm_item .q_header_qm_link{color:#999;position:absolute;top:7px;right:15px}
+.q_header .q_header_tnav .q_header_qm_body .q_header_qm_item .q_header_qm_link:hover{color:#0084bb}
+.q_header .q_header_tnav .q_header_qm_body .q_header_qm_item .q_header_qm_link2{color:#0084bb;padding-left:10px}
+.q_header .q_header_tnav .q_header_qm_body .q_header_qm_item .q_header_qm_switch{width:36px;height:19px;display:block;background:url(//source.qunarzz.com/common/hf/message/switch-shutdown.png);position:absolute;top:8px;right:10px}
+.q_header .q_header_tnav .q_header_qm_body .q_header_qm_item .q_header_qm_switch.q_header_qm_switch_open{background:url(//source.qunarzz.com/common/hf/message/switch-open.png)}
+.q_header .q_header_tnav .q_header_qm_body .q_header_qm_item.q_header_qm_curr,.q_header .q_header_tnav .q_header_qm_body .q_header_qm_item:hover{background:#fafafa}
+.q_header .q_header_tnav .q_header_qm_footer{height:18px;color:#999;padding:7px 10px 5px 20px;background:#fafafa}
+.q_header .q_header_tnav a.qm_foote_left{vertical-align:middle;float:left;background:url(//source.qunarzz.com/common/hf/message/setting.png) no-repeat;padding-left:18px}
+.q_header .q_header_tnav a.qm_foote_right{float:right;color:#999}
+.q_header .q_header_tnav li .q_header_qm_inner{padding:5px 10px 0 10px;margin-top:-5px;*margin-left:-2px;*padding-top:3px;background:0;height:19px;*height:21px;bottom:-1px;border-left:1px solid #fff;border-right:1px solid #fff;position:relative}
+.q_header .q_header_tnav li.q_header_qm_autoshow .q_header_qm_inner,.q_header .q_header_tnav li.q_header_qm_hover .q_header_qm_inner{z-index:2001;border:1px solid #ccc;border-bottom:0;background:#fff;padding-top:4px;*padding-top:2px;height:17px\0}
