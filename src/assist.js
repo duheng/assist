@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 import Base from './modules/base';
 import TopBar from './modules/TopBar';
 import ZoomPage from './modules/ZoomPage';
@@ -10,6 +12,9 @@ class Assist extends Base {
       // 合并参数
       this.mergeConfig(opts);
       this.init();
+      if(Cookies.get(this.config.namespace)) {
+        this.isShowTopBar(true)
+      }
     }
   
     init() {
@@ -20,5 +25,4 @@ class Assist extends Base {
     }
 
   }
-  new Assist()
   export default Assist;

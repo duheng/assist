@@ -1,8 +1,7 @@
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+(function (factory) {
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Assist = factory());
-}(this, (function () { 'use strict';
+  factory();
+}((function () { 'use strict';
 
   function ownKeys(object, enumerableOnly) {
     var keys = Object.keys(object);
@@ -158,6 +157,175 @@
     };
   }
 
+  function createCommonjsModule(fn, basedir, module) {
+  	return module = {
+  	  path: basedir,
+  	  exports: {},
+  	  require: function (path, base) {
+        return commonjsRequire(path, (base === undefined || base === null) ? module.path : base);
+      }
+  	}, fn(module, module.exports), module.exports;
+  }
+
+  function commonjsRequire () {
+  	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
+  }
+
+  var js_cookie = createCommonjsModule(function (module, exports) {
+  (function (factory) {
+  	var registeredInModuleLoader;
+  	{
+  		module.exports = factory();
+  		registeredInModuleLoader = true;
+  	}
+  	if (!registeredInModuleLoader) {
+  		var OldCookies = window.Cookies;
+  		var api = window.Cookies = factory();
+  		api.noConflict = function () {
+  			window.Cookies = OldCookies;
+  			return api;
+  		};
+  	}
+  }(function () {
+  	function extend () {
+  		var i = 0;
+  		var result = {};
+  		for (; i < arguments.length; i++) {
+  			var attributes = arguments[ i ];
+  			for (var key in attributes) {
+  				result[key] = attributes[key];
+  			}
+  		}
+  		return result;
+  	}
+
+  	function decode (s) {
+  		return s.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
+  	}
+
+  	function init (converter) {
+  		function api() {}
+
+  		function set (key, value, attributes) {
+  			if (typeof document === 'undefined') {
+  				return;
+  			}
+
+  			attributes = extend({
+  				path: '/'
+  			}, api.defaults, attributes);
+
+  			if (typeof attributes.expires === 'number') {
+  				attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e+5);
+  			}
+
+  			// We're using "expires" because "max-age" is not supported by IE
+  			attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
+
+  			try {
+  				var result = JSON.stringify(value);
+  				if (/^[\{\[]/.test(result)) {
+  					value = result;
+  				}
+  			} catch (e) {}
+
+  			value = converter.write ?
+  				converter.write(value, key) :
+  				encodeURIComponent(String(value))
+  					.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+
+  			key = encodeURIComponent(String(key))
+  				.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent)
+  				.replace(/[\(\)]/g, escape);
+
+  			var stringifiedAttributes = '';
+  			for (var attributeName in attributes) {
+  				if (!attributes[attributeName]) {
+  					continue;
+  				}
+  				stringifiedAttributes += '; ' + attributeName;
+  				if (attributes[attributeName] === true) {
+  					continue;
+  				}
+
+  				// Considers RFC 6265 section 5.2:
+  				// ...
+  				// 3.  If the remaining unparsed-attributes contains a %x3B (";")
+  				//     character:
+  				// Consume the characters of the unparsed-attributes up to,
+  				// not including, the first %x3B (";") character.
+  				// ...
+  				stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
+  			}
+
+  			return (document.cookie = key + '=' + value + stringifiedAttributes);
+  		}
+
+  		function get (key, json) {
+  			if (typeof document === 'undefined') {
+  				return;
+  			}
+
+  			var jar = {};
+  			// To prevent the for loop in the first place assign an empty array
+  			// in case there are no cookies at all.
+  			var cookies = document.cookie ? document.cookie.split('; ') : [];
+  			var i = 0;
+
+  			for (; i < cookies.length; i++) {
+  				var parts = cookies[i].split('=');
+  				var cookie = parts.slice(1).join('=');
+
+  				if (!json && cookie.charAt(0) === '"') {
+  					cookie = cookie.slice(1, -1);
+  				}
+
+  				try {
+  					var name = decode(parts[0]);
+  					cookie = (converter.read || converter)(cookie, name) ||
+  						decode(cookie);
+
+  					if (json) {
+  						try {
+  							cookie = JSON.parse(cookie);
+  						} catch (e) {}
+  					}
+
+  					jar[name] = cookie;
+
+  					if (key === name) {
+  						break;
+  					}
+  				} catch (e) {}
+  			}
+
+  			return key ? jar[key] : jar;
+  		}
+
+  		api.set = set;
+  		api.get = function (key) {
+  			return get(key, false /* read as raw */);
+  		};
+  		api.getJSON = function (key) {
+  			return get(key, true /* read as json */);
+  		};
+  		api.remove = function (key, attributes) {
+  			set(key, '', extend(attributes, {
+  				expires: -1
+  			}));
+  		};
+
+  		api.defaults = {};
+
+  		api.withConverter = init;
+
+  		return api;
+  	}
+
+  	return init(function () {});
+  }));
+  });
+
   let Base = /*#__PURE__*/function () {
     function Base() {
       _classCallCheck(this, Base);
@@ -193,18 +361,38 @@
     }, {
       key: "show",
       value: function show() {
-        document.getElementById('assist-open').onclick = () => {
-          this.showTopBar();
-        };
+        if (document.getElementById('assist-open')) {
+          document.getElementById('assist-open').onclick = () => {
+            this.isShowTopBar(true);
+          };
+        }
       }
     }, {
-      key: "showTopBar",
-      value: function showTopBar() {
+      key: "close",
+      value: function close() {
+        this.isShowTopBar(false);
+      }
+    }, {
+      key: "isShowTopBar",
+      value: function isShowTopBar(isShow) {
         const {
           namespace
         } = this.config;
         const activeBtn = document.getElementById(`${namespace}-topbar-html`);
-        activeBtn.style.display = 'block';
+
+        if (isShow) {
+          document.body.style.marginTop = '100px';
+          activeBtn.style.display = 'block';
+          js_cookie.set(namespace, true, {
+            domain: '.qunar.com'
+          });
+        } else {
+          document.body.style = 'none';
+          activeBtn.style.display = 'none';
+          js_cookie.remove(namespace, {
+            domain: '.qunar.com'
+          });
+        }
       }
     }, {
       key: "creatStyle",
@@ -251,25 +439,49 @@
     return Base;
   }();
 
-  var styles$2 = ".topbar-html {\n  width: 100%;\n  background: #00d0d4;\n  overflow: hidden;\n  z-index: 2147483645;\n  position: fixed;\n  top: 0;\n  box-shadow: 0 0 10px 2px #999;\n  left: 0;\n  right: 0;\n}\n.topbar-html-mright {\n  margin-right: 20px !important;\n}\n.topbar-html-content {\n  width: 1080px;\n  height: 100px;\n  margin: 0 auto;\n  display: flex;\n}\n.topbar-html-content-item {\n  width: 60px;\n  margin: 0 3px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.topbar-html-content-item span {\n  height: 30px;\n  line-height: 30px;\n  color: #FFFFFF;\n  font-size: 14px;\n  font-weight: bolder;\n}\n.topbar-html-content-item i {\n  height: 60px;\n  width: 60px;\n  border-radius: 5px;\n  display: block;\n  background-color: #FFFFFF;\n}";
+  var styles$2 = ".topbar-html {\n  width: 100%;\n  background: #00d0d4;\n  overflow: hidden;\n  z-index: 2147483645;\n  position: fixed;\n  top: 0;\n  box-shadow: 0 0 10px 2px #999;\n  left: 0;\n  right: 0;\n}\n.topbar-html-mright {\n  margin-right: 20px !important;\n}\n.topbar-html-content {\n  width: 1080px;\n  height: 100px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n}\n.topbar-html-content-item {\n  width: 60px;\n  margin: 0 3px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.topbar-html-content-item span {\n  height: 30px;\n  line-height: 30px;\n  color: #FFFFFF;\n  font-size: 14px;\n  font-weight: bolder;\n}\n.topbar-html-content-item i {\n  height: 60px;\n  width: 60px;\n  border-radius: 5px;\n  display: block;\n  background-color: #FFFFFF;\n}";
 
   const topBarHtml = namespace => {
     console.log('namespace+++++++', namespace);
     return `<div class='topbar-html-content'>
+        <div id='${namespace}-reset' class='topbar-html-content-item'>
+          <span>重置</span>
+          <i></i>
+        </div>
+        <div id='${namespace}-audio' class='topbar-html-content-item'>
+          <span>声音开关</span>
+          <i></i>
+        </div>
+        <div id='${namespace}-audio-speed' class='topbar-html-content-item topbar-html-mright'>
+          <span>语速</span>
+          <i></i>
+        </div>
         <div id='${namespace}-zoom-out' class='topbar-html-content-item'>
           <span>放大</span>
           <i></i>
         </div>
-        <div id='${namespace}-zoom-min' class='topbar-html-content-item'>
+        <div id='${namespace}-zoom-min' class='topbar-html-content-item topbar-html-mright'>
           <span>缩小</span>
-          <i></i>
-        </div>
-        <div id='${namespace}-pointer-follow' class='topbar-html-content-item topbar-html-mright'>
-          <span>十字线</span>
           <i></i>
         </div>
         <div id='${namespace}-cursor-auto' class='topbar-html-content-item'>
           <span>鼠标样式</span>
+          <i></i>
+        </div>
+        <div id='${namespace}-pointer-follow' class='topbar-html-content-item'>
+          <span>十字线</span>
+          <i></i>
+        </div>
+        <div id='${namespace}-bigtext' class='topbar-html-content-item topbar-html-mright'>
+          <span>大字幕</span>
+          <i></i>
+        </div>
+        <div id='${namespace}-info' class='topbar-html-content-item'>
+          <span>说明</span>
+          <i></i>
+        </div>
+        <div id='${namespace}-close' class='topbar-html-content-item'>
+          <span>退出</span>
           <i></i>
         </div>
       </div>`;
@@ -277,15 +489,23 @@
 
   const TopBar = {
     init(core) {
+      core.creatStyle('topbar-style', styles$2);
+      core.creatHtml('topbar-html', topBarHtml);
+      this.setEvents(core);
+    },
+
+    setEvents(core) {
       const {
         namespace
       } = core.config;
-      core.creatStyle('topbar-style', styles$2);
-      core.creatHtml('topbar-html', topBarHtml);
-      this.setContainer(namespace);
-    },
+      const Btn = document.getElementById(`${namespace}-close`);
 
-    setContainer(namespace) {}
+      Btn.onclick = () => {
+        core.close();
+      }; // document.onmousemove = this.mouseMove; 
+      // this.togglePointer(namespace)
+
+    }
 
   };
 
@@ -312,11 +532,21 @@
     },
 
     zoomOut() {
+      if (this.size >= 1.3) {
+        console.log('已最大');
+        return;
+      }
+
       this.size = this.size + 0.1;
       this.set();
     },
 
     zoomMin() {
+      if (this.size <= 1.0) {
+        console.log('已最小');
+        return;
+      }
+
       this.size = this.size - 0.1;
       this.set();
     },
@@ -329,8 +559,8 @@
           return;
         }
 
-        el.style.zoom = this.size;
-        el.style.cssText += '; -moz-transform: scale(' + this.size + ');-moz-transform-origin: 0 0; ';
+        el.style.transform = `scale(${this.size})`;
+        el.style.transformOrigin = '0px 0px';
       });
     }
 
@@ -425,6 +655,10 @@
 
       _this.init();
 
+      if (js_cookie.get(_this.config.namespace)) {
+        _this.isShowTopBar(true);
+      }
+
       return _this;
     }
 
@@ -441,8 +675,10 @@
     return Assist;
   }(Base);
 
-  new Assist();
-
-  return Assist;
+  const QunarAssist = new Assist({
+    namespace: 'qunar-assist',
+    url: 'http://qunar.com'
+  });
+  console.log('Assist-----', QunarAssist);
 
 })));

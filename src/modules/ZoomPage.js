@@ -18,11 +18,18 @@ const ZoomPage = {
        
     },
     zoomOut() {
-        
+        if(this.size >= 1.3) {
+            console.log('已最大')
+            return
+        }
         this.size = this.size + 0.1;  
         this.set(); 
     },
     zoomMin() {
+        if(this.size <= 1.0) {
+            console.log('已最小')
+            return
+        }
         this.size = this.size - 0.1;  
         this.set(); 
     },
@@ -32,9 +39,8 @@ const ZoomPage = {
             if(this.ignore.indexOf(__el) > -1 || el.id == this.namespace) {
                 return
             }
-            el.style.zoom = this.size;
-            el.style.cssText += '; -moz-transform: scale(' + this.size + ');-moz-transform-origin: 0 0; '; 
-            
+            el.style.transform = `scale(${this.size})`
+            el.style.transformOrigin = '0px 0px'
         });
     }     
         

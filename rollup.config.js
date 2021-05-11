@@ -10,18 +10,19 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy'
 
+const entry = {
+    assist: './src/assist.js',
+    'qunar-assist':'./src/qunar-assist.js'
+}
 
-
-function generateWebConfig(isBrowser) {
+function generateWebConfig(isBrowser,input) {
     return {
-        input: `./src/index.js`,
-        output: [
-            {
-                file: `./dist/index.js`,
-                format: isBrowser ? 'umd' : 'cjs',
-                name: 'Assist',
-            },
-        ],
+        input,
+        output:  {
+            dir: 'dist',
+            format: isBrowser ? 'umd' : 'cjs',
+            name: 'Assist'
+        },
         plugins: [
             sass(),
             json(),
@@ -45,4 +46,9 @@ function generateWebConfig(isBrowser) {
     };
 }
 
-module.exports = generateWebConfig(true);
+const build = () => {
+    return Object.keys(entry).map(item=>{
+        return generateWebConfig(true,entry[item])
+    })
+}
+module.exports = build();

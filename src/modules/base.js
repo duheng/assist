@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 export default class Base {
     constructor() {
     
@@ -8,6 +10,7 @@ export default class Base {
       };
       this.creatContainer()
       this.show()
+
     }
 
     mergeConfig(opts) {
@@ -27,15 +30,31 @@ export default class Base {
     }
 
     show() {
-      document.getElementById('assist-open').onclick = ()=> {
-        this.showTopBar()
+      if(document.getElementById('assist-open')) {
+        document.getElementById('assist-open').onclick = ()=> {
+          this.isShowTopBar(true)
+        }
       }
     }
 
-    showTopBar() {
+    close() {
+      this.isShowTopBar(false)
+    }
+
+    isShowTopBar(isShow) {
       const { namespace } = this.config
       const activeBtn =  document.getElementById(`${namespace}-topbar-html`)
-      activeBtn.style.display = 'block'
+      if(isShow) {
+        document.body.style.marginTop = '100px'
+        activeBtn.style.display = 'block'
+        Cookies.set(namespace, true, { domain: '.qunar.com' })
+
+      }else {
+        document.body.style = 'none'
+        activeBtn.style.display = 'none'
+        Cookies.remove(namespace, { domain: '.qunar.com'})
+
+      }
     }
 
     creatStyle(id, css) {

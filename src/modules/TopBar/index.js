@@ -2,14 +2,20 @@ import styles from './index.scss'
 import tmpl from './index.tmpl.js'
 const TopBar = {
     init(core) {
-        const { namespace } = core.config
+      
         core.creatStyle('topbar-style',styles)
         core.creatHtml('topbar-html',tmpl)
-        this.setContainer(namespace)
+        this.setEvents(core)
 
     },
-    setContainer(namespace) {
-        
+    setEvents(core) {
+        const { namespace } = core.config
+        const Btn = document.getElementById(`${namespace}-close`)
+        Btn.onclick = () => {
+            core.close()
+        }
+        // document.onmousemove = this.mouseMove; 
+        // this.togglePointer(namespace)
     }
 };
 
