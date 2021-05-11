@@ -383,7 +383,7 @@
 
   };
 
-  var styles = "* {\n  cursor: url(\"./assets/allaw.cur\"), auto !important;\n}\n\na {\n  cursor: url(\"./assets/linkaw.cur\"), auto !important;\n}";
+  var styles = "* {\n  cursor: url(\"http://s.qunarzz.com/common/assist/allaw.cur\"), auto !important;\n}\n\na {\n  cursor: url(\"http://s.qunarzz.com/common/assist/linkaw.cur\"), auto !important;\n}";
 
   const CursorAuto = {
     init(core) {
