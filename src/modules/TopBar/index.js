@@ -2,6 +2,8 @@ import styles from './index.scss'
 import tmpl from './index.tmpl.js'
 import ZoomPage from '../ZoomPage';
 import PointerFllow from '../PointerFllow';
+import BigText from '../BigText';
+import CursorAuto from '../CursorAuto';
 const TopBar = {
     init(core) {
       
@@ -22,7 +24,9 @@ const TopBar = {
         BtnReset.onclick = () => {
            // console.log('core----', core)
              ZoomPage.reset()
-            // PointerFllow.reset(namespace)
+             PointerFllow.reset(core)
+             BigText.reset(core)
+             CursorAuto.reset(core)
         }
         // document.onmousemove = this.mouseMove; 
         // this.togglePointer(namespace)

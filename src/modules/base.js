@@ -4,7 +4,7 @@ export default class Base {
     constructor() {
     
       this.config = {
-        namespace: 'qunar-assist',
+        namespace: 'mozi-assist',
         url: '',
         
       };

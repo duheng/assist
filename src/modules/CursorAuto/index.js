@@ -16,6 +16,11 @@ const CursorAuto = {
             }
        }
     },
+    reset(core) {
+        const { namespace } = core.config
+        const activeBtn = document.getElementById(`${namespace}-cursor-auto-style`)
+        activeBtn.remove()
+    }
         
 };
 

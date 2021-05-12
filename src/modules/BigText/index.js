@@ -38,6 +38,12 @@ const BigText = {
         const { parseTagText, namespace } = BigText
         const activeBtn = document.getElementById(`${namespace}-bigtext-content`)
         activeBtn.innerText = BigText.parseTagText(target)
+    },
+    reset(core) {
+        const { namespace } = core.config
+        const activeBtn =  document.getElementById(`${namespace}-bigtext-html`)
+        activeBtn.style.display = 'none'
+        this.removeEventMove(core)
     }
 };
 

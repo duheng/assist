@@ -39,7 +39,8 @@ const PointerFllow = {
         pointerY.style.left = event.clientX - 10 + "px";
     },
     reset(core) {
-        const activeBtn =  document.getElementById(`${core.namespace}-pointer-follow-html`)
+        const { namespace } = core.config
+        const activeBtn =  document.getElementById(`${namespace}-pointer-follow-html`)
         activeBtn.style.display = 'none'
         this.removeEventMove(core)
     }

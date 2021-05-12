@@ -331,7 +331,7 @@
       _classCallCheck(this, Base);
 
       this.config = {
-        namespace: 'qunar-assist',
+        namespace: 'mozi-assist',
         url: ''
       };
       this.eventShow();
@@ -662,68 +662,17 @@
     },
 
     reset(core) {
-      const activeBtn = document.getElementById(`${core.namespace}-pointer-follow-html`);
+      const {
+        namespace
+      } = core.config;
+      const activeBtn = document.getElementById(`${namespace}-pointer-follow-html`);
       activeBtn.style.display = 'none';
       this.removeEventMove(core);
     }
 
   };
 
-  const TopBar = {
-    init(core) {
-      core.creatStyle('topbar-style', styles$3);
-      core.creatHtml('topbar-html', topBarHtml);
-      this.setEvents(core);
-    },
-
-    setEvents(core) {
-      const {
-        namespace
-      } = core.config;
-      const BtnClose = document.getElementById(`${namespace}-close`);
-      const BtnReset = document.getElementById(`${namespace}-reset`);
-
-      BtnClose.onclick = () => {
-        core.close();
-      };
-
-      BtnReset.onclick = () => {
-        // console.log('core----', core)
-        ZoomPage.reset(); // PointerFllow.reset(namespace)
-      }; // document.onmousemove = this.mouseMove; 
-      // this.togglePointer(namespace)
-
-    }
-
-  };
-
-  var styles$1 = "* {\n  cursor: url(\"http://s.qunarzz.com/common/assist/allaw.cur\"), auto !important;\n}\n\na {\n  cursor: url(\"http://s.qunarzz.com/common/assist/linkaw.cur\"), auto !important;\n}";
-
-  const CursorAuto = {
-    init(core) {
-      const {
-        namespace
-      } = core.config;
-      this.setEvents(core, namespace);
-    },
-
-    setEvents(core, namespace) {
-      const tabBarBtn = document.getElementById(`${namespace}-cursor-auto`);
-
-      tabBarBtn.onclick = () => {
-        const activeBtn = document.getElementById(`${namespace}-cursor-auto-style`);
-
-        if (activeBtn) {
-          activeBtn.remove();
-        } else {
-          core.creatStyle('cursor-auto-style', styles$1);
-        }
-      };
-    }
-
-  };
-
-  var styles = ".bigtext-html {\n  z-index: 99999999999;\n  height: 150px;\n  text-align: center;\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  left: 0;\n  border-top: 1px solid #505050;\n}\n.bigtext-html-content {\n  height: 100%;\n  background-color: #FFFFFF;\n  font-size: 53px;\n  color: #333 !important;\n  text-align: center;\n  font-weight: bold;\n}";
+  var styles$1 = ".bigtext-html {\n  z-index: 99999999999;\n  height: 150px;\n  text-align: center;\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  left: 0;\n  border-top: 1px solid #505050;\n}\n.bigtext-html-content {\n  height: 100%;\n  background-color: #FFFFFF;\n  font-size: 53px;\n  color: #333 !important;\n  text-align: center;\n  font-weight: bold;\n}";
 
   const BigTextHtml = namespace => {
     return `<div class='bigtext-html'>
@@ -742,7 +691,7 @@
       this.body = document.body;
       this.namespace = namespace;
       this.parseTagText = core.parseTagText;
-      core.creatStyle('bigtext-style', styles);
+      core.creatStyle('bigtext-style', styles$1);
       core.creatHtml('bigtext-html', BigTextHtml);
       this.setEvents(core, namespace);
     },
@@ -784,6 +733,80 @@
       } = BigText;
       const activeBtn = document.getElementById(`${namespace}-bigtext-content`);
       activeBtn.innerText = BigText.parseTagText(target);
+    },
+
+    reset(core) {
+      const {
+        namespace
+      } = core.config;
+      const activeBtn = document.getElementById(`${namespace}-bigtext-html`);
+      activeBtn.style.display = 'none';
+      this.removeEventMove(core);
+    }
+
+  };
+
+  var styles = "* {\n  cursor: url(\"http://s.qunarzz.com/common/assist/allaw.cur\"), auto !important;\n}\n\na {\n  cursor: url(\"http://s.qunarzz.com/common/assist/linkaw.cur\"), auto !important;\n}";
+
+  const CursorAuto = {
+    init(core) {
+      const {
+        namespace
+      } = core.config;
+      this.setEvents(core, namespace);
+    },
+
+    setEvents(core, namespace) {
+      const tabBarBtn = document.getElementById(`${namespace}-cursor-auto`);
+
+      tabBarBtn.onclick = () => {
+        const activeBtn = document.getElementById(`${namespace}-cursor-auto-style`);
+
+        if (activeBtn) {
+          activeBtn.remove();
+        } else {
+          core.creatStyle('cursor-auto-style', styles);
+        }
+      };
+    },
+
+    reset(core) {
+      const {
+        namespace
+      } = core.config;
+      const activeBtn = document.getElementById(`${namespace}-cursor-auto-style`);
+      activeBtn.remove();
+    }
+
+  };
+
+  const TopBar = {
+    init(core) {
+      core.creatStyle('topbar-style', styles$3);
+      core.creatHtml('topbar-html', topBarHtml);
+      this.setEvents(core);
+    },
+
+    setEvents(core) {
+      const {
+        namespace
+      } = core.config;
+      const BtnClose = document.getElementById(`${namespace}-close`);
+      const BtnReset = document.getElementById(`${namespace}-reset`);
+
+      BtnClose.onclick = () => {
+        core.close();
+      };
+
+      BtnReset.onclick = () => {
+        // console.log('core----', core)
+        ZoomPage.reset();
+        PointerFllow.reset(core);
+        BigText.reset(core);
+        CursorAuto.reset(core);
+      }; // document.onmousemove = this.mouseMove; 
+      // this.togglePointer(namespace)
+
     }
 
   };
@@ -826,7 +849,7 @@
   }(Base);
 
   const QunarAssist = new Assist({
-    namespace: 'qunar-assist-111',
+    namespace: 'qunar-assist',
     url: 'http://qunar.com'
   });
   console.log('Assist-----', QunarAssist);
