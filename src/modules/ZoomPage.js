@@ -5,9 +5,9 @@ const ZoomPage = {
         this.size = 1.0
         this.ignore = ['LINK','SCRIPT']
         this.namespace = namespace
+        console.log('初始化---')
     },
     setEvents(namespace) {
-       // document.onmousedown = this.mouseDown; 
        document.getElementById(`${namespace}-zoom-out`).onclick = () => {
         this.zoomOut() 
        }
@@ -15,7 +15,6 @@ const ZoomPage = {
        document.getElementById(`${namespace}-zoom-min`).onclick = () => {
         this.zoomMin() 
        }
-       
     },
     zoomOut() {
         if(this.size >= 1.3) {
@@ -42,7 +41,11 @@ const ZoomPage = {
             el.style.transform = `scale(${this.size})`
             el.style.transformOrigin = '0px 0px'
         });
-    }     
+    },
+    reset() {
+        this.size = 1.0
+        this.set()
+    }   
         
 };
 

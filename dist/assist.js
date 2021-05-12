@@ -335,14 +335,14 @@
         namespace: 'qunar-assist',
         url: ''
       };
-      this.creatContainer();
-      this.show();
+      this.eventShow();
     }
 
     _createClass(Base, [{
       key: "mergeConfig",
       value: function mergeConfig(opts) {
         this.config = _objectSpread2(_objectSpread2({}, this.config), opts);
+        this.creatContainer();
       }
     }, {
       key: "use",
@@ -355,13 +355,18 @@
         const {
           namespace
         } = this.config;
+
+        if (document.getElementById(namespace)) {
+          return;
+        }
+
         const Container = document.createElement("div");
         Container.id = namespace;
         document.body.appendChild(Container);
       }
     }, {
-      key: "show",
-      value: function show() {
+      key: "eventShow",
+      value: function eventShow() {
         if (document.getElementById('assist-open')) {
           document.getElementById('assist-open').onclick = () => {
             this.isShowTopBar(true);
@@ -393,6 +398,7 @@
           js_cookie.remove(namespace, {
             domain: '.qunar.com'
           });
+          location.reload();
         }
       }
     }, {
@@ -435,12 +441,63 @@
         DomContainer.innerHTML = __html;
         document.getElementById(namespace).appendChild(DomContainer);
       }
+    }, {
+      key: "parseTagText",
+      value: function parseTagText(target) {
+        if (target.children.length === 0) {
+          if (target.role === 'A' || target.tagName === 'A') {
+            console.log('这是一个链接:' + target.innerText);
+            return `链接 ${target.innerText}`;
+          }
+
+          if (target.role === 'IMG' || target.tagName === 'IMG') {
+            console.log('这是一张图片:' + target.alt || target.title);
+            return `图片 ${target.alt || target.title}`;
+          }
+
+          if (target.role === 'BUTTON' || target.tagName === 'BUTTON') {
+            console.log('这是一个按钮:' + target.innerText);
+            return `按钮 ${target.innerText}`;
+          }
+
+          if (!!target.innerText && target.innerText != 'undefined') {
+            console.log(`文本 ${target.innerText}`);
+            return `文本 ${target.innerText || target.alt || target.title}`;
+          }
+
+          return '';
+        } else {
+          return '';
+        }
+      }
+    }, {
+      key: "addEvent",
+      value: function addEvent(element, type, callback) {
+        if (element.addEventListener) {
+          element.addEventListener(type, callback, false);
+        } else if (element.attachEvent) {
+          element.attachEvent('on' + type, callback);
+        } else {
+          element['on' + type] = callback;
+        }
+      }
+    }, {
+      key: "removeEvent",
+      value: function removeEvent(element, type, callback) {
+        if (element.removeEventListener) {
+          element.removeEventListener(type, callback);
+        } else if (element.detachEvent) {
+          element.detachEvent('on' + type, callback);
+        } else {
+          element['on' + type] = null;
+        }
+      }
     }]);
 
     return Base;
   }();
 
-  var styles$2 = ".topbar-html {\n  width: 100%;\n  background: #00d0d4;\n  overflow: hidden;\n  z-index: 2147483645;\n  position: fixed;\n  top: 0;\n  box-shadow: 0 0 10px 2px #999;\n  left: 0;\n  right: 0;\n}\n.topbar-html-mright {\n  margin-right: 20px !important;\n}\n.topbar-html-content {\n  width: 1080px;\n  height: 100px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n}\n.topbar-html-content-item {\n  width: 60px;\n  margin: 0 3px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.topbar-html-content-item span {\n  height: 30px;\n  line-height: 30px;\n  color: #FFFFFF;\n  font-size: 14px;\n  font-weight: bolder;\n}\n.topbar-html-content-item i {\n  height: 60px;\n  width: 60px;\n  border-radius: 5px;\n  display: block;\n  background-color: #FFFFFF;\n}";
+  var styles$3 = ".topbar-html {\n  width: 100%;\n  background: #00d0d4;\n  overflow: hidden;\n  z-index: 2147483645;\n  position: fixed;\n  top: 0;\n  box-shadow: 0 0 10px 2px #999;\n  left: 0;\n  right: 0;\n}\n.topbar-html-mright {\n  margin-right: 20px !important;\n}\n.topbar-html-content {\n  width: 1080px;\n  height: 100px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n}\n.topbar-html-content-item {\n  width: 60px;\n  margin: 0 3px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.topbar-html-content-item span {\n  height: 30px;\n  line-height: 30px;\n  color: #FFFFFF;\n  font-size: 14px;\n  font-weight: bolder;\n}\n.topbar-html-content-item i {\n  height: 60px;\n  width: 60px;\n  border-radius: 5px;\n  display: block;\n  background-color: #FFFFFF;\n}";
 
   const topBarHtml = namespace => {
     console.log('namespace+++++++', namespace);
@@ -488,28 +545,6 @@
       </div>`;
   };
 
-  const TopBar = {
-    init(core) {
-      core.creatStyle('topbar-style', styles$2);
-      core.creatHtml('topbar-html', topBarHtml);
-      this.setEvents(core);
-    },
-
-    setEvents(core) {
-      const {
-        namespace
-      } = core.config;
-      const Btn = document.getElementById(`${namespace}-close`);
-
-      Btn.onclick = () => {
-        core.close();
-      }; // document.onmousemove = this.mouseMove; 
-      // this.togglePointer(namespace)
-
-    }
-
-  };
-
   const ZoomPage = {
     init(core) {
       const {
@@ -519,10 +554,10 @@
       this.size = 1.0;
       this.ignore = ['LINK', 'SCRIPT'];
       this.namespace = namespace;
+      console.log('初始化---');
     },
 
     setEvents(namespace) {
-      // document.onmousedown = this.mouseDown; 
       document.getElementById(`${namespace}-zoom-out`).onclick = () => {
         this.zoomOut();
       };
@@ -563,11 +598,16 @@
         el.style.transform = `scale(${this.size})`;
         el.style.transformOrigin = '0px 0px';
       });
+    },
+
+    reset() {
+      this.size = 1.0;
+      this.set();
     }
 
   };
 
-  var styles$1 = ".pointer-follow-html {\n  background-color: #505050 !important;\n}\n.pointer-follow-html-x, .pointer-follow-html-y {\n  z-index: 99999999999;\n  transform: none;\n  transform-origin: 0px 0px;\n  position: fixed;\n  top: 0;\n  left: 0;\n  background-color: blue !important;\n  width: 100%;\n  height: 2px;\n}\n.pointer-follow-html-y {\n  height: 100%;\n  width: 2px;\n}";
+  var styles$2 = ".pointer-follow-html {\n  background-color: #505050 !important;\n}\n.pointer-follow-html-x, .pointer-follow-html-y {\n  z-index: 99999999999;\n  transform: none;\n  transform-origin: 0px 0px;\n  position: fixed;\n  top: 0;\n  left: 0;\n  background-color: blue !important;\n  width: 100%;\n  height: 2px;\n}\n.pointer-follow-html-y {\n  height: 100%;\n  width: 2px;\n}";
 
   const PointerFllowHtml = () => {
     return `<div class='pointer-follow-html'>
@@ -581,25 +621,35 @@
       const {
         namespace
       } = core.config;
-      core.creatStyle('pointer-follow-style', styles$1);
+      this.body = document.body;
+      core.creatStyle('pointer-follow-style', styles$2);
       core.creatHtml('pointer-follow-html', PointerFllowHtml);
-      this.setEvents(namespace);
+      this.setEvents(core, namespace);
     },
 
-    setEvents(namespace) {
-      document.onmousemove = this.mouseMove;
-      this.togglePointer(namespace);
+    setEvents(core, namespace) {
+      this.togglePointer(core, namespace);
     },
 
-    togglePointer(namespace) {
+    addEventMove(core) {
+      core.addEvent(this.body, 'mousemove', this.mouseMove);
+    },
+
+    removeEventMove(core) {
+      core.removeEvent(this.body, 'mousemove', this.mouseMove);
+    },
+
+    togglePointer(core, namespace) {
       const tabBarBtn = document.getElementById(`${namespace}-pointer-follow`);
       const activeBtn = document.getElementById(`${namespace}-pointer-follow-html`);
 
       tabBarBtn.onclick = () => {
         if (activeBtn.style.display == 'block') {
           activeBtn.style.display = 'none';
+          this.removeEventMove(core);
         } else {
           activeBtn.style.display = 'block';
+          this.addEventMove(core);
         }
       };
     },
@@ -610,11 +660,45 @@
           pointerY = document.getElementById("pointer-follow-html-y");
       pointerX.style.top = event.clientY - 10 + "px";
       pointerY.style.left = event.clientX - 10 + "px";
+    },
+
+    reset(core) {
+      const activeBtn = document.getElementById(`${core.namespace}-pointer-follow-html`);
+      activeBtn.style.display = 'none';
+      this.removeEventMove(core);
     }
 
   };
 
-  var styles = "* {\n  cursor: url(\"http://s.qunarzz.com/common/assist/allaw.cur\"), auto !important;\n}\n\na {\n  cursor: url(\"http://s.qunarzz.com/common/assist/linkaw.cur\"), auto !important;\n}";
+  const TopBar = {
+    init(core) {
+      core.creatStyle('topbar-style', styles$3);
+      core.creatHtml('topbar-html', topBarHtml);
+      this.setEvents(core);
+    },
+
+    setEvents(core) {
+      const {
+        namespace
+      } = core.config;
+      const BtnClose = document.getElementById(`${namespace}-close`);
+      const BtnReset = document.getElementById(`${namespace}-reset`);
+
+      BtnClose.onclick = () => {
+        core.close();
+      };
+
+      BtnReset.onclick = () => {
+        // console.log('core----', core)
+        ZoomPage.reset(); // PointerFllow.reset(namespace)
+      }; // document.onmousemove = this.mouseMove; 
+      // this.togglePointer(namespace)
+
+    }
+
+  };
+
+  var styles$1 = "* {\n  cursor: url(\"http://s.qunarzz.com/common/assist/allaw.cur\"), auto !important;\n}\n\na {\n  cursor: url(\"http://s.qunarzz.com/common/assist/linkaw.cur\"), auto !important;\n}";
 
   const CursorAuto = {
     init(core) {
@@ -633,9 +717,74 @@
         if (activeBtn) {
           activeBtn.remove();
         } else {
-          core.creatStyle('cursor-auto-style', styles);
+          core.creatStyle('cursor-auto-style', styles$1);
         }
       };
+    }
+
+  };
+
+  var styles = ".bigtext-html {\n  z-index: 99999999999;\n  height: 150px;\n  text-align: center;\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  left: 0;\n  border-top: 1px solid #505050;\n}\n.bigtext-html-content {\n  height: 100%;\n  background-color: #FFFFFF;\n  font-size: 53px;\n  color: #333 !important;\n  text-align: center;\n  font-weight: bold;\n}";
+
+  const BigTextHtml = namespace => {
+    return `<div class='bigtext-html'>
+           <div id='${namespace}-bigtext-content' class='bigtext-html-content'></div>
+           <div class='bigtext-html-btn'>
+              <i class='bigtext-html-close'>X</i>
+           </div>
+        </div>`;
+  };
+
+  const BigText = {
+    init(core) {
+      const {
+        namespace
+      } = core.config;
+      this.body = document.body;
+      this.namespace = namespace;
+      this.parseTagText = core.parseTagText;
+      core.creatStyle('bigtext-style', styles);
+      core.creatHtml('bigtext-html', BigTextHtml);
+      this.setEvents(core, namespace);
+    },
+
+    setEvents(core, namespace) {
+      this.toggleBigText(core, namespace);
+    },
+
+    addEventMove(core) {
+      core.addEvent(this.body, 'mouseover', this.mouseMove);
+    },
+
+    removeEventMove(core) {
+      core.removeEvent(this.body, 'mouseover', this.mouseMove);
+    },
+
+    toggleBigText(core, namespace) {
+      const tabBarBtn = document.getElementById(`${namespace}-bigtext`);
+
+      tabBarBtn.onclick = () => {
+        const activeBtn = document.getElementById(`${namespace}-bigtext-html`);
+
+        if (activeBtn.style.display == 'block') {
+          activeBtn.style.display = 'none';
+          this.removeEventMove(core);
+        } else {
+          activeBtn.style.display = 'block';
+          this.addEventMove(core);
+        }
+      };
+    },
+
+    mouseMove(event) {
+      var event = window.event || event;
+      var target = event.target;
+      const {
+        parseTagText,
+        namespace
+      } = BigText;
+      const activeBtn = document.getElementById(`${namespace}-bigtext-content`);
+      activeBtn.innerText = BigText.parseTagText(target);
     }
 
   };
@@ -670,6 +819,7 @@
         this.use(ZoomPage);
         this.use(PointerFllow);
         this.use(CursorAuto);
+        this.use(BigText);
       }
     }]);
 

@@ -8,13 +8,14 @@ export default class Base {
         url: '',
         
       };
-      this.creatContainer()
-      this.show()
+     
+      this.eventShow()
 
     }
 
     mergeConfig(opts) {
       this.config = { ...this.config, ...opts }; 
+      this.creatContainer()
     }
   
     use(plugin, ...args) {
@@ -23,13 +24,16 @@ export default class Base {
 
     creatContainer() {
       const { namespace } = this.config
+      if(document.getElementById(namespace)) {
+        return
+      }
       const Container = document.createElement("div");
       Container.id = namespace
       document.body.appendChild(Container)
       
     }
 
-    show() {
+    eventShow() {
       if(document.getElementById('assist-open')) {
         document.getElementById('assist-open').onclick = ()=> {
           this.isShowTopBar(true)
@@ -53,7 +57,7 @@ export default class Base {
         document.body.style = 'none'
         activeBtn.style.display = 'none'
         Cookies.remove(namespace, { domain: '.qunar.com'})
-
+        location.reload()
       }
     }
 
@@ -84,6 +88,51 @@ export default class Base {
         const __html = htmlFn(namespace)
         DomContainer.innerHTML = __html
         document.getElementById(namespace).appendChild(DomContainer)
+    }
+
+    parseTagText(target) {
+      if (target.children.length === 0){
+          if (target.role === 'A' || target.tagName === 'A') {
+              console.log('这是一个链接:' + target.innerText);
+              return `链接 ${target.innerText}`;
+          }
+          if (target.role === 'IMG' ||target.tagName === 'IMG') {
+              console.log('这是一张图片:' + target.alt || target.title);
+              return `图片 ${target.alt || target.title}`;
+          }
+          if (target.role === 'BUTTON' ||target.tagName === 'BUTTON') {
+              console.log('这是一个按钮:' +  target.innerText);
+              return `按钮 ${target.innerText}`;
+          }
+          if (!!target.innerText && target.innerText != 'undefined'){
+              console.log(`文本 ${target.innerText}`);
+              return `文本 ${target.innerText || target.alt || target.title}`;
+          }
+          return ''
+          
+      } else {
+        return ''
+      }
+    }
+
+    addEvent(element, type, callback) {
+      if(element.addEventListener){
+          element.addEventListener(type, callback, false);
+      } else if(element.attachEvent){
+          element.attachEvent('on' + type, callback);
+      } else {
+          element['on' + type] = callback;
+      }
+    }
+
+    removeEvent(element, type, callback) {
+      if(element.removeEventListener){
+          element.removeEventListener(type, callback);
+      } else if(element.detachEvent){
+          element.detachEvent('on' + type, callback);
+      } else {
+          element['on' + type] = null;
+      }
     }
    
   }
