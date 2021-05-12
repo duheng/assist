@@ -22,6 +22,8 @@ export default class Base {
       plugin.init(this, ...args);
     }
 
+    
+
     creatContainer() {
       const { namespace } = this.config
       if(document.getElementById(namespace)) {
