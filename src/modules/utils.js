@@ -54,8 +54,8 @@ const removeEvent = (element, type, callback) => {
 const parseTagText = (target) => {
     if (target.children.length === 0){
         if (target.role === 'A' || target.tagName === 'A') {
-            console.log('这是一个链接:' + target.innerText);
-            return `链接 ${target.innerText}`;
+            console.log('这是一个链接:' + target.alt || target.title || target.innerText);
+            return `链接 ${target.alt || target.title || target.innerText}`;
         }
         if (target.role === 'IMG' ||target.tagName === 'IMG') {
             console.log('这是一张图片:' + target.alt || target.title);
@@ -63,9 +63,21 @@ const parseTagText = (target) => {
         }
         if (target.role === 'BUTTON' ||target.tagName === 'BUTTON') {
             console.log('这是一个按钮:' +  target.innerText);
-            return `按钮 ${target.innerText}`;
+            return `按钮 ${target.alt || target.title || target.innerText}`;
         }
-        if (!!target.innerText && target.innerText != 'undefined'){
+        if (target.role === 'INPUT' ||target.tagName === 'INPUT') {
+            if(target.type == 'radio') {
+                console.log('这是一个单选框:' + target);
+                return `单选框 ${target.alt || target.title || target.value}`;
+            }else if(target.type == 'checkbox') {
+                console.log('这是一个复选框:' + target.alt || target.title || target.value);
+                return `复选框 ${target.alt || target.title || target.value}`;
+            }
+            
+            console.log('这是一个输入框:' + target.alt || target.title || target.value);
+            return `输入框 ${target.alt || target.title || target.value}`;
+        }
+        if (target.alt || target.title || target.innerText){
             console.log(`文本 ${target.innerText}`);
             return `文本 ${target.innerText || target.alt || target.title}`;
         }

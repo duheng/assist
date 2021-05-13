@@ -395,8 +395,8 @@
   const parseTagText = target => {
     if (target.children.length === 0) {
       if (target.role === 'A' || target.tagName === 'A') {
-        console.log('这是一个链接:' + target.innerText);
-        return `链接 ${target.innerText}`;
+        console.log('这是一个链接:' + target.alt || target.title || target.innerText);
+        return `链接 ${target.alt || target.title || target.innerText}`;
       }
 
       if (target.role === 'IMG' || target.tagName === 'IMG') {
@@ -406,10 +406,23 @@
 
       if (target.role === 'BUTTON' || target.tagName === 'BUTTON') {
         console.log('这是一个按钮:' + target.innerText);
-        return `按钮 ${target.innerText}`;
+        return `按钮 ${target.alt || target.title || target.innerText}`;
       }
 
-      if (!!target.innerText && target.innerText != 'undefined') {
+      if (target.role === 'INPUT' || target.tagName === 'INPUT') {
+        if (target.type == 'radio') {
+          console.log('这是一个单选框:' + target);
+          return `单选框 ${target.alt || target.title || target.value}`;
+        } else if (target.type == 'checkbox') {
+          console.log('这是一个复选框:' + target.alt || target.title || target.value);
+          return `复选框 ${target.alt || target.title || target.value}`;
+        }
+
+        console.log('这是一个输入框:' + target.alt || target.title || target.value);
+        return `输入框 ${target.alt || target.title || target.value}`;
+      }
+
+      if (target.alt || target.title || target.innerText) {
         console.log(`文本 ${target.innerText}`);
         return `文本 ${target.innerText || target.alt || target.title}`;
       }
@@ -671,6 +684,7 @@
           return;
         }
 
+        el.style.zoom = this.size;
         el.style.transform = `scale(${this.size})`;
         el.style.transformOrigin = '0px 0px';
       });
@@ -684,7 +698,7 @@
 
   };
 
-  var styles$2 = ".pointer-follow-html {\n  background-color: #505050 !important;\n}\n.pointer-follow-html-x, .pointer-follow-html-y {\n  z-index: 99999999999;\n  transform: none;\n  transform-origin: 0px 0px;\n  position: fixed;\n  top: 0;\n  left: 0;\n  background-color: blue !important;\n  width: 100%;\n  height: 2px;\n}\n.pointer-follow-html-y {\n  height: 100%;\n  width: 2px;\n}";
+  var styles$2 = ".pointer-follow-html-x, .pointer-follow-html-y {\n  z-index: 99999999999;\n  transform: none;\n  transform-origin: 0px 0px;\n  position: fixed;\n  top: 0;\n  left: 0;\n  background-color: #ff0000 !important;\n  width: 100%;\n  height: 4px;\n}\n.pointer-follow-html-y {\n  height: 100%;\n  width: 4px;\n}";
 
   const PointerFllowHtml = () => {
     return `<div class='pointer-follow-html'>
@@ -934,10 +948,9 @@
     return Assist;
   }(Base);
 
-  const QunarAssist = new Assist({
+  window.QunarAssist = new Assist({
     namespace: 'qunar-assist',
     url: 'http://qunar.com'
   });
-  console.log('Assist-----', QunarAssist);
 
 })));

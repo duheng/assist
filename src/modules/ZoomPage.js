@@ -40,6 +40,7 @@ const ZoomPage = {
             if(this.ignore.indexOf(__el) > -1 || el.id == this.namespace) {
                 return
             }
+            el.style.zoom = this.size;
             el.style.transform = `scale(${this.size})`
             el.style.transformOrigin = '0px 0px'
         });
