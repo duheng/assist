@@ -17,10 +17,10 @@ const BigText = {
       this.toggleBigText(core, namespace)
     },
     addEventMove() {
-       addEvent(this.body,'mouseover',this.mouseMove)
+       addEvent(this.body,'mouseover',this.mouseOver)
     },
     removeEventMove() {
-      removeEvent(this.body,'mouseover',this.mouseMove)
+      removeEvent(this.body,'mouseover',this.mouseOver)
     },
     toggleBigText(core, namespace) {
         const tabBarBtn = document.getElementById(`${namespace}-bigtext`)
@@ -33,7 +33,7 @@ const BigText = {
              }
         }
     },
-    mouseMove(event){
+    mouseOver(event){
         var event = window.event || event;
         var target = event.target;
         const { namespace } = BigText

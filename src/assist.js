@@ -2,6 +2,7 @@ import { cookie } from './modules/utils'
 
 import Base from './modules/base';
 import TopBar from './modules/TopBar';
+import Audio from './modules/Audio';
 import ZoomPage from './modules/ZoomPage';
 import PointerFllow from './modules/PointerFllow';
 import CursorAuto from './modules/CursorAuto';
@@ -21,6 +22,7 @@ class Assist extends Base {
   
     init() {
       this.use(TopBar);
+      this.use(Audio);
       this.use(ZoomPage);
       this.use(PointerFllow);
       this.use(CursorAuto);

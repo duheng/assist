@@ -561,7 +561,7 @@
     return Base;
   }();
 
-  var styles$3 = ".topbar-html {\n  width: 100%;\n  background: #797F8D;\n  overflow: hidden;\n  z-index: 2147483645;\n  position: fixed;\n  top: 0;\n  box-shadow: 0 0 10px 2px #999;\n  left: 0;\n  right: 0;\n}\n.topbar-html-mright {\n  margin-right: 50px !important;\n}\n.topbar-html-margin0 {\n  margin: 0 !important;\n}\n.topbar-html-content {\n  width: 1080px;\n  height: 100px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n}\n.topbar-html-content-item {\n  margin: 0 6px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.topbar-html-content-item span {\n  height: 30px;\n  line-height: 30px;\n  color: #FFFFFF;\n  font-size: 16px;\n  font-weight: 500;\n  font-family: PingFangSC-Medium;\n}\n.topbar-html-content-item img {\n  height: 52px;\n  width: 52px;\n  border-radius: 5px;\n  display: block;\n  background-color: #FFFFFF;\n}";
+  var styles$4 = ".topbar-html {\n  width: 100%;\n  background: #797F8D;\n  overflow: hidden;\n  z-index: 2147483645;\n  position: fixed;\n  top: 0;\n  box-shadow: 0 0 10px 2px #999;\n  left: 0;\n  right: 0;\n}\n.topbar-html-mright {\n  margin-right: 50px !important;\n}\n.topbar-html-margin0 {\n  margin: 0 !important;\n}\n.topbar-html-content {\n  width: 1080px;\n  height: 100px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n}\n.topbar-html-content-item {\n  margin: 0 6px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.topbar-html-content-item span {\n  height: 30px;\n  line-height: 30px;\n  color: #FFFFFF;\n  font-size: 16px;\n  font-weight: 500;\n  font-family: PingFangSC-Medium;\n}\n.topbar-html-content-item img {\n  height: 52px;\n  width: 52px;\n  border-radius: 5px;\n  display: block;\n  background-color: #FFFFFF;\n}";
 
   var img$8 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEUAAAD///////////////////////////////////////8zMzM5OTk8PDz8/PxcXFzu7u6zs7NHR0diYmJBQUG3t7eqqqqkpKSBgYHQ0NC+vr5MTEybm5v5+fnz8/Po6OjV1dWfn590dHRPT0/h4eHd3d3b29vLy8vFxcWvr6+WlpaHh4dmZmZXV1dubm6MjIwpqEHtAAAACnRSTlMAvfPZlHYzJgQRpdOjTAAAA69JREFUaN7t2mlTpDAQBuAZj1WbTkBuGOa+D/X//7sdDTHRWbTTzqRqq3w/7g4+SRMghPR07m7711dw1lxd92/veh/zpw8XSv+PxdzfwAVzc6+dhz5cNP2Htj9Uhy+pPt3AxXPzNg7AQ15HRB88pH+8fsBL7nq34CW3PiqnancNXnLduwIvueqBp/xCvxAbitZ1Pp0WeVZFoHNuSE6aUGAqMAgQhRCY7Cp5fmhSiiPxKUKU1VkhmQ2EDdjWPJNng7JYMR1UXJ8HWoSa6aTCFbQZzuIw50HNyZlBPP2nQtVvFLxmxoCig7CbjiLcN3meF2WSorClcATHlKoJE2doEaPVkdljZLehfrYsHIwBIFTtyVyhpbBG8k4rJsOtNRrTJcCT+u2jIzS22vvYMYg3ZkRixITG5k+UEroiC1PdMQsaxZpJ1/BVVnNNzTmQTNAMKJXvf4oMqBDakQBUiQEt9aHJEAiZtc1yh0LdH+UQ+sSD6raFT5KgRKvVapKyIBm3HVp9Y6j7WyqOQQ6UCXVEQSja4B1gQHN1REwo3Cb9AVS1HdrA95niD6BSHTAAQtbBKVQRIdl2aAuUnJwjpD34TOWQeAm9xGgnLoEK7VTZn4EZMpSoytVACx9C/RwjhQ9F6hSlQAsfqhR0AFr4UKagEjipy3JDhXJ1jgqOk7/NMIiQmm1g7miYeRNuaNA0YEO1auP0spApRkGDtuocNQzohX73No/xPQOaKaimQZV6lCUMKFGXekWDImTfGUTnzatH+Dk9i3YCCUQo1KfUNbmCDiTIvE3OnKHn4C0NFZowazdEPWVwmzPgzhEqWkiC4yxISCdHtjM86pzB1E5kTlDdHlVRITOFGtC7ZObGc9Chz71x7wC9oCmD+9vEmuxMUM/X6ZDpUpCOiI6cB9YNlfPGJ2mXUNh2KARHaIF0yX5bXrpC0Aj627IMtVOAMwQHcp9G4XujJAOK3ldO5qsvnXWKgUo8AgYEC2Gv+3VF7jUTiDGwIFha66abDiYbWGtOwIRgLAw12A5Pq7sT1i+W4AwZyWqvwOc6spXHGZr/xXgBP4BglHxcU02TssjzvNl/WlMVhwh+BIEsSKvEDQATMlkS1r0XwIbs1N+s5GcA54FAZnPRxQyo3yaIqf7xtQWFKCcAQIXIVpMgHjl8JVIUYTNx/X5ET1RleTGdbut193D+v77x/UL+IW/bDLxtnPC2FcTb5hZv23V8bUDytqXK1yYxb9vefG3k87U10etmS2/bR/8CfLm94E4nnEwAAAAASUVORK5CYII=";
 
@@ -624,7 +624,7 @@
 
   const TopBar = {
     init(core) {
-      core.creatStyle('topbar-style', styles$3);
+      core.creatStyle('topbar-style', styles$4);
       core.creatHtml('topbar-html', topBarHtml);
       this.setEvents(core);
     },
@@ -644,6 +644,60 @@
         core.resetAction();
       };
     }
+
+  };
+
+  var styles$3 = ".bigtext-html {\n  z-index: 99999999999;\n  height: 150px;\n  text-align: center;\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  left: 0;\n  border-top: 1px solid #505050;\n}\n.bigtext-html-content {\n  height: 100%;\n  background-color: #FFFFFF;\n  font-size: 53px;\n  color: #333 !important;\n  text-align: center;\n  font-weight: bold;\n}";
+
+  const BigTextHtml$1 = namespace => {
+    return '';
+  };
+
+  const Audio = {
+    init(core) {
+      const {
+        namespace
+      } = core.config;
+      this.body = document.body;
+      this.namespace = namespace;
+      core.creatStyle('audio-style', styles$3);
+      core.creatHtml('audio-html', BigTextHtml$1);
+      this.setEvents();
+      console.log('init--Audio->', this.namespace);
+    },
+
+    setEvents() {
+      this.addEventMove();
+    },
+
+    addEventMove() {
+      addEvent(this.body, 'mouseover', this.mouseOver);
+    },
+
+    removeEventMove() {
+      removeEvent(this.body, 'mouseover', this.mouseOver);
+    },
+
+    mouseOver(event) {
+      var event = window.event || event;
+      var target = event.target;
+      const {
+        namespace
+      } = Audio;
+
+      var __text = encodeURI(parseTagText(target));
+
+      var __url = `http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text=${__text}`; // document.getElementById(`${namespace}-audio-source`).setAttribute('src',__url)
+      // document.getElementById(`${namespace}-audio`).play();
+
+      let __audio = `<audio autoplay='autoplay' controls='controls'>
+        <source src='${__url}'>
+        <embed height="0" width="0"  src='${__url}'>
+        </audio>`;
+      document.getElementById(`${namespace}-audio-html`).innerHTML = __audio; // qunar-assist-audio-html
+    },
+
+    reset() {}
 
   };
 
@@ -862,11 +916,11 @@
     },
 
     addEventMove() {
-      addEvent(this.body, 'mouseover', this.mouseMove);
+      addEvent(this.body, 'mouseover', this.mouseOver);
     },
 
     removeEventMove() {
-      removeEvent(this.body, 'mouseover', this.mouseMove);
+      removeEvent(this.body, 'mouseover', this.mouseOver);
     },
 
     toggleBigText(core, namespace) {
@@ -883,7 +937,7 @@
       };
     },
 
-    mouseMove(event) {
+    mouseOver(event) {
       var event = window.event || event;
       var target = event.target;
       const {
@@ -943,6 +997,7 @@
       key: "init",
       value: function init() {
         this.use(TopBar);
+        this.use(Audio);
         this.use(ZoomPage);
         this.use(PointerFllow);
         this.use(CursorAuto);
