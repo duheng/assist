@@ -1,4 +1,4 @@
-import cookie from './utils'
+import { cookie } from './utils'
 
 const ZoomPage = {
     init(core) {

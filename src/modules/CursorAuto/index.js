@@ -1,4 +1,4 @@
-import cookie from '../utils'
+import { cookie } from '../utils'
 import styles from './index.scss'
 const CursorAuto = {
     init(core) {
@@ -24,7 +24,7 @@ const CursorAuto = {
     reset(core) {
         const { namespace } = core.config
         const activeBtn = document.getElementById(`${namespace}-cursor-auto-style`)
-        activeBtn.remove()
+        activeBtn && activeBtn.remove()
     }
         
 };

@@ -1,4 +1,4 @@
-import cookie from '../utils'
+import { cookie, addEvent, removeEvent, parseTagText } from '../utils'
 import styles from './index.scss'
 import tmpl from './index.tmpl.js'
 const BigText = {
@@ -6,7 +6,6 @@ const BigText = {
         const { namespace } = core.config
         this.body =  document.body
         this.namespace = namespace
-        this.parseTagText = core.parseTagText
         core.creatStyle('bigtext-style',styles)
         core.creatHtml('bigtext-html',tmpl)
         this.setEvents(core, namespace)
@@ -17,11 +16,11 @@ const BigText = {
     setEvents(core, namespace) {
       this.toggleBigText(core, namespace)
     },
-    addEventMove(core) {
-        core.addEvent(this.body,'mouseover',this.mouseMove)
+    addEventMove() {
+       addEvent(this.body,'mouseover',this.mouseMove)
     },
-    removeEventMove(core) {
-        core.removeEvent(this.body,'mouseover',this.mouseMove)
+    removeEventMove() {
+      removeEvent(this.body,'mouseover',this.mouseMove)
     },
     toggleBigText(core, namespace) {
         const tabBarBtn = document.getElementById(`${namespace}-bigtext`)
@@ -37,22 +36,22 @@ const BigText = {
     mouseMove(event){
         var event = window.event || event;
         var target = event.target;
-        const { parseTagText, namespace } = BigText
+        const { namespace } = BigText
         const activeBtn = document.getElementById(`${namespace}-bigtext-content`)
-        activeBtn.innerText = BigText.parseTagText(target)
+        activeBtn.innerText = parseTagText(target)
     },
     show(core) {
         const { namespace } = core.config
         const activeBtn =  document.getElementById(`${namespace}-bigtext-html`)
         activeBtn.style.display = 'block'
-        this.addEventMove(core)
+        this.addEventMove()
         cookie.set('bigtext', true, namespace)
     },
     reset(core) {
         const { namespace } = core.config
         const activeBtn =  document.getElementById(`${namespace}-bigtext-html`)
         activeBtn.style.display = 'none'
-        this.removeEventMove(core)
+        this.removeEventMove()
         cookie.set('bigtext', false, namespace)
     }
 };

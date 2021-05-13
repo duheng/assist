@@ -1,5 +1,5 @@
                
-import cookie from '../utils'
+import { cookie, addEvent, removeEvent } from '../utils'
 import styles from './index.scss'
 import tmpl from './index.tmpl.js'
 const PointerFllow = {
@@ -17,11 +17,11 @@ const PointerFllow = {
         this.togglePointer(core, namespace)
        
     },
-    addEventMove(core) {
-        core.addEvent(this.body,'mousemove',this.mouseMove)
+    addEventMove() {
+        addEvent(this.body,'mousemove',this.mouseMove)
     },
-    removeEventMove(core) {
-        core.removeEvent(this.body,'mousemove',this.mouseMove)
+    removeEventMove() {
+        removeEvent(this.body,'mousemove',this.mouseMove)
     },
     togglePointer(core, namespace) {
         const tabBarBtn = document.getElementById(`${namespace}-pointer-follow`)
@@ -45,14 +45,14 @@ const PointerFllow = {
         const { namespace } = core.config
         const activeBtn =  document.getElementById(`${namespace}-pointer-follow-html`)
         activeBtn.style.display = 'block'
-        this.addEventMove(core)
+        this.addEventMove()
         cookie.set('pointer',true,namespace)
     },
     reset(core) {
         const { namespace } = core.config
         const activeBtn =  document.getElementById(`${namespace}-pointer-follow-html`)
         activeBtn.style.display = 'none'
-        this.removeEventMove(core)
+        this.removeEventMove()
         cookie.set('pointer',false,namespace)
     }
 };

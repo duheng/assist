@@ -1,7 +1,7 @@
 
 .topbar-html {
     width: 100%;
-    background: #00d0d4;
+    background: #797F8D;
     overflow: hidden;
     z-index: 2147483645;
     position: fixed;
@@ -10,7 +10,10 @@
     left: 0;
     right: 0;
     &-mright {
-        margin-right: 20px !important;
+        margin-right: 50px !important;
+    }
+    &-margin0 {
+        margin: 0 !important;
     }
     &-content {
         width: 1080px;
@@ -19,8 +22,7 @@
         display: flex;
         justify-content: center;
         &-item {
-            width: 60px;
-            margin: 0 3px;
+            margin: 0 6px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -28,13 +30,14 @@
                 height: 30px;
                 line-height: 30px;
                 color: #FFFFFF;
-                font-size: 14px;
-                font-weight: bolder;
+                font-size: 16px;
+                font-weight: 500;
+                font-family: PingFangSC-Medium;
             }
 
-            i {
-                height: 60px;
-                width: 60px;
+            img {
+                height: 52px;
+                width: 52px;
                 border-radius: 5px;
                 display: block;
                 background-color: #FFFFFF;

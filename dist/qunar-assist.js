@@ -326,29 +326,25 @@
   }));
   });
 
-  /**
-      * 1 - 是否展示无障碍
-      * 2 - 是否开启声音
-      * 3 - 语速
-      * 4 - 缩放倍数
-      * 5 - 是否替换鼠标样式
-      * 6 - 是否开启十字线
-      * 7 - 是否开启大字幕
-      * 8 - 是否开启指读
-      * [0,0,'slow',0.0,0,]
-      * **/
-
   const cookie = {
     set: (key, value, namespace) => {
       let memory = {
         show: false,
+        // 是否展示无障碍
         audio: false,
+        // 是否开启声音
         speed: 'slow',
+        // 语速
         zomm: 0.1,
+        // 缩放倍数
         cursor: false,
+        // 是否替换鼠标样式
         pointer: false,
+        // 是否开启十字线
         bigtext: false,
-        overead: false
+        // 是否开启大字幕
+        overead: false // 是否开启指读
+
       };
 
       if (js_cookie.get(namespace)) {
@@ -364,17 +360,63 @@
       let __key = '';
 
       if (js_cookie.get(namespace)) {
-        //  console.log(key,'Cookies++++>', JSON.parse(Cookies.get(namespace))[key])
         __key = JSON.parse(js_cookie.get(namespace))[key];
       }
 
-      console.log('__key+++++', __key);
       return __key;
     },
     remove: namespace => {
       js_cookie.remove(namespace, {
         domain: '.qunar.com'
       });
+    }
+  };
+
+  const addEvent = (element, type, callback) => {
+    if (element.addEventListener) {
+      element.addEventListener(type, callback, false);
+    } else if (element.attachEvent) {
+      element.attachEvent('on' + type, callback);
+    } else {
+      element['on' + type] = callback;
+    }
+  };
+
+  const removeEvent = (element, type, callback) => {
+    if (element.removeEventListener) {
+      element.removeEventListener(type, callback);
+    } else if (element.detachEvent) {
+      element.detachEvent('on' + type, callback);
+    } else {
+      element['on' + type] = null;
+    }
+  };
+
+  const parseTagText = target => {
+    if (target.children.length === 0) {
+      if (target.role === 'A' || target.tagName === 'A') {
+        console.log('这是一个链接:' + target.innerText);
+        return `链接 ${target.innerText}`;
+      }
+
+      if (target.role === 'IMG' || target.tagName === 'IMG') {
+        console.log('这是一张图片:' + target.alt || target.title);
+        return `图片 ${target.alt || target.title}`;
+      }
+
+      if (target.role === 'BUTTON' || target.tagName === 'BUTTON') {
+        console.log('这是一个按钮:' + target.innerText);
+        return `按钮 ${target.innerText}`;
+      }
+
+      if (!!target.innerText && target.innerText != 'undefined') {
+        console.log(`文本 ${target.innerText}`);
+        return `文本 ${target.innerText || target.alt || target.title}`;
+      }
+
+      return '';
+    } else {
+      return '';
     }
   };
 
@@ -385,18 +427,8 @@
       this.config = {
         namespace: 'mozi-assist',
         url: ''
-      }; // this.memory = {
-      //   show: false,   // 是否展示无障碍
-      //   audio: false,  // 是否开启声音
-      //   speed: 'slow', // 语速
-      //   zomm: 0.1,     // 缩放倍数
-      //   cursor: false, // 是否替换鼠标样式
-      //   pointer: false,// 是否开启十字线
-      //   bigtext: false,// 是否开启大字幕
-      //   overead: false // 是否开启指读
-      // }
-
-      this.eventShow();
+      };
+      this.registeOpen();
     }
 
     _createClass(Base, [{
@@ -426,8 +458,8 @@
         document.body.appendChild(Container);
       }
     }, {
-      key: "eventShow",
-      value: function eventShow() {
+      key: "registeOpen",
+      value: function registeOpen() {
         if (document.getElementById('assist-open')) {
           document.getElementById('assist-open').onclick = () => {
             this.isShowTopBar(true);
@@ -498,108 +530,95 @@
         DomContainer.innerHTML = __html;
         document.getElementById(namespace).appendChild(DomContainer);
       }
-    }, {
-      key: "parseTagText",
-      value: function parseTagText(target) {
-        if (target.children.length === 0) {
-          if (target.role === 'A' || target.tagName === 'A') {
-            console.log('这是一个链接:' + target.innerText);
-            return `链接 ${target.innerText}`;
-          }
-
-          if (target.role === 'IMG' || target.tagName === 'IMG') {
-            console.log('这是一张图片:' + target.alt || target.title);
-            return `图片 ${target.alt || target.title}`;
-          }
-
-          if (target.role === 'BUTTON' || target.tagName === 'BUTTON') {
-            console.log('这是一个按钮:' + target.innerText);
-            return `按钮 ${target.innerText}`;
-          }
-
-          if (!!target.innerText && target.innerText != 'undefined') {
-            console.log(`文本 ${target.innerText}`);
-            return `文本 ${target.innerText || target.alt || target.title}`;
-          }
-
-          return '';
-        } else {
-          return '';
-        }
-      }
-    }, {
-      key: "addEvent",
-      value: function addEvent(element, type, callback) {
-        if (element.addEventListener) {
-          element.addEventListener(type, callback, false);
-        } else if (element.attachEvent) {
-          element.attachEvent('on' + type, callback);
-        } else {
-          element['on' + type] = callback;
-        }
-      }
-    }, {
-      key: "removeEvent",
-      value: function removeEvent(element, type, callback) {
-        if (element.removeEventListener) {
-          element.removeEventListener(type, callback);
-        } else if (element.detachEvent) {
-          element.detachEvent('on' + type, callback);
-        } else {
-          element['on' + type] = null;
-        }
-      }
     }]);
 
     return Base;
   }();
 
-  var styles$3 = ".topbar-html {\n  width: 100%;\n  background: #00d0d4;\n  overflow: hidden;\n  z-index: 2147483645;\n  position: fixed;\n  top: 0;\n  box-shadow: 0 0 10px 2px #999;\n  left: 0;\n  right: 0;\n}\n.topbar-html-mright {\n  margin-right: 20px !important;\n}\n.topbar-html-content {\n  width: 1080px;\n  height: 100px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n}\n.topbar-html-content-item {\n  width: 60px;\n  margin: 0 3px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.topbar-html-content-item span {\n  height: 30px;\n  line-height: 30px;\n  color: #FFFFFF;\n  font-size: 14px;\n  font-weight: bolder;\n}\n.topbar-html-content-item i {\n  height: 60px;\n  width: 60px;\n  border-radius: 5px;\n  display: block;\n  background-color: #FFFFFF;\n}";
+  var styles$3 = ".topbar-html {\n  width: 100%;\n  background: #797F8D;\n  overflow: hidden;\n  z-index: 2147483645;\n  position: fixed;\n  top: 0;\n  box-shadow: 0 0 10px 2px #999;\n  left: 0;\n  right: 0;\n}\n.topbar-html-mright {\n  margin-right: 50px !important;\n}\n.topbar-html-margin0 {\n  margin: 0 !important;\n}\n.topbar-html-content {\n  width: 1080px;\n  height: 100px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n}\n.topbar-html-content-item {\n  margin: 0 6px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.topbar-html-content-item span {\n  height: 30px;\n  line-height: 30px;\n  color: #FFFFFF;\n  font-size: 16px;\n  font-weight: 500;\n  font-family: PingFangSC-Medium;\n}\n.topbar-html-content-item img {\n  height: 52px;\n  width: 52px;\n  border-radius: 5px;\n  display: block;\n  background-color: #FFFFFF;\n}";
+
+  var img$8 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAkFBMVEUAAAD///////////////////////////////////////8zMzM5OTk8PDz8/PxcXFzu7u6zs7NHR0diYmJBQUG3t7eqqqqkpKSBgYHQ0NC+vr5MTEybm5v5+fnz8/Po6OjV1dWfn590dHRPT0/h4eHd3d3b29vLy8vFxcWvr6+WlpaHh4dmZmZXV1dubm6MjIwpqEHtAAAACnRSTlMAvfPZlHYzJgQRpdOjTAAAA69JREFUaN7t2mlTpDAQBuAZj1WbTkBuGOa+D/X//7sdDTHRWbTTzqRqq3w/7g4+SRMghPR07m7711dw1lxd92/veh/zpw8XSv+PxdzfwAVzc6+dhz5cNP2Htj9Uhy+pPt3AxXPzNg7AQ15HRB88pH+8fsBL7nq34CW3PiqnancNXnLduwIvueqBp/xCvxAbitZ1Pp0WeVZFoHNuSE6aUGAqMAgQhRCY7Cp5fmhSiiPxKUKU1VkhmQ2EDdjWPJNng7JYMR1UXJ8HWoSa6aTCFbQZzuIw50HNyZlBPP2nQtVvFLxmxoCig7CbjiLcN3meF2WSorClcATHlKoJE2doEaPVkdljZLehfrYsHIwBIFTtyVyhpbBG8k4rJsOtNRrTJcCT+u2jIzS22vvYMYg3ZkRixITG5k+UEroiC1PdMQsaxZpJ1/BVVnNNzTmQTNAMKJXvf4oMqBDakQBUiQEt9aHJEAiZtc1yh0LdH+UQ+sSD6raFT5KgRKvVapKyIBm3HVp9Y6j7WyqOQQ6UCXVEQSja4B1gQHN1REwo3Cb9AVS1HdrA95niD6BSHTAAQtbBKVQRIdl2aAuUnJwjpD34TOWQeAm9xGgnLoEK7VTZn4EZMpSoytVACx9C/RwjhQ9F6hSlQAsfqhR0AFr4UKagEjipy3JDhXJ1jgqOk7/NMIiQmm1g7miYeRNuaNA0YEO1auP0spApRkGDtuocNQzohX73No/xPQOaKaimQZV6lCUMKFGXekWDImTfGUTnzatH+Dk9i3YCCUQo1KfUNbmCDiTIvE3OnKHn4C0NFZowazdEPWVwmzPgzhEqWkiC4yxISCdHtjM86pzB1E5kTlDdHlVRITOFGtC7ZObGc9Chz71x7wC9oCmD+9vEmuxMUM/X6ZDpUpCOiI6cB9YNlfPGJ2mXUNh2KARHaIF0yX5bXrpC0Aj627IMtVOAMwQHcp9G4XujJAOK3ldO5qsvnXWKgUo8AgYEC2Gv+3VF7jUTiDGwIFha66abDiYbWGtOwIRgLAw12A5Pq7sT1i+W4AwZyWqvwOc6spXHGZr/xXgBP4BglHxcU02TssjzvNl/WlMVhwh+BIEsSKvEDQATMlkS1r0XwIbs1N+s5GcA54FAZnPRxQyo3yaIqf7xtQWFKCcAQIXIVpMgHjl8JVIUYTNx/X5ET1RleTGdbut193D+v77x/UL+IW/bDLxtnPC2FcTb5hZv23V8bUDytqXK1yYxb9vefG3k87U10etmS2/bR/8CfLm94E4nnEwAAAAASUVORK5CYII=";
+
+  var img$7 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAjVBMVEUAAAD///////////////////////8zMzM4ODg+Pj719fWoqKg7OztGRkbg4OD39/d1dXVbW1vIyMj7+/tMTEzj4+OUlJSCgoJCQkLo6Oi9vb1RUVHs7Ozb29vX19fw8PDAwMC6urpwcHC0tLRVVVWlpaVpaWnQ0NCurq6enp6ZmZmLi4uIiIh7e3thYWGg660bAAAABnRSTlMA+uWnfzGozdCBAAADiklEQVRo3u3a7XKqMBAGYK3HJeFEUEHRgqj41dqP+7+805MNs5lhILF2memM758iJTwG1hDbDL4yHj0NgS3Dp9F4oPOHSyHrj3agh3xJ4yH0kOF4MIJeMho8QS95GgyhlwwH0FMe0AN6QA/ot0FRNhFikm3sfQxQnIlAR2S0kwGKP1VQJwcMBxTPyKE+3Q81HYGGkUoA4ICMQ/kA4IDC2hHvH7ghgQEiR80BKtzkgKg/ewD4K/Rm/PNQeCSHoPDHIXKegQdqOjxQ02mH4u29UJgbR2mnBXoXIp3fBW0bDkG2g5XvgDz70w4lASb6LhRfUro/HRDUR0U3QcXhnEqhowKM2EEnVBlpsvWHinc8PYacTig0PRdnb+giReBwCKKsV3QrvaBLkwkUOU2oWOO+SJoxPfSCyiYj5BxaoXAmRBCjZC7e0gcKJw1FZGtoh7ACCr33VWH/Qw/opMz502ypc9phsxZojUfn+qB4hdDVDQ0n2LDxwWuDFhIbvOndzwo76IY2eKTcgieU5PTY/conNr84oZOgVl5Q3aUg1fv3+CpzQssAT+APQWkuwou+SwKvnROa0nFekN5GaaZ/ccZ3WnBAiSkgfV8PUndvxwHVJz/ozyH+4pUF2uKNqfQLrIYpCwQzukm0zQFVpsCpGnIe6A2rwT4DD7S0oA8+iFrRpUv5i+GTsRhCu7zxSXFmgXAkVfZgt2SBcmt8m9Mo0Q5RoSa3QAccVI9W0cmN3/NIljdAG4nnPlkjkAIXNDet/KGinqEmVvvKCSWmWZV4QkmAkThtzPDF3glBhpJI33ZznXLbCRXoiJl+ZxtsrWI3VKjARJqI4z5ph9bKntrPUM3ADcFLLVHkcd0KwVEfsrBnWyJyQ3Tx7IhV1AptAylX+EZi80yfghsyE9tGZNQGQVKWMX01pA65Idil0iERRElm6KgluCDKoRKirgWSuqHKXIg0dkN2wmjzP/NXkjqhq7kKqvzut/JIktQBTQLMHr4LwYKkDggPEidwQDf2qQlNqRDckL/UhMJASXUFF+QvtZf3fL8AN+Qvcf0ZrVkRPBBJK5J4oKa0BrgilDBAtrQ74IYCDsiWBP48AzBAWhKGoqkBA6QlG8rxFt0Luftkao4FgnWuUJEpTSQ4IIhfUiWlSk8x7WOAdIqybPTmN/979AE9oF8C9bWkqrdFYr0te+ttIV9fSxP7W2zZ2/LRf1C1IJ35WNi4AAAAAElFTkSuQmCC";
+
+  var img$6 = "data:image/png;base64,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";
+
+  var img$5 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAmVBMVEX8/PwAAAD///////////////////8zMzM3Nzfg4OBERERRUVE+Pj6kpKTn5+fi4uKFhYVubm5YWFj4+Pj09PTAwMCbm5vs7OzZ2dmSkpKKiopNTU1BQUFra2vw8PDPz8+ysrKvr6/FxcWOjo54eHhiYmLLy8u4uLhwcHBmZmY7OzvS0tKVlZWAgIB9fX10dHSqqqpJSUleXl4uaMzTAAAABnRSTlP+AOWnfzGF0eAUAAAD5UlEQVRo3u3a2XqqMBAAYLpNIhakrCog7vtW3//hjoeJRhrwZNTynQvnplVC/jAJCWkxXl5ePt5e4Rfj9e3jiByhdwN+OYz3v9A71BDvL8aHATXEkXmDWuLNeIVa4tWAmuIJPaEn9ITuhFqB5YzTw2K+7fRXPn73cKg3GCeMcc6OgT/ddfZ4KJgzJC6Ds+/QfiRk9GPBlFib1sOgYVxGSKrrPwSKdsV6MQpfJbMHQG2TS4OZ6cgazPr7cOvyy2yO7oYCzs8pSgeXPe9NO+bZ4ql/HxSer2YZRurh6eR8PG7dA41lh/cqBkrzVOQzux0anTKzu9LcfiJKfbZuhfpMhAXXwnZR4k3/NijjoneGcD28ncje102QnYhebuBnnTHTuQXChPBEazJbCymgQ3uRuBVoxRyLmx4VipbYxD7ohd/EBHSoUBfPG4Fu2J+YgYgGRZiJpCwTQycsG8eWaBoN6uBZg7IKj98zo6Sib7ykHgUycGjHZSs6r2r3DKE9BRpWD9ZG3hdp6Q2Rn+RSoHGeuSZUQl9QeUmsQYDyynhIhLxlfpqlD7WxaTYRgk2eiLk+hCP1G6jQLD9vqQ1hy7hDhiKRCW3IxZuIDIGZQ0NtCGeTjA5NcDToQgZmoDBrBYemCJycTp++Cnly8pyvdaEeQp4yPErD/zlz8a4uZGMNSvKVUBaGMG/P5g6IVUdXhYipuzyyqIYyNXXEwVCY77fnTloWtxKBslzyji4EWGn7R0EMMXuLT15xZUxpwxuaefkZ/T7CtS/QhnY4nMiQL9YJbQgHj0uGhthvhjY0FbciFcJNwQS0IQNHQ58KmbheakLytplQIJmIFQESG5Y2DZqL9ZIA+fhYt4CqacMBNVY4FNb6kJwIpqCGW3WtBzzHJkFtVv2M1o1Lt0wBXtCY+JA/lwNPL7xY9CsFkpfE27rQjosLIkLQFTurSM8JRcNsMuSLLazr6TiB3L/TIHn78bmGNOVM3g9UCPZCcu1/OZYomUQ3QeCIdpqrq4zhMAFlcBtkTLioYX+lVANLyQ6iQ9CLT1IcVBSJHPmnNLN1KwT+gjMRh6zseMixgJToEEZXPu80rWI93nAsGFWiQzBgTFrm1grarchuZIPOhDPJmIpEhiAzL7PDi7+I3y3DUSQyBN4aa62Myd/KpUSGZLS2rIrizJ1hISnRIRl29zO3FGaHN7MikSFZLhgnxZ5hy9TC2UmRaJAajcEojRN+rMpNN5ZcqhTJJkDkQEmdxQkQSVK3pQSILHHl+8dCKKnPdr8CwcB1lfXi//2v5RN6Qk/oCT02antJrLbX3mp7ka+uVxPre9myttdH/wB03iKbr43v3gAAAABJRU5ErkJggg==";
+
+  var img$4 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAllBMVEUAAAD///////////////////////8zMzM2NjY4ODj7+/tSUlLi4uJERESTk5OFhYX4+Pjn5+fAwMCkpKRYWFhBQUH09PSbm5vs7Ox2dnbZ2dlra2tiYmJNTU08PDzPz8+ysrKvr6+pqamJiYmOjo5/f3/w8PDLy8t7e3twcHDT09PGxsbk5ORmZmZeXl5JSUm3t7e6urrPoq9IAAAABnRSTlMA+uWnfzGozdCBAAADxklEQVRo3u3a7XaaQBCAYZM0M7sIyJcIgkHFbxOT3P/NNd3ZIoRod4zh9IfvjzanUR9YB8RTeh89PtzDD3b/8NhT/bqDH+7ul3Kggz6kxzvooLvH3gN00kPvHjrpvgcddYNu0A26Qd+E7CAcpNkh3y7d6S4GRgxoNUuHiFLgR/R35BbXh4ItElFP4uvIvyZkTSfEtBO4tK8G7SdtoE6V8VWgJG0ul5RCSNmghu9XgMaOrF5QoJMtwtnbdD7aRAJr2sL6LhRIUS1RNnuGY97adbD6ZRZ/DxpVe/M0SqDVOq9WdGJ/A7LSao7L1Yk97ldbUlwOLQRSqX1m9If6UcPnS6Ep6kI4lx+RJPrxZVAh9Jrs4Xxe+nciLoL8IT1bv8tGM+NeAkWSDkYfDHK1FPChuV64HRi1pYc7HhdKnlA1BbPivpKEy4VKWrgFmObTlomEByWSDg0PjAsFbRoPcmmHZmCe9UonkRUHsmi0JxYweqO1m3OgfTWsnCL1pIgDpULtEPB6R5XNgNQEiRET8tTT5NwcGqPKB2ZLtRBbcyhUM/cK3N4U9GQM0ZaJARtK9EoYQ5E+iNg5CtobQ3Q2KfhQTtNgClmoSqBWcOh/Wdb4/B6IP5BrCq0I8pofGqeKP5+5ZGkK+ahqLX6r1gfDSI3r0hR6bkN4urINMZfOgmMvp6Hi89KJkjkMq/o/bY5X4PQHJZon3pI3DEAvOv7Ef5XnQb1MjXdoDPXVxr4BO/rsC4yhFGkFuMWoso0hGp6IDe2VIyxjaF0dirwWagNzMIYsGqrpRedUOTKH9GGTMx29EDsGNMXmgHMui1+BAcV0WffCcnb63MeBQJ8I1hzoQO/sMwsaI3InPKAdSoEFwZY7eN5Ev69MSO+SNJ6HlE62G2BCUOpvVomZM9Ib5rOhWH+FjTyzN4gKgQtVh5/YGkhridXxwIZgrqXIB+qfjxwmfIgunuj5zu4sYw1QQwVcBlm51K8wt+Bkdi6abxAfgtVEaGkSwNclA5TaEY59KQTxi0Ddofjq9yNJD2hKfAis8njx0w+br+PtN8Q0JT5EzRCPlrMJg7Gd+HYxc3OBR8ZpSWwICqe+OrL5g/45tAYtiQ2B5wqB58ptAGhIfIiylyhPIAKjdwBoSXyI8hdDFG1GYroDqiXxIcoKNh+WqCNPWegDZSARZJY9W2SToUTpRNkyHFtAtSWfBfGrpByOMSCW1P5ayoDYkoR6DIglta/tfgSC2SEK4VP/7/9a3qAbdINu0HXr7Caxzm576+xGvq5uTezuZsvObh/9DX0gIQxCgyCMAAAAAElFTkSuQmCC";
+
+  var img$3 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAmVBMVEUAAAD///////////////////////8zMzM5OTnT09M/Pz/7+/tGRkY1NTXv7+9OTk7c3Nx6enpYWFjo6OjFxcVfX1/39/fW1tbMzMy7u7usrKyNjY1oaGhTU1Pz8/Pk5OTQ0NC3t7eysrJzc3NKSkqjo6OdnZ2Tk5OAgIDr6+vg4OCXl5dvb29ra2tjY2O+vr6Dg4Onp6eJiYmMMDgYAAAABnRSTlMA+uWnfzGozdCBAAAC8UlEQVRo3u3ay3LiMBAFUAzhCmxjg23wA8wbwpsk//9xk4nUyC6YmgVqVRbcDVBenFJJ5W4JNb7TbjUdsMVpttqNn7zxKWS9/TiwkG+p7cBCnHajBStpNZqwkmbDgZU4DVjKC3pBL8gKNN+8LwPUwwDtT+I7boFKOCAvEjIfHigs0FZQTiNQOKCJuGVIE8UCuUInPECGA+qIStw5KEwQcZ0cFB4op7XX+wTACHWnt0UxBjgheAOSBiNWCHgn6RLwQih6SipjXggJLT4/5YWQ+kpyE14Is5CW+ZIXQjAUKkdeCKMVSTuPFQK+SDpPeSFsSIr2vBByWubrPi+EzKVlnvFC6K+pbix4IewjobLhhTA9k/TFC8HbkbQasULAUbdHvBCWVDfCGS+ExKW60eWFdN3oJLwQ4pLqRsELIbgIlXdeqNoeeawQMCZpMuWF8EnLPIp5IVx13eCFMHf1foMVwiFUkr/nhXR7NOCEnOAwX7hqSKahuJ/lxXa8Ow1DSVBGhqFI3IVnRPk/oA9j0MKTn+XjAQWmoI1YqrL3yIn6MARthQgd+TZdV4WeH11W48SDCYj6BNXLFZKYLJI0nhqtsLSPLdXGwpez4plvt6ggXGvdfmEa0huWoRqSK3sgzzC0E7cktTO2pVHIGQidi+qL5ZBKhpMTSlZdHCI3B3krqmyybJ9VcZCPI2NQdiYnVSNLa+swMQXd6mcffbWFUMVCPh+agrQDnOR39VL7oDkzCa0PANCtleyZnLPJ01CknXBWPTjuqV9qzrrPQjvtxJDJqhWO5uz0LDTrKKfcgzKUQ1LwiubsOQiLzt2xY1I7XU3lr+2zEGa70p8UDyauE1S71PNz0OPkekeUU+O4YoCoMXHjz1BQjhwQNSY9cYsbsEBeSAA5V7BAKOrO5ACAAar3Wr1BChkGCHOaH3ccg8IB4er/ZdabKXRYIIwWx23m4T6//w/fF/SCXtB/Yu1KlbVLYtauvVm7yGfraqK9y5bWro/+AdOIGl9J8J/ZAAAAAElFTkSuQmCC";
+
+  var img$2 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAUVBMVEUAAAD///////////////////////8zMzPz8/NZWVnAwMA/Pz/a2tpzc3P4+Pi6urpOTk47Ozvu7u6qqqp6enphYWHS0tLHx8ebm5uTk5Nra2tiB1jKAAAABnRSTlMA++WnfzGVrfkxAAABBElEQVRo3u3aW46CQBCF4S6QU+04w8XLzOj+F6qCLZrYSSfaFSDn38CXEOCljrtUlYUgW1KUletbCTInq96BQRepEhgklSthUukKmFQ4gUniYBQhQoSWDYk3gbb7TtsGT+WA6lav7fBQFuhf+7oaY1mgkw79YiwLtNahL4wRAqEQIRAKEQKhECEQChHCkiEf7bAZanysOhna7jca7RtDPxpt3aRBvlVNguLtkqCjvg11PgU6vA/p36Sgjzy6Sb0MH3i9p/bBLvJfR4gQoVuEQChECIRChEDo3qyPIC/POrM+VL08vc37mHiNECFCS4esJlVmIzGz2ZvZkM9qmmg3tjSbj54BcxwE/PC391YAAAAASUVORK5CYII=";
+
+  var img$1 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAjVBMVEUAAAD///////////////////////////8zMzOysrI3NzdgYGBcXFzOzs6VlZU1NTX8/Pz39/dmZmZFRUW8vLyrq6uenp6BgYFwcHBXV1dBQUH09PTh4eHZ2dnHx8eSkpJQUFBLS0s8PDzl5eXU1NR0dHTw8PDb29vAwMCvr6+mpqaMjIx6enrr6+tiYmIKA4ZdAAAAB3RSTlMA+uWnfzED0RzAUQAAAf1JREFUaN7t2tlSwjAUgOGyeQ6B0n2je9kFff/HUybRGUenSROaUSf/NeQbaHJBONZ7i9kURmw6W1j3nuYTGLnJ/OkdmoOG5pa1mICGJgtrBlqaWVPQ0tQCTRnIQAb6J9DODpcDO5f5UKioW5TJ8S/eACi/OihdGwpDRYtKJa4YtA9QsdQTgV4CVC4RgFwfH9CSD12QFVyj5cDiA0HaNudBboO0jQsSFSukxTwoRNozyOUxKXA50I2+bgWylewI2hyIbbk9SJewr74fKhQ+EOtEl/D7IZu+qgaFtngv64dCla3AyugG74eWH+dNIbrviIH+IxSla07+Jn8AdEN+pM2VoT2KRDbKUOQISakyVAk55KoMuRnhOw7ZKUNwTLb4ra9455ePP0f2x8P/moEMZCADGchABjKQgQz0c3u6TDw65BG8V40OQYQOOimMD0GVpNHf/rFsoCHQZXSoolCsAjX0UrUfKimUKDjsRK/7oePnHa90Z7rEoR+CTPUK0mUrRByoZjfxR1koQtqOA52Q5ntyjt3R978CB4IDk5pQ4jm91ARpFRcqCbK6bDWwxkHWK3AhiFG97U4AglTZcc4gAnkHRYeEwINYtaPitDaIQnDypZlu44EQxCpiv+nIwIL1Lfxkft9/5QYy0DhpGxLTNvambZBP12iivmFLbeOjbzu6QQG065M4AAAAAElFTkSuQmCC";
+
+  var img = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGgAAABoCAMAAAAqwkWTAAAAllBMVEUAAAD///////////////////////8zMzNDQ0OlpaX7+/vq6upQUFDk5OTf3983Nzfx8fHDw8OSkpLS0tKDg4N+fn5bW1v39/fZ2dmYmJiLi4tVVVV5eXljY2M6OjrKysqioqKdnZ1zc3NnZ2dfX19LS0tHR0e/v7+7u7u0tLSurq5sbGw/Pz+qqqpZWVmIiIjs7OzFxcURI+eeAAAABnRSTlMA+uWnfzGozdCBAAADWUlEQVRo3u3aaXOiQBAGYI+1wRkuRRRFUeMZjxz//89tVnnH1JaQbqywtbv0tyTdPjJMzwwVGh/RabfoG6PV7jQu8aNJ3xzNHxeHKogPqdOkCqLZabSpkmg3WlRJtBpUUdRQDdXQPw6p2BVkl4fOqWXNxJQc2lm/YqiEZXJoZV1iLiyTQ/YV6tKnqKH/BQpUJVDPsdIoKIT2yWn9/iCk+pdPnRVBi8vP/YegYGWhPXOhIL3+4hiUh7RjZXHOh0LkJFoOGQfxng+5JsnR5aC3m5OofIiebtJbGUjNLMRQUwE0GprEmSoBDUx5NCruo9HUpA7k0LMpXny9MixN8rMU0ieUdjlLUBfZJy2Enm7Xw4FogfwnGdS7DToPoggVPRH0gvmmuJAaokQC7bKi1OVvE16aFe0EEC5oLNmPxrgkPhSj05UEUlhJYjb0mlUcZDvsISubcCGVfdZWySDU2YoJzc0dkkHmLs2ZEPJdKeThGzKhdbY3yE9BSbaI8yDlX9P7cqh//ZuvWJCHxpND+6zUY0E93CI55GK940BY8k90P5yijSfFt2BAGGgnB4owOvdig9vLgSaFqzBpGx+Vv0hOOBAWoBXlSa/DY96OnR1oXlnQAM0gD0ADydC9yAj50OFIs5EzZjIsWdAB7S13FPYXUcN6csgTNazGWVAO4dSpWRAWmYHYQTPbxIOOmA1l58KRCeHUGUodPJMtmZBnlRy7AaYRE8ICnWqZo1Msx1xojEsqd0FjNqT9rGc9UROhSrMhmhY/gxQ/6UyJD4XFzyDFTzqhADLf7uSxB+5kRkECuT7O+QHPCXDC910RRH0MxEpxHLVCfp9k0ChB5VQxnCmyk5EQothH7Vp/5eg1cv2YpBCdLcQ2LHbCrUk9kxyiiSn3z6pg2Lq+SZyQFELbIpx9XtLeQQ5aVQ6po3WL9fxeynxo3eKoxBCkyPoUydL9rUeXyee/R3DkENrJxCZa7GI3CNx4t5hiChQ0EB+inm2xwu7RYxDpFcdZaSoPIfbbr5gt5uRjEI2WduGojUf0MASq6+QxThfMgxAinGzujNkEqxMD4od7iNY2DHsdHdBXPEgYgRvPw9gt3A//un/41lAN1dAfgip7Sayy194qe5GvqlcTq3vZsrLXR38CNzUbwKsmamQAAAAASUVORK5CYII=";
 
   const topBarHtml = namespace => {
-    console.log('namespace+++++++', namespace);
     return `<div class='topbar-html-content'>
         <div id='${namespace}-reset' class='topbar-html-content-item'>
           <span>重置</span>
-          <i></i>
+          <img src='${img$8}'></img>
         </div>
-        <div id='${namespace}-audio' class='topbar-html-content-item'>
+        <div id='${namespace}-audio' class='topbar-html-content-item topbar-html-margin0'>
           <span>声音开关</span>
-          <i></i>
+          <img src='${img$7}'></img>
         </div>
         <div id='${namespace}-audio-speed' class='topbar-html-content-item topbar-html-mright'>
           <span>语速</span>
-          <i></i>
+          <img src='${img$6}'></img>
         </div>
         <div id='${namespace}-zoom-out' class='topbar-html-content-item'>
           <span>放大</span>
-          <i></i>
+          <img src='${img$5}'></img>
         </div>
         <div id='${namespace}-zoom-min' class='topbar-html-content-item topbar-html-mright'>
           <span>缩小</span>
-          <i></i>
+          <img src='${img$4}'></img>
         </div>
-        <div id='${namespace}-cursor-auto' class='topbar-html-content-item'>
+        <div id='${namespace}-cursor-auto' class='topbar-html-content-item topbar-html-margin0'>
           <span>鼠标样式</span>
-          <i></i>
+          <img src='${img$3}'></img>
         </div>
         <div id='${namespace}-pointer-follow' class='topbar-html-content-item'>
           <span>十字线</span>
-          <i></i>
+          <img src='${img$2}'></img>
         </div>
         <div id='${namespace}-bigtext' class='topbar-html-content-item topbar-html-mright'>
           <span>大字幕</span>
-          <i></i>
-        </div>
-        <div id='${namespace}-info' class='topbar-html-content-item'>
-          <span>说明</span>
-          <i></i>
+          <img src='${img$1}'></img>
         </div>
         <div id='${namespace}-close' class='topbar-html-content-item'>
-          <span>退出</span>
-          <i></i>
+          <span>退出服务</span>
+          <img src='${img}'></img>
         </div>
       </div>`;
+  };
+
+  const TopBar = {
+    init(core) {
+      core.creatStyle('topbar-style', styles$3);
+      core.creatHtml('topbar-html', topBarHtml);
+      this.setEvents(core);
+    },
+
+    setEvents(core) {
+      const {
+        namespace
+      } = core.config;
+      const BtnClose = document.getElementById(`${namespace}-close`);
+      const BtnReset = document.getElementById(`${namespace}-reset`);
+
+      BtnClose.onclick = () => {
+        core.close();
+      };
+
+      BtnReset.onclick = () => {
+        core.resetAction();
+      };
+    }
+
   };
 
   const ZoomPage = {
@@ -693,12 +712,12 @@
       this.togglePointer(core, namespace);
     },
 
-    addEventMove(core) {
-      core.addEvent(this.body, 'mousemove', this.mouseMove);
+    addEventMove() {
+      addEvent(this.body, 'mousemove', this.mouseMove);
     },
 
-    removeEventMove(core) {
-      core.removeEvent(this.body, 'mousemove', this.mouseMove);
+    removeEventMove() {
+      removeEvent(this.body, 'mousemove', this.mouseMove);
     },
 
     togglePointer(core, namespace) {
@@ -728,7 +747,7 @@
       } = core.config;
       const activeBtn = document.getElementById(`${namespace}-pointer-follow-html`);
       activeBtn.style.display = 'block';
-      this.addEventMove(core);
+      this.addEventMove();
       cookie.set('pointer', true, namespace);
     },
 
@@ -738,13 +757,53 @@
       } = core.config;
       const activeBtn = document.getElementById(`${namespace}-pointer-follow-html`);
       activeBtn.style.display = 'none';
-      this.removeEventMove(core);
+      this.removeEventMove();
       cookie.set('pointer', false, namespace);
     }
 
   };
 
-  var styles$1 = ".bigtext-html {\n  z-index: 99999999999;\n  height: 150px;\n  text-align: center;\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  left: 0;\n  border-top: 1px solid #505050;\n}\n.bigtext-html-content {\n  height: 100%;\n  background-color: #FFFFFF;\n  font-size: 53px;\n  color: #333 !important;\n  text-align: center;\n  font-weight: bold;\n}";
+  var styles$1 = "* {\n  cursor: url(\"http://s.qunarzz.com/common/assist/allaw.cur\"), auto !important;\n}\n\na {\n  cursor: url(\"http://s.qunarzz.com/common/assist/linkaw.cur\"), auto !important;\n}";
+
+  const CursorAuto = {
+    init(core) {
+      const {
+        namespace
+      } = core.config;
+      this.setEvents(core, namespace);
+
+      if (cookie.get('cursor', namespace)) {
+        core.creatStyle('cursor-auto-style', styles$1);
+      }
+    },
+
+    setEvents(core, namespace) {
+      const tabBarBtn = document.getElementById(`${namespace}-cursor-auto`);
+
+      tabBarBtn.onclick = () => {
+        const activeBtn = document.getElementById(`${namespace}-cursor-auto-style`);
+
+        if (activeBtn) {
+          activeBtn.remove();
+          cookie.set('cursor', false, namespace);
+        } else {
+          cookie.set('cursor', true, namespace);
+          core.creatStyle('cursor-auto-style', styles$1);
+        }
+      };
+    },
+
+    reset(core) {
+      const {
+        namespace
+      } = core.config;
+      const activeBtn = document.getElementById(`${namespace}-cursor-auto-style`);
+      activeBtn && activeBtn.remove();
+    }
+
+  };
+
+  var styles = ".bigtext-html {\n  z-index: 99999999999;\n  height: 150px;\n  text-align: center;\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  left: 0;\n  border-top: 1px solid #505050;\n}\n.bigtext-html-content {\n  height: 100%;\n  background-color: #FFFFFF;\n  font-size: 53px;\n  color: #333 !important;\n  text-align: center;\n  font-weight: bold;\n}";
 
   const BigTextHtml = namespace => {
     return `<div class='bigtext-html'>
@@ -762,8 +821,7 @@
       } = core.config;
       this.body = document.body;
       this.namespace = namespace;
-      this.parseTagText = core.parseTagText;
-      core.creatStyle('bigtext-style', styles$1);
+      core.creatStyle('bigtext-style', styles);
       core.creatHtml('bigtext-html', BigTextHtml);
       this.setEvents(core, namespace);
 
@@ -776,12 +834,12 @@
       this.toggleBigText(core, namespace);
     },
 
-    addEventMove(core) {
-      core.addEvent(this.body, 'mouseover', this.mouseMove);
+    addEventMove() {
+      addEvent(this.body, 'mouseover', this.mouseMove);
     },
 
-    removeEventMove(core) {
-      core.removeEvent(this.body, 'mouseover', this.mouseMove);
+    removeEventMove() {
+      removeEvent(this.body, 'mouseover', this.mouseMove);
     },
 
     toggleBigText(core, namespace) {
@@ -802,11 +860,10 @@
       var event = window.event || event;
       var target = event.target;
       const {
-        parseTagText,
         namespace
       } = BigText;
       const activeBtn = document.getElementById(`${namespace}-bigtext-content`);
-      activeBtn.innerText = BigText.parseTagText(target);
+      activeBtn.innerText = parseTagText(target);
     },
 
     show(core) {
@@ -815,7 +872,7 @@
       } = core.config;
       const activeBtn = document.getElementById(`${namespace}-bigtext-html`);
       activeBtn.style.display = 'block';
-      this.addEventMove(core);
+      this.addEventMove();
       cookie.set('bigtext', true, namespace);
     },
 
@@ -825,79 +882,8 @@
       } = core.config;
       const activeBtn = document.getElementById(`${namespace}-bigtext-html`);
       activeBtn.style.display = 'none';
-      this.removeEventMove(core);
+      this.removeEventMove();
       cookie.set('bigtext', false, namespace);
-    }
-
-  };
-
-  var styles = "* {\n  cursor: url(\"http://s.qunarzz.com/common/assist/allaw.cur\"), auto !important;\n}\n\na {\n  cursor: url(\"http://s.qunarzz.com/common/assist/linkaw.cur\"), auto !important;\n}";
-
-  const CursorAuto = {
-    init(core) {
-      const {
-        namespace
-      } = core.config;
-      this.setEvents(core, namespace);
-
-      if (cookie.get('cursor', namespace)) {
-        core.creatStyle('cursor-auto-style', styles);
-      }
-    },
-
-    setEvents(core, namespace) {
-      const tabBarBtn = document.getElementById(`${namespace}-cursor-auto`);
-
-      tabBarBtn.onclick = () => {
-        const activeBtn = document.getElementById(`${namespace}-cursor-auto-style`);
-
-        if (activeBtn) {
-          activeBtn.remove();
-          cookie.set('cursor', false, namespace);
-        } else {
-          cookie.set('cursor', true, namespace);
-          core.creatStyle('cursor-auto-style', styles);
-        }
-      };
-    },
-
-    reset(core) {
-      const {
-        namespace
-      } = core.config;
-      const activeBtn = document.getElementById(`${namespace}-cursor-auto-style`);
-      activeBtn.remove();
-    }
-
-  };
-
-  const TopBar = {
-    init(core) {
-      core.creatStyle('topbar-style', styles$3);
-      core.creatHtml('topbar-html', topBarHtml);
-      this.setEvents(core);
-    },
-
-    setEvents(core) {
-      const {
-        namespace
-      } = core.config;
-      const BtnClose = document.getElementById(`${namespace}-close`);
-      const BtnReset = document.getElementById(`${namespace}-reset`);
-
-      BtnClose.onclick = () => {
-        core.close();
-      };
-
-      BtnReset.onclick = () => {
-        // console.log('core----', core)
-        ZoomPage.reset();
-        PointerFllow.reset(core);
-        BigText.reset(core);
-        CursorAuto.reset(core);
-      }; // document.onmousemove = this.mouseMove; 
-      // this.togglePointer(namespace)
-
     }
 
   };
@@ -918,12 +904,11 @@
 
       _this.init();
 
-      console.log('cook-----', cookie.get('show', _this.config.namespace));
-
       if (cookie.get('show', _this.config.namespace)) {
         _this.isShowTopBar(true);
       }
 
+      _this.resetAction = _this.reset;
       return _this;
     }
 
@@ -935,6 +920,14 @@
         this.use(PointerFllow);
         this.use(CursorAuto);
         this.use(BigText);
+      }
+    }, {
+      key: "reset",
+      value: function reset() {
+        ZoomPage.reset();
+        CursorAuto.reset(this);
+        PointerFllow.reset(this);
+        BigText.reset(this);
       }
     }]);
 

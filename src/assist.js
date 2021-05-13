@@ -1,4 +1,4 @@
-import cookie from './modules/utils'
+import { cookie } from './modules/utils'
 
 import Base from './modules/base';
 import TopBar from './modules/TopBar';
@@ -13,10 +13,10 @@ class Assist extends Base {
       // 合并参数
       this.mergeConfig(opts);
       this.init();
-      console.log('cook-----',cookie.get('show',this.config.namespace))
       if(cookie.get('show',this.config.namespace)) {
         this.isShowTopBar(true)
       }
+      this.resetAction = this.reset
     }
   
     init() {
@@ -25,6 +25,12 @@ class Assist extends Base {
       this.use(PointerFllow);
       this.use(CursorAuto);
       this.use(BigText);
+    }
+    reset() {
+      ZoomPage.reset()
+      CursorAuto.reset(this)
+      PointerFllow.reset(this)
+      BigText.reset(this)
     }
     
   }

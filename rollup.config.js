@@ -8,6 +8,8 @@ const cwd = process.cwd();
 import sass from 'rollup-plugin-sass';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import image from '@rollup/plugin-image';
+
 import copy from 'rollup-plugin-copy'
 
 const entry = {
@@ -26,6 +28,7 @@ function generateWebConfig(isBrowser,input) {
         plugins: [
             sass(),
             json(),
+            image(),
             babelPlugin({
                 exclude: 'node_modules/**',
                 plugins: [
@@ -37,11 +40,11 @@ function generateWebConfig(isBrowser,input) {
                 browser: isBrowser,
             }),
             commonjs(),
-            copy({
-                targets: [
-                  { src: 'src/assets/**/*', dest: 'dist/assets' }
-                ]
-              })
+            // copy({
+            //     targets: [
+            //       { src: 'src/assets/**/*', dest: 'dist/assets' }
+            //     ]
+            //   })
         ],
     };
 }

@@ -1,28 +1,18 @@
 import Cookies from 'js-cookie'
 
- /**
-     * 1 - 是否展示无障碍
-     * 2 - 是否开启声音
-     * 3 - 语速
-     * 4 - 缩放倍数
-     * 5 - 是否替换鼠标样式
-     * 6 - 是否开启十字线
-     * 7 - 是否开启大字幕
-     * 8 - 是否开启指读
-     * [0,0,'slow',0.0,0,]
-     * **/
 const cookie = {
     set:(key,value, namespace) => {
      let memory = {
-         show: false,
-         audio: false,
-         speed: 'slow',
-         zomm: 0.1,
-         cursor: false,
-         pointer: false,
-         bigtext: false,
-         overead: false
-     }
+        show: false,   // 是否展示无障碍
+        audio: false,  // 是否开启声音
+        speed: 'slow', // 语速
+        zomm: 0.1,     // 缩放倍数
+        cursor: false, // 是否替换鼠标样式
+        pointer: false,// 是否开启十字线
+        bigtext: false,// 是否开启大字幕
+        overead: false // 是否开启指读
+      }
+
      if(Cookies.get(namespace)) {
         memory = JSON.parse(Cookies.get(namespace))
      }
@@ -32,14 +22,63 @@ const cookie = {
     get:(key, namespace)=> {
         let __key = ''
        if(Cookies.get(namespace)) {
-         //  console.log(key,'Cookies++++>', JSON.parse(Cookies.get(namespace))[key])
            __key =  JSON.parse(Cookies.get(namespace))[key]
        }
-       console.log('__key+++++',__key)
        return __key
     },
     remove: (namespace) => {
         Cookies.remove(namespace, { domain: '.qunar.com'})
     }
 }
-export default cookie;
+
+const addEvent = (element, type, callback) => {
+    if(element.addEventListener){
+        element.addEventListener(type, callback, false);
+    } else if(element.attachEvent){
+        element.attachEvent('on' + type, callback);
+    } else {
+        element['on' + type] = callback;
+    }
+}
+
+const removeEvent = (element, type, callback) => {
+    if(element.removeEventListener){
+        element.removeEventListener(type, callback);
+    } else if(element.detachEvent){
+        element.detachEvent('on' + type, callback);
+    } else {
+        element['on' + type] = null;
+    }
+}
+
+const parseTagText = (target) => {
+    if (target.children.length === 0){
+        if (target.role === 'A' || target.tagName === 'A') {
+            console.log('这是一个链接:' + target.innerText);
+            return `链接 ${target.innerText}`;
+        }
+        if (target.role === 'IMG' ||target.tagName === 'IMG') {
+            console.log('这是一张图片:' + target.alt || target.title);
+            return `图片 ${target.alt || target.title}`;
+        }
+        if (target.role === 'BUTTON' ||target.tagName === 'BUTTON') {
+            console.log('这是一个按钮:' +  target.innerText);
+            return `按钮 ${target.innerText}`;
+        }
+        if (!!target.innerText && target.innerText != 'undefined'){
+            console.log(`文本 ${target.innerText}`);
+            return `文本 ${target.innerText || target.alt || target.title}`;
+        }
+        return ''
+        
+    } else {
+        return ''
+    }
+}
+
+export {
+    cookie,
+    addEvent,
+    removeEvent,
+    parseTagText
+};
