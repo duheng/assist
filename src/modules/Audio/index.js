@@ -9,6 +9,8 @@ const Audio = {
         core.creatStyle('audio-style',styles)
         core.creatHtml('audio-html',tmpl)
         this.setEvents()
+      
+       
         console.log('init--Audio->', this.namespace)
     },
     setEvents() {
@@ -24,16 +26,19 @@ const Audio = {
         var event = window.event || event;
         var target = event.target;
         const { namespace } = Audio
-        var __text = encodeURI(parseTagText(target))
+        var __text = parseTagText(target)
         var __url = `http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text=${__text}`
         // document.getElementById(`${namespace}-audio-source`).setAttribute('src',__url)
        // document.getElementById(`${namespace}-audio`).play();
-        let __audio = `<audio autoplay='autoplay' controls='controls'>
-        <source src='${__url}'>
-        <embed height="0" width="0"  src='${__url}'>
-        </audio>`
-        document.getElementById(`${namespace}-audio-html`).innerHTML = __audio
-       // qunar-assist-audio-html
+    //     let __audio = `<audio autoplay='autoplay' controls='controls'>
+    //     <source src='${__url}'>
+    //     <embed height="0" width="0"  src='${__url}'>
+    //     </audio>`
+    //     document.getElementById(`${namespace}-audio-html`).innerHTML = __audio
+    //    // qunar-assist-audio-html
+    //    var url = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&text=" + encodeURI(str);
+  
+    
     },
     reset() {
        
