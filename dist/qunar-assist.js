@@ -496,11 +496,24 @@
           document.body.style.marginTop = '100px';
           activeBtn.style.display = 'block';
           cookie.set('show', true, namespace);
+          this.hideModules();
         } else {
           document.body.style = 'none';
           activeBtn.style.display = 'none';
           cookie.remove(namespace);
           location.reload();
+        }
+      }
+    }, {
+      key: "hideModules",
+      value: function hideModules() {
+        const {
+          namespace
+        } = this.config;
+        const classList = document.getElementsByClassName(`${namespace}-hide`);
+
+        for (let i = 0; i < classList.length; i++) {
+          classList[i].style.display = 'none';
         }
       }
     }, {
