@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/duheng/assist.git"
   },
-  "author": "blue.yang",
+  "author": "墨子",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/duheng/assist/issues"
@@ -29,13 +29,15 @@
     "lerna": "^3.5.1",
     "rollup": "^2.0.6",
     "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-eslint": "^7.0.0"
-  },
-  "dependencies": {
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-hash": "^1.3.0",
+    "rollup-plugin-uglify": "^6.0.4",
     "@babel/plugin-transform-classes": "^7.13.0",
     "@rollup/plugin-image": "^2.0.6",
-    "js-cookie": "^2.2.1",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-sass": "^1.2.2"
+  },
+  "dependencies": {
+    "js-cookie": "^2.2.1"
   }
 }
