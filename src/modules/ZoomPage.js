@@ -1,11 +1,13 @@
+import cookie from './utils'
+
 const ZoomPage = {
     init(core) {
         const { namespace } = core.config
         this.setEvents(namespace)
-        this.size = 1.0
+        this.size = cookie.get('zomm',namespace) || 1.0
         this.ignore = ['LINK','SCRIPT']
         this.namespace = namespace
-        console.log('初始化---')
+        this.set()
     },
     setEvents(namespace) {
        document.getElementById(`${namespace}-zoom-out`).onclick = () => {
@@ -21,7 +23,7 @@ const ZoomPage = {
             console.log('已最大')
             return
         }
-        this.size = this.size + 0.1;  
+        this.size = parseFloat((this.size+0.1).toFixed(10));  
         this.set(); 
     },
     zoomMin() {
@@ -29,7 +31,7 @@ const ZoomPage = {
             console.log('已最小')
             return
         }
-        this.size = this.size - 0.1;  
+        this.size = parseFloat((this.size-0.1).toFixed(10));  
         this.set(); 
     },
     set() {  
@@ -41,6 +43,7 @@ const ZoomPage = {
             el.style.transform = `scale(${this.size})`
             el.style.transformOrigin = '0px 0px'
         });
+        cookie.set('zomm', this.size, this.namespace)
     },
     reset() {
         this.size = 1.0

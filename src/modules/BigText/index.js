@@ -1,3 +1,4 @@
+import cookie from '../utils'
 import styles from './index.scss'
 import tmpl from './index.tmpl.js'
 const BigText = {
@@ -9,6 +10,9 @@ const BigText = {
         core.creatStyle('bigtext-style',styles)
         core.creatHtml('bigtext-html',tmpl)
         this.setEvents(core, namespace)
+        if(cookie.get('bigtext',namespace)) {
+            this.show(core)
+        }
     },
     setEvents(core, namespace) {
       this.toggleBigText(core, namespace)
@@ -24,11 +28,9 @@ const BigText = {
         tabBarBtn.onclick = () => {
              const activeBtn = document.getElementById(`${namespace}-bigtext-html`)
              if( activeBtn.style.display == 'block' ) {
-                 activeBtn.style.display = 'none'
-                 this.removeEventMove(core)
+                this.reset(core)
              } else {
-                 activeBtn.style.display = 'block'
-                 this.addEventMove(core)
+                this.show(core)
              }
         }
     },
@@ -39,11 +41,19 @@ const BigText = {
         const activeBtn = document.getElementById(`${namespace}-bigtext-content`)
         activeBtn.innerText = BigText.parseTagText(target)
     },
+    show(core) {
+        const { namespace } = core.config
+        const activeBtn =  document.getElementById(`${namespace}-bigtext-html`)
+        activeBtn.style.display = 'block'
+        this.addEventMove(core)
+        cookie.set('bigtext', true, namespace)
+    },
     reset(core) {
         const { namespace } = core.config
         const activeBtn =  document.getElementById(`${namespace}-bigtext-html`)
         activeBtn.style.display = 'none'
         this.removeEventMove(core)
+        cookie.set('bigtext', false, namespace)
     }
 };
 

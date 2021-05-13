@@ -1,3 +1,5 @@
+               
+import cookie from '../utils'
 import styles from './index.scss'
 import tmpl from './index.tmpl.js'
 const PointerFllow = {
@@ -7,6 +9,9 @@ const PointerFllow = {
         core.creatStyle('pointer-follow-style',styles)
         core.creatHtml('pointer-follow-html',tmpl)
         this.setEvents(core, namespace)
+        if(cookie.get('pointer',namespace)) {
+            this.show(core)
+        }
     },
     setEvents(core, namespace) {
         this.togglePointer(core, namespace)
@@ -23,11 +28,9 @@ const PointerFllow = {
         const activeBtn =  document.getElementById(`${namespace}-pointer-follow-html`)
         tabBarBtn.onclick = () => {
             if( activeBtn.style.display == 'block' ) {
-                activeBtn.style.display = 'none'
-                this.removeEventMove(core)
+                this.reset(core)
             } else {
-                activeBtn.style.display = 'block'
-                this.addEventMove(core)
+                this.show(core)
             }
         }
     },
@@ -38,11 +41,19 @@ const PointerFllow = {
         pointerX.style.top = event.clientY - 10 + "px";
         pointerY.style.left = event.clientX - 10 + "px";
     },
+    show(core) {
+        const { namespace } = core.config
+        const activeBtn =  document.getElementById(`${namespace}-pointer-follow-html`)
+        activeBtn.style.display = 'block'
+        this.addEventMove(core)
+        cookie.set('pointer',true,namespace)
+    },
     reset(core) {
         const { namespace } = core.config
         const activeBtn =  document.getElementById(`${namespace}-pointer-follow-html`)
         activeBtn.style.display = 'none'
         this.removeEventMove(core)
+        cookie.set('pointer',false,namespace)
     }
 };
 

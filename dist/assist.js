@@ -327,6 +327,58 @@
   }));
   });
 
+  /**
+      * 1 - 是否展示无障碍
+      * 2 - 是否开启声音
+      * 3 - 语速
+      * 4 - 缩放倍数
+      * 5 - 是否替换鼠标样式
+      * 6 - 是否开启十字线
+      * 7 - 是否开启大字幕
+      * 8 - 是否开启指读
+      * [0,0,'slow',0.0,0,]
+      * **/
+
+  const cookie = {
+    set: (key, value, namespace) => {
+      let memory = {
+        show: false,
+        audio: false,
+        speed: 'slow',
+        zomm: 0.1,
+        cursor: false,
+        pointer: false,
+        bigtext: false,
+        overead: false
+      };
+
+      if (js_cookie.get(namespace)) {
+        memory = JSON.parse(js_cookie.get(namespace));
+      }
+
+      memory[key] = value;
+      js_cookie.set(namespace, JSON.stringify(memory), {
+        domain: '.qunar.com'
+      });
+    },
+    get: (key, namespace) => {
+      let __key = '';
+
+      if (js_cookie.get(namespace)) {
+        //  console.log(key,'Cookies++++>', JSON.parse(Cookies.get(namespace))[key])
+        __key = JSON.parse(js_cookie.get(namespace))[key];
+      }
+
+      console.log('__key+++++', __key);
+      return __key;
+    },
+    remove: namespace => {
+      js_cookie.remove(namespace, {
+        domain: '.qunar.com'
+      });
+    }
+  };
+
   let Base = /*#__PURE__*/function () {
     function Base() {
       _classCallCheck(this, Base);
@@ -334,7 +386,17 @@
       this.config = {
         namespace: 'mozi-assist',
         url: ''
-      };
+      }; // this.memory = {
+      //   show: false,   // 是否展示无障碍
+      //   audio: false,  // 是否开启声音
+      //   speed: 'slow', // 语速
+      //   zomm: 0.1,     // 缩放倍数
+      //   cursor: false, // 是否替换鼠标样式
+      //   pointer: false,// 是否开启十字线
+      //   bigtext: false,// 是否开启大字幕
+      //   overead: false // 是否开启指读
+      // }
+
       this.eventShow();
     }
 
@@ -389,15 +451,11 @@
         if (isShow) {
           document.body.style.marginTop = '100px';
           activeBtn.style.display = 'block';
-          js_cookie.set(namespace, true, {
-            domain: '.qunar.com'
-          });
+          cookie.set('show', true, namespace);
         } else {
           document.body.style = 'none';
           activeBtn.style.display = 'none';
-          js_cookie.remove(namespace, {
-            domain: '.qunar.com'
-          });
+          cookie.remove(namespace);
           location.reload();
         }
       }
@@ -551,10 +609,10 @@
         namespace
       } = core.config;
       this.setEvents(namespace);
-      this.size = 1.0;
+      this.size = cookie.get('zomm', namespace) || 1.0;
       this.ignore = ['LINK', 'SCRIPT'];
       this.namespace = namespace;
-      console.log('初始化---');
+      this.set();
     },
 
     setEvents(namespace) {
@@ -573,7 +631,7 @@
         return;
       }
 
-      this.size = this.size + 0.1;
+      this.size = parseFloat((this.size + 0.1).toFixed(10));
       this.set();
     },
 
@@ -583,7 +641,7 @@
         return;
       }
 
-      this.size = this.size - 0.1;
+      this.size = parseFloat((this.size - 0.1).toFixed(10));
       this.set();
     },
 
@@ -598,6 +656,7 @@
         el.style.transform = `scale(${this.size})`;
         el.style.transformOrigin = '0px 0px';
       });
+      cookie.set('zomm', this.size, this.namespace);
     },
 
     reset() {
@@ -625,6 +684,10 @@
       core.creatStyle('pointer-follow-style', styles$2);
       core.creatHtml('pointer-follow-html', PointerFllowHtml);
       this.setEvents(core, namespace);
+
+      if (cookie.get('pointer', namespace)) {
+        this.show(core);
+      }
     },
 
     setEvents(core, namespace) {
@@ -645,11 +708,9 @@
 
       tabBarBtn.onclick = () => {
         if (activeBtn.style.display == 'block') {
-          activeBtn.style.display = 'none';
-          this.removeEventMove(core);
+          this.reset(core);
         } else {
-          activeBtn.style.display = 'block';
-          this.addEventMove(core);
+          this.show(core);
         }
       };
     },
@@ -662,6 +723,16 @@
       pointerY.style.left = event.clientX - 10 + "px";
     },
 
+    show(core) {
+      const {
+        namespace
+      } = core.config;
+      const activeBtn = document.getElementById(`${namespace}-pointer-follow-html`);
+      activeBtn.style.display = 'block';
+      this.addEventMove(core);
+      cookie.set('pointer', true, namespace);
+    },
+
     reset(core) {
       const {
         namespace
@@ -669,6 +740,7 @@
       const activeBtn = document.getElementById(`${namespace}-pointer-follow-html`);
       activeBtn.style.display = 'none';
       this.removeEventMove(core);
+      cookie.set('pointer', false, namespace);
     }
 
   };
@@ -695,6 +767,10 @@
       core.creatStyle('bigtext-style', styles$1);
       core.creatHtml('bigtext-html', BigTextHtml);
       this.setEvents(core, namespace);
+
+      if (cookie.get('bigtext', namespace)) {
+        this.show(core);
+      }
     },
 
     setEvents(core, namespace) {
@@ -716,11 +792,9 @@
         const activeBtn = document.getElementById(`${namespace}-bigtext-html`);
 
         if (activeBtn.style.display == 'block') {
-          activeBtn.style.display = 'none';
-          this.removeEventMove(core);
+          this.reset(core);
         } else {
-          activeBtn.style.display = 'block';
-          this.addEventMove(core);
+          this.show(core);
         }
       };
     },
@@ -736,6 +810,16 @@
       activeBtn.innerText = BigText.parseTagText(target);
     },
 
+    show(core) {
+      const {
+        namespace
+      } = core.config;
+      const activeBtn = document.getElementById(`${namespace}-bigtext-html`);
+      activeBtn.style.display = 'block';
+      this.addEventMove(core);
+      cookie.set('bigtext', true, namespace);
+    },
+
     reset(core) {
       const {
         namespace
@@ -743,6 +827,7 @@
       const activeBtn = document.getElementById(`${namespace}-bigtext-html`);
       activeBtn.style.display = 'none';
       this.removeEventMove(core);
+      cookie.set('bigtext', false, namespace);
     }
 
   };
@@ -755,6 +840,10 @@
         namespace
       } = core.config;
       this.setEvents(core, namespace);
+
+      if (cookie.get('cursor', namespace)) {
+        core.creatStyle('cursor-auto-style', styles);
+      }
     },
 
     setEvents(core, namespace) {
@@ -765,7 +854,9 @@
 
         if (activeBtn) {
           activeBtn.remove();
+          cookie.set('cursor', false, namespace);
         } else {
+          cookie.set('cursor', true, namespace);
           core.creatStyle('cursor-auto-style', styles);
         }
       };
@@ -828,7 +919,9 @@
 
       _this.init();
 
-      if (js_cookie.get(_this.config.namespace)) {
+      console.log('cook-----', cookie.get('show', _this.config.namespace));
+
+      if (cookie.get('show', _this.config.namespace)) {
         _this.isShowTopBar(true);
       }
 

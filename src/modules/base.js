@@ -1,14 +1,23 @@
-import Cookies from 'js-cookie'
+import cookie from './utils'
 
 export default class Base {
     constructor() {
-    
       this.config = {
         namespace: 'mozi-assist',
-        url: '',
-        
+        url: ''
       };
-     
+
+      // this.memory = {
+      //   show: false,   // 是否展示无障碍
+      //   audio: false,  // 是否开启声音
+      //   speed: 'slow', // 语速
+      //   zomm: 0.1,     // 缩放倍数
+      //   cursor: false, // 是否替换鼠标样式
+      //   pointer: false,// 是否开启十字线
+      //   bigtext: false,// 是否开启大字幕
+      //   overead: false // 是否开启指读
+      // }
+      
       this.eventShow()
 
     }
@@ -53,12 +62,11 @@ export default class Base {
       if(isShow) {
         document.body.style.marginTop = '100px'
         activeBtn.style.display = 'block'
-        Cookies.set(namespace, true, { domain: '.qunar.com' })
-
-      }else {
+        cookie.set('show',true, namespace)
+      } else {
         document.body.style = 'none'
         activeBtn.style.display = 'none'
-        Cookies.remove(namespace, { domain: '.qunar.com'})
+        cookie.remove(namespace)
         location.reload()
       }
     }
@@ -136,6 +144,7 @@ export default class Base {
           element['on' + type] = null;
       }
     }
+
    
   }
   
