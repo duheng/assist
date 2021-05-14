@@ -334,7 +334,7 @@
         // 是否展示无障碍
         audio: false,
         // 是否开启声音
-        speed: 'slow',
+        speed: 'middle',
         // 语速
         zomm: 0.1,
         // 缩放倍数
@@ -395,11 +395,6 @@
 
   const parseTagText = target => {
     if (target.children.length === 0) {
-      if (target.role === 'A' || target.tagName === 'A') {
-        console.log('这是一个链接:' + target.alt || target.title || target.innerText);
-        return `链接 ${target.alt || target.title || target.innerText}`;
-      }
-
       if (target.role === 'IMG' || target.tagName === 'IMG') {
         console.log('这是一张图片:' + target.alt || target.title);
         return `图片 ${target.alt || target.title}`;
@@ -429,9 +424,14 @@
       }
 
       return '';
-    } else {
-      return '';
     }
+
+    if (target.role === 'A' || target.tagName === 'A') {
+      console.log('这是一个链接:' + target.alt || target.title || target.innerText);
+      return `链接 ${target.alt || target.title || target.innerText}`;
+    }
+
+    return '';
   };
 
   let Base = /*#__PURE__*/function () {
@@ -651,7 +651,11 @@
   var styles$3 = ".bigtext-html {\n  z-index: 99999999999;\n  height: 150px;\n  text-align: center;\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  left: 0;\n  border-top: 1px solid #505050;\n}\n.bigtext-html-content {\n  height: 100%;\n  background-color: #FFFFFF;\n  font-size: 53px;\n  color: #333 !important;\n  text-align: center;\n  font-weight: bold;\n}";
 
   const BigTextHtml$1 = namespace => {
-    return '';
+    return `<audio autoplay='autoplay' id='${namespace}-audio-media'>
+               <source src='' id='${namespace}-audio-source'>
+               <embed height="0" width="0"  src='' id='${namespace}-audio-embed'>
+        </audio>
+        `;
   };
 
   const Audio = {
@@ -663,12 +667,45 @@
       this.namespace = namespace;
       core.creatStyle('audio-style', styles$3);
       core.creatHtml('audio-html', BigTextHtml$1);
+      this.isAudio = cookie.get('audio', namespace);
+      this.speed = cookie.get('speed', namespace);
       this.setEvents();
+
+      if (this.isAudio) {
+        this.addEventMove();
+      }
+
       console.log('init--Audio->', this.namespace);
     },
 
     setEvents() {
-      this.addEventMove();
+      this.toggleAudio();
+      addEvent(this.body, 'mouseover', this.mouseOver);
+      window.addEventListener('touchstart', this.forceSafariPlayAudio, false);
+    },
+
+    toggleAudio() {
+      const {
+        namespace
+      } = Audio;
+
+      document.getElementById(`${namespace}-audio`).onclick = () => {
+        if (this.isAudio) {
+          this.removeEventMove();
+          this.isAudio = false;
+          cookie.set('audio', false, namespace);
+        } else {
+          this.addEventMove();
+          this.isAudio = true;
+          cookie.set('audio', true, namespace);
+        }
+      };
+
+      document.getElementById(`${namespace}-audio-speed`).onclick = () => {
+        this.speed = this.speed == 'middle' ? 'fast' : 'middle';
+        cookie.set('speed', this.speed, namespace);
+        console.log('speed-----', this.speed);
+      };
     },
 
     addEventMove() {
@@ -679,22 +716,63 @@
       removeEvent(this.body, 'mouseover', this.mouseOver);
     },
 
-    mouseOver(event) {
-      var event = window.event || event;
-      var target = event.target;
+    forceSafariPlayAudio() {
+      const {
+        namespace
+      } = Audio;
 
-      parseTagText(target);
-      // document.getElementById(`${namespace}-audio`).play();
-      //     let __audio = `<audio autoplay='autoplay' controls='controls'>
-      //     <source src='${__url}'>
-      //     <embed height="0" width="0"  src='${__url}'>
-      //     </audio>`
-      //     document.getElementById(`${namespace}-audio-html`).innerHTML = __audio
-      //    // qunar-assist-audio-html
-      //    var url = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&text=" + encodeURI(str);
+      let __audio = document.getElementById(`${namespace}-audio-media`);
+
+      __audio.load();
+
+      __audio.play();
     },
 
-    reset() {}
+    mouseOver(event) {
+      var event = window.event || event;
+      var target = event.target || event.srcElement;
+      const {
+        namespace,
+        speed
+      } = Audio;
+
+      var __text = parseTagText(target);
+
+      if (__text == '') {
+        return;
+      }
+
+      console.log('speed2-----', this.speed);
+      var __url2 = 'http://www.govwza.cn/yxsm/cache/voices/voices1/480/48076e3f30eabc16fbc2df6b683087b2.mp3';
+
+      let __audio = document.getElementById(`${namespace}-audio-media`);
+
+      __audio.src = __url2;
+      document.getElementById(`${namespace}-audio-source`).src = __url2;
+      document.getElementById(`${namespace}-audio-embed`).src = __url2;
+
+      let playPromise = __audio.play();
+
+      __audio.load();
+
+      if (playPromise !== undefined) {
+        playPromise.then(_ => {
+          __audio.play();
+
+          window.removeEventListener('touchstart', this.forceSafariPlayAudio, false);
+        }).catch(error => {});
+      }
+    },
+
+    reset() {
+      const {
+        namespace
+      } = Audio;
+      this.removeEventMove();
+      this.isAudio = false;
+      cookie.set('audio', false, namespace);
+      cookie.set('speed', 'middle', namespace);
+    }
 
   };
 
@@ -936,7 +1014,7 @@
 
     mouseOver(event) {
       var event = window.event || event;
-      var target = event.target;
+      var target = event.target || event.srcElement;
       const {
         namespace
       } = BigText;
@@ -1003,6 +1081,7 @@
     }, {
       key: "reset",
       value: function reset() {
+        Audio.reset();
         ZoomPage.reset();
         CursorAuto.reset(this);
         PointerFllow.reset(this);

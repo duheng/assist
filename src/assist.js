@@ -29,6 +29,7 @@ class Assist extends Base {
       this.use(BigText);
     }
     reset() {
+      Audio.reset()
       ZoomPage.reset()
       CursorAuto.reset(this)
       PointerFllow.reset(this)

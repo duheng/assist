@@ -5,7 +5,7 @@ const cookie = {
      let memory = {
         show: false,   // 是否展示无障碍
         audio: false,  // 是否开启声音
-        speed: 'slow', // 语速
+        speed: 'middle', // 语速
         zomm: 0.1,     // 缩放倍数
         cursor: false, // 是否替换鼠标样式
         pointer: false,// 是否开启十字线
@@ -52,11 +52,7 @@ const removeEvent = (element, type, callback) => {
 }
 
 const parseTagText = (target) => {
-    if (target.children.length === 0){
-        if (target.role === 'A' || target.tagName === 'A') {
-            console.log('这是一个链接:' + target.alt || target.title || target.innerText);
-            return `链接 ${target.alt || target.title || target.innerText}`;
-        }
+    if (target.children.length === 0  ){
         if (target.role === 'IMG' ||target.tagName === 'IMG') {
             console.log('这是一张图片:' + target.alt || target.title);
             return `图片 ${target.alt || target.title}`;
@@ -77,14 +73,34 @@ const parseTagText = (target) => {
             console.log('这是一个输入框:' + target.alt || target.title || target.value);
             return `输入框 ${target.alt || target.title || target.value}`;
         }
+
         if (target.alt || target.title || target.innerText){
             console.log(`文本 ${target.innerText}`);
             return `文本 ${target.innerText || target.alt || target.title}`;
         }
+    
         return ''
-        
-    } else {
-        return ''
+    } 
+
+    if (target.role === 'A' || target.tagName === 'A') {
+        console.log('这是一个链接:' + target.alt || target.title || target.innerText);
+        return `链接 ${target.alt || target.title || target.innerText}`;
+    }
+    return ''
+    
+}
+
+const triggerEvent = (element, eventType) =>{
+    var e;
+    if(element.dispatchEvent){//正常情况
+        e = new Event(eventType);
+        element.dispatchEvent(e);
+    }else if(element.fireEvent){//IE
+        e = document.createEventObject();
+        e.button = 1;
+        element.fireEvent('on'+eventType,e);
+    }else if(element['on'+eventType]){
+        element['on'+eventType].call();
     }
 }
 
@@ -122,5 +138,6 @@ export {
     addEvent,
     removeEvent,
     parseTagText,
-    ajax
+    ajax,
+    triggerEvent
 };

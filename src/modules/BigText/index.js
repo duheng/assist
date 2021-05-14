@@ -35,7 +35,7 @@ const BigText = {
     },
     mouseOver(event){
         var event = window.event || event;
-        var target = event.target;
+        var target = event.target || event.srcElement;
         const { namespace } = BigText
         const activeBtn = document.getElementById(`${namespace}-bigtext-content`)
         activeBtn.innerText = parseTagText(target)
