@@ -11,17 +11,15 @@ const Audio = {
         core.creatHtml('audio-html',tmpl)
         this.isAudio  = cookie.get('audio',namespace)
         this.speed =  cookie.get('speed',namespace)
+        this.audio = document.getElementById(`${namespace}-audio-media`) || ''
         this.setEvents()
         if(this.isAudio) {
             this.addEventMove()
+            addEvent(document,'click',this.forceSafariPlayAudio)
         }
-       
-        console.log('init--Audio->', this.namespace)
     },
     setEvents() {
-       this.toggleAudio()
-       addEvent(this.body,'mouseover',this.mouseOver)
-       window.addEventListener('touchstart', this.forceSafariPlayAudio, false);
+        this.toggleAudio()
     },
     toggleAudio() {
         const { namespace } = Audio
@@ -39,7 +37,6 @@ const Audio = {
         document.getElementById(`${namespace}-audio-speed`).onclick = () => {
             this.speed = this.speed == 'middle' ? 'fast' : 'middle'
             cookie.set('speed', this.speed, namespace)
-            console.log('speed-----', this.speed)
         }
     },
     addEventMove() {
@@ -49,36 +46,35 @@ const Audio = {
        removeEvent(this.body,'mouseover',this.mouseOver)
     },
     forceSafariPlayAudio() {
-        const { namespace } = Audio
-        let __audio = document.getElementById(`${namespace}-audio-media`)
-        __audio.load();
-        __audio.play();
+        const { audio } = Audio
+        audio.load();
+        audio.play();
     },
     mouseOver(event){
         var event = window.event || event;
         var target = event.target || event.srcElement;
-        const { namespace, speed } = Audio
         var __text = parseTagText(target)
         if(__text == '') {
             return
         }
-        console.log('speed2-----', this.speed)
+        Audio.playAudio(__text)
+    },
+    playAudio(text) {
+        const { namespace, audio, speed, forceSafariPlayAudio } = Audio
         let __speed = speed == 'middle' ? 5 : 7
-        var __url = `http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=${__speed}&text=${__text}`
-        var __url2 = 'http://www.govwza.cn/yxsm/cache/voices/voices1/480/48076e3f30eabc16fbc2df6b683087b2.mp3'
-        let __audio = document.getElementById(`${namespace}-audio-media`)
-        __audio.src = __url2
+        var __url = `http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=${__speed}&text=${text}`
+        var __url2 = 'https://s.qunarzz.com/common/assist/song.mp3'
+        audio.pause();
+        audio.src = __url2
         document.getElementById(`${namespace}-audio-source`).src = __url2
         document.getElementById(`${namespace}-audio-embed`).src = __url2
-       let playPromise =  __audio.play();
-       __audio.load();
+       let playPromise =  audio.play();
        if(playPromise !== undefined) {
           playPromise.then(_ => {
-            __audio.play();
-            window.removeEventListener('touchstart', this.forceSafariPlayAudio, false);
+            removeEvent(document,'click', forceSafariPlayAudio)
           })
           .catch(error => {
-            
+            console.log(error)
           });
        }
     },
@@ -86,6 +82,7 @@ const Audio = {
         const { namespace } = Audio
         this.removeEventMove()
         this.isAudio = false
+        this.audio.pause()
         cookie.set('audio', false, namespace)
         cookie.set('speed', 'middle', namespace)
     }   

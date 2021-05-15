@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Fake auto play html audio in iOS Safari the right way</title>
+</head>
+<body>
+    <h1>在 iOS Safari 中假装自动播放 HTML5 audio(音乐) 的正确方式</h1>
+    <p>核心原理: 通过一个用户交互事件来主动 play 一下 audio</p>
+    <br>
+    <br>
+    <br>
+    <audio id="bgmusic" preload controls></audio>
+    <script>
+    (function() {
+        var audioEl = document.getElementById('bgmusic');
+        function log(info) {
+            console.log(info);
+            // alert(info);
+        }
+        function forceSafariPlayAudio() {
+            console.log('SSS')
+            audioEl.load(); // iOS 9   还需要额外的 load 一下, 否则直接 play 无效
+            audioEl.play(); // iOS 7/8 仅需要 play 一下
+        }
+
+    
+
+        // 可以自动播放时正确的事件顺序是
+        // loadstart
+        // loadedmetadata
+        // loadeddata
+        // canplay
+        // play
+        // playing
+        // 
+        // 不能自动播放时触发的事件是
+        // iPhone5  iOS 7.0.6 loadstart
+        // iPhone6s iOS 9.1   loadstart -> loadedmetadata -> loadeddata -> canplay
+        audioEl.addEventListener('loadstart', function() {
+            log('loadstart');
+        }, false);
+        audioEl.addEventListener('loadeddata', function() {
+            log('loadeddata');
+        }, false);
+        audioEl.addEventListener('loadedmetadata', function() {
+            log('loadedmetadata');
+        }, false);
+        audioEl.addEventListener('canplay', function() {
+            log('canplay');
+        }, false);
+        audioEl.addEventListener('play', function() {
+            log('play');
+            // 当 audio 能够播放后, 移除这个事件
+            window.removeEventListener('touchstart', forceSafariPlayAudio, false);
+        }, false);
+        audioEl.addEventListener('playing', function() {
+            log('playing');
+        }, false);
+        audioEl.addEventListener('pause', function() {
+            log('pause');
+        }, false);
+        audioEl.src = 'http://www.w3school.com.cn/i/song.mp3';
+        // 由于 iOS Safari 限制不允许 audio autoplay, 必须用户主动交互(例如 click)后才能播放 audio,
+        // 因此我们通过一个用户交互事件来主动 play 一下 audio.
+        window.addEventListener('touchstart', forceSafariPlayAudio, false);
+        document.body.onclick = () => {
+            console.log('AAA')
+            audioEl.play().then(res=>{
+            console.log('11',res)
+        }).catch(error => {
+            audioEl.load();
+            console.log('22',error)
+          });
+        }
+      
+       
+      
+        
+
+      
+    })();
+    </script>
+</body>
+</html>

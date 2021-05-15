@@ -651,7 +651,7 @@
   var styles$3 = ".bigtext-html {\n  z-index: 99999999999;\n  height: 150px;\n  text-align: center;\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  left: 0;\n  border-top: 1px solid #505050;\n}\n.bigtext-html-content {\n  height: 100%;\n  background-color: #FFFFFF;\n  font-size: 53px;\n  color: #333 !important;\n  text-align: center;\n  font-weight: bold;\n}";
 
   const BigTextHtml$1 = namespace => {
-    return `<audio autoplay='autoplay' id='${namespace}-audio-media'>
+    return `<audio autoplay id='${namespace}-audio-media'>
                <source src='' id='${namespace}-audio-source'>
                <embed height="0" width="0"  src='' id='${namespace}-audio-embed'>
         </audio>
@@ -669,19 +669,17 @@
       core.creatHtml('audio-html', BigTextHtml$1);
       this.isAudio = cookie.get('audio', namespace);
       this.speed = cookie.get('speed', namespace);
+      this.audio = document.getElementById(`${namespace}-audio-media`) || '';
       this.setEvents();
 
       if (this.isAudio) {
         this.addEventMove();
+        addEvent(document, 'click', this.forceSafariPlayAudio);
       }
-
-      console.log('init--Audio->', this.namespace);
     },
 
     setEvents() {
       this.toggleAudio();
-      addEvent(this.body, 'mouseover', this.mouseOver);
-      window.addEventListener('touchstart', this.forceSafariPlayAudio, false);
     },
 
     toggleAudio() {
@@ -704,7 +702,6 @@
       document.getElementById(`${namespace}-audio-speed`).onclick = () => {
         this.speed = this.speed == 'middle' ? 'fast' : 'middle';
         cookie.set('speed', this.speed, namespace);
-        console.log('speed-----', this.speed);
       };
     },
 
@@ -718,23 +715,15 @@
 
     forceSafariPlayAudio() {
       const {
-        namespace
+        audio
       } = Audio;
-
-      let __audio = document.getElementById(`${namespace}-audio-media`);
-
-      __audio.load();
-
-      __audio.play();
+      audio.load();
+      audio.play();
     },
 
     mouseOver(event) {
       var event = window.event || event;
       var target = event.target || event.srcElement;
-      const {
-        namespace,
-        speed
-      } = Audio;
 
       var __text = parseTagText(target);
 
@@ -742,25 +731,29 @@
         return;
       }
 
-      console.log('speed2-----', this.speed);
-      var __url2 = 'http://www.govwza.cn/yxsm/cache/voices/voices1/480/48076e3f30eabc16fbc2df6b683087b2.mp3';
+      Audio.playAudio(__text);
+    },
 
-      let __audio = document.getElementById(`${namespace}-audio-media`);
-
-      __audio.src = __url2;
+    playAudio(text) {
+      const {
+        namespace,
+        audio,
+        speed,
+        forceSafariPlayAudio
+      } = Audio;
+      var __url2 = 'https://s.qunarzz.com/common/assist/song.mp3';
+      audio.pause();
+      audio.src = __url2;
       document.getElementById(`${namespace}-audio-source`).src = __url2;
       document.getElementById(`${namespace}-audio-embed`).src = __url2;
-
-      let playPromise = __audio.play();
-
-      __audio.load();
+      let playPromise = audio.play();
 
       if (playPromise !== undefined) {
         playPromise.then(_ => {
-          __audio.play();
-
-          window.removeEventListener('touchstart', this.forceSafariPlayAudio, false);
-        }).catch(error => {});
+          removeEvent(document, 'click', forceSafariPlayAudio);
+        }).catch(error => {
+          console.log(error);
+        });
       }
     },
 
@@ -770,6 +763,7 @@
       } = Audio;
       this.removeEventMove();
       this.isAudio = false;
+      this.audio.pause();
       cookie.set('audio', false, namespace);
       cookie.set('speed', 'middle', namespace);
     }
