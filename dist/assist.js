@@ -419,8 +419,8 @@
       }
 
       if (target.alt || target.title || target.innerText) {
-        console.log(`文本 ${target.innerText}`);
-        return `文本 ${target.innerText || target.alt || target.title}`;
+        console.log(`文本 ${target.alt || target.title || target.innerText}`);
+        return `文本 ${target.alt || target.title || target.innerText}`;
       }
 
       return '';
@@ -624,7 +624,7 @@
         </div>
         <div id='${namespace}-audio-speed' class='topbar-html-content-item topbar-html-mright'>
           <span>语速</span>
-          <img src='${img$l}' name='speed' source-src='${img$l}'  hover-src='${img$b}'  selected-src='${img$2}'   selected-hover-src='${img}'>></img>
+          <img src='${img$l}' name='speed' source-src='${img$l}'  hover-src='${img$b}'  selected-src='${img$2}'   selected-hover-src='${img}'></img>
         </div>
         <div id='${namespace}-zoom-out' class='topbar-html-content-item'>
           <span>放大</span>
@@ -647,9 +647,9 @@
           <img src='${img$g}' source-src='${img$g}'  hover-src='${img$6}'></img>
         </div>
         <div id='${namespace}-pointeread' class='topbar-html-content-item topbar-html-mright'>
-        <span>指读</span>
-        <img src='${img$f}' source-src='${img$f}'  hover-src='${img$5}'></img>
-      </div>
+          <span>指读</span>
+          <img src='${img$f}' source-src='${img$f}'  hover-src='${img$5}'></img>
+        </div>
         <div id='${namespace}-close' class='topbar-html-content-item'>
           <span>退出服务</span>
           <img src='${img$e}' source-src='${img$e}'  hover-src='${img$4}'></img>
@@ -710,10 +710,8 @@
         }
       } else if (__name == 'speed') {
         if (cookie.get('speed', TopBar.namespace) == 'fast') {
-          console.log('333', cookie.get('speed', TopBar.namespace));
           target.src = target.getAttribute('selected-hover-src');
         } else {
-          console.log('444');
           target.src = __hover;
         }
       } else {
@@ -852,7 +850,11 @@
 
       var __text = parseTagText(target);
 
-      if (__text == '') {
+      var __parentNodeId = target.parentNode.id;
+
+      var __isAssist = __parentNodeId.indexOf(Audio.namespace) > -1;
+
+      if (__text == '' || __isAssist) {
         return;
       }
 
@@ -892,6 +894,8 @@
       this.removeEventMove();
       this.isAudio = true;
       this.audio.pause();
+      this.audioTabImg.src = this.audioTabImg.getAttribute('source-src');
+      this.speedTabImg.src = this.speedTabImg.getAttribute('source-src');
       cookie.set('audio', true, namespace);
       cookie.set('speed', 'middle', namespace);
     }
@@ -1084,7 +1088,7 @@
   var styles = ".bigtext-html {\n  z-index: 99999999999;\n  height: 150px;\n  text-align: center;\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  left: 0;\n  border-top: 1px solid #505050;\n}\n.bigtext-html-content {\n  height: 100%;\n  background-color: #FFFFFF;\n  font-size: 53px;\n  color: #333 !important;\n  text-align: center;\n  font-weight: bold;\n}";
 
   const BigTextHtml = namespace => {
-    return `<div class='bigtext-html'>
+    return `<div id='${namespace}-bigtext-html' class='bigtext-html'>
            <div id='${namespace}-bigtext-content' class='bigtext-html-content'></div>
            <div class='bigtext-html-btn'>
               <i class='bigtext-html-close'>X</i>
@@ -1140,7 +1144,18 @@
       const {
         namespace
       } = BigText;
+      var __parentNodeId = target.parentNode.id;
+
+      var __isAssist = __parentNodeId.indexOf(namespace) > -1;
+
       const activeBtn = document.getElementById(`${namespace}-bigtext-content`);
+      activeBtn.innerText = parseTagText(target);
+
+      if (__isAssist) {
+        activeBtn.innerText = '';
+        return;
+      }
+
       activeBtn.innerText = parseTagText(target);
     },
 

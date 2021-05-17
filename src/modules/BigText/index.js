@@ -37,7 +37,14 @@ const BigText = {
         var event = window.event || event;
         var target = event.target || event.srcElement;
         const { namespace } = BigText
+        var __parentNodeId  =  target.parentNode.id
+        var __isAssist = __parentNodeId.indexOf(namespace) > -1
         const activeBtn = document.getElementById(`${namespace}-bigtext-content`)
+        activeBtn.innerText = parseTagText(target)
+        if(__isAssist) {
+            activeBtn.innerText = ''
+            return
+        }
         activeBtn.innerText = parseTagText(target)
     },
     show(core) {

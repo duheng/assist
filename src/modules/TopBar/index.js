@@ -51,10 +51,8 @@ const TopBar = {
          
         } else if (__name == 'speed') {
             if(cookie.get('speed',TopBar.namespace) == 'fast' ) {
-            console.log('333',cookie.get('speed',TopBar.namespace))
               target.src = target.getAttribute('selected-hover-src')
             } else {
-                console.log('444')
               target.src = __hover
             }
         } else {

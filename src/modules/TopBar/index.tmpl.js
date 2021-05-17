@@ -38,7 +38,7 @@ const topBarHtml = (namespace) => {
         </div>
         <div id='${namespace}-audio-speed' class='topbar-html-content-item topbar-html-mright'>
           <span>语速</span>
-          <img src='${speed}' name='speed' source-src='${speed}'  hover-src='${speedHover}'  selected-src='${speedQuick}'   selected-hover-src='${speedQuickHover}'>></img>
+          <img src='${speed}' name='speed' source-src='${speed}'  hover-src='${speedHover}'  selected-src='${speedQuick}'   selected-hover-src='${speedQuickHover}'></img>
         </div>
         <div id='${namespace}-zoom-out' class='topbar-html-content-item'>
           <span>放大</span>
@@ -61,9 +61,9 @@ const topBarHtml = (namespace) => {
           <img src='${bigtext}' source-src='${bigtext}'  hover-src='${bigtextHover}'></img>
         </div>
         <div id='${namespace}-pointeread' class='topbar-html-content-item topbar-html-mright'>
-        <span>指读</span>
-        <img src='${pointeread}' source-src='${pointeread}'  hover-src='${pointereadHover}'></img>
-      </div>
+          <span>指读</span>
+          <img src='${pointeread}' source-src='${pointeread}'  hover-src='${pointereadHover}'></img>
+        </div>
         <div id='${namespace}-close' class='topbar-html-content-item'>
           <span>退出服务</span>
           <img src='${close}' source-src='${close}'  hover-src='${closeHover}'></img>

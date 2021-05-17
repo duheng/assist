@@ -77,7 +77,9 @@ const Audio = {
         var event = window.event || event;
         var target = event.target || event.srcElement;
         var __text = parseTagText(target)
-        if(__text == '') {
+        var __parentNodeId  =  target.parentNode.id
+        var __isAssist = __parentNodeId.indexOf(Audio.namespace) > -1
+        if(__text == '' || __isAssist ) {
             return
         }
         Audio.playAudio(__text)
@@ -106,6 +108,8 @@ const Audio = {
         this.removeEventMove()
         this.isAudio = true
         this.audio.pause()
+        this.audioTabImg.src = this.audioTabImg.getAttribute('source-src')
+        this.speedTabImg.src = this.speedTabImg.getAttribute('source-src')
         cookie.set('audio', true, namespace)
         cookie.set('speed', 'middle', namespace)
     }   

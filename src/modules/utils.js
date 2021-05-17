@@ -75,8 +75,8 @@ const parseTagText = (target) => {
         }
 
         if (target.alt || target.title || target.innerText){
-            console.log(`文本 ${target.innerText}`);
-            return `文本 ${target.innerText || target.alt || target.title}`;
+            console.log(`文本 ${target.alt || target.title || target.innerText}`);
+            return `文本 ${target.alt || target.title || target.innerText}`;
         }
     
         return ''
