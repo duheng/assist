@@ -704,19 +704,17 @@
 
       if (__name == 'audio') {
         if (cookie.get('audio', TopBar.namespace)) {
-          console.log('11111', cookie.get('audio', TopBar.namespace));
           target.src = __hover;
         } else {
-          console.log('22222');
           target.src = target.getAttribute('selected-hover-src');
         }
       } else if (__name == 'speed') {
         if (cookie.get('speed', TopBar.namespace) == 'fast') {
           console.log('333', cookie.get('speed', TopBar.namespace));
-          target.src = __hover;
+          target.src = target.getAttribute('selected-hover-src');
         } else {
           console.log('444');
-          target.src = target.getAttribute('selected-hover-src');
+          target.src = __hover;
         }
       } else {
         target.src = __hover;
@@ -733,30 +731,23 @@
 
       const __name = target.getAttribute('name');
 
-      const __source = target.getAttribute('source-src'); // this.isAudio  = cookie.get('audio',TopBar.namespace)
-
+      const __source = target.getAttribute('source-src');
 
       if (__name == 'audio') {
         if (cookie.get('audio', TopBar.namespace)) {
-          console.log('11111', cookie.get('audio', TopBar.namespace));
           target.src = __source;
         } else {
-          console.log('22222');
           target.src = target.getAttribute('selected-src');
         }
       } else if (__name == 'speed') {
         if (cookie.get('speed', TopBar.namespace) == 'fast') {
-          console.log('333', cookie.get('speed', TopBar.namespace));
-          target.src = __source;
-        } else {
-          console.log('444');
           target.src = target.getAttribute('selected-src');
+        } else {
+          target.src = __source;
         }
       } else {
         target.src = __source;
       }
-
-      console.log('name-----', __name);
     }
 
   };
@@ -781,10 +772,12 @@
       core.creatStyle('audio-style', styles$3);
       core.creatHtml('audio-html', BigTextHtml$1);
       this.isAudio = cookie.get('audio', namespace);
-      this.speed = cookie.get('speed', namespace);
-      this.speedTab = document.getElementById(`${namespace}-audio-speed`) || '';
       this.audio = document.getElementById(`${namespace}-audio-media`) || '';
       this.audioTab = document.getElementById(`${namespace}-audio`) || '';
+      this.audioTabImg = this.audioTab.getElementsByTagName('img')[0];
+      this.speed = cookie.get('speed', namespace);
+      this.speedTab = document.getElementById(`${namespace}-audio-speed`) || '';
+      this.speedTabImg = this.speedTab.getElementsByTagName('img')[0];
       this.setEvents();
     },
 
@@ -795,13 +788,13 @@
         this.addEventMove();
         addEvent(document, 'click', this.forceSafariPlayAudio); // 苹果浏览器需要用户跟浏览器有个交互才可以播放语音
       } else {
-        this.audioTab.getElementsByTagName('img')[0].src = this.audioTab.getElementsByTagName('img')[0].getAttribute('selected-src');
+        this.audioTabImg.src = this.audioTabImg.getAttribute('selected-src');
       }
 
       if (this.speed == 'fast') {
-        this.speedTab.getElementsByTagName('img')[0].src = this.speedTab.getElementsByTagName('img')[0].getAttribute('selected-src');
+        this.speedTabImg.src = this.speedTabImg.getAttribute('selected-src');
       } else {
-        this.speedTab.getElementsByTagName('img')[0].src = this.speedTab.getElementsByTagName('img')[0].getAttribute('source-src');
+        this.speedTabImg.src = this.speedTabImg.getAttribute('source-src');
       }
     },
 
@@ -815,22 +808,22 @@
           this.removeEventMove();
           this.isAudio = false;
           cookie.set('audio', false, namespace);
-          this.audioTab.getElementsByTagName('img')[0].src = this.audioTab.getElementsByTagName('img')[0].getAttribute('selected-src');
+          this.audioTabImg.src = this.audioTabImg.getAttribute('selected-src');
         } else {
           this.addEventMove();
           this.isAudio = true;
           cookie.set('audio', true, namespace);
-          this.audioTab.getElementsByTagName('img')[0].src = this.audioTab.getElementsByTagName('img')[0].getAttribute('source-src');
+          this.audioTabImg.src = this.audioTabImg.getAttribute('source-src');
         }
       };
 
       this.speedTab.onclick = () => {
         if (this.speed == 'middle') {
           this.speed = 'fast';
-          this.speedTab.getElementsByTagName('img')[0].src = this.speedTab.getElementsByTagName('img')[0].getAttribute('source-src');
+          this.speedTabImg.src = this.speedTabImg.getAttribute('selected-src');
         } else {
           this.speed = 'middle';
-          this.speedTab.getElementsByTagName('img')[0].src = this.speedTab.getElementsByTagName('img')[0].getAttribute('selected-src');
+          this.speedTabImg.src = this.speedTabImg.getAttribute('source-src');
         }
 
         cookie.set('speed', this.speed, namespace);

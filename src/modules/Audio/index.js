@@ -10,10 +10,15 @@ const Audio = {
         core.creatStyle('audio-style',styles)
         core.creatHtml('audio-html',tmpl)
         this.isAudio  = cookie.get('audio',namespace)
-        this.speed =  cookie.get('speed',namespace)
-        this.speedTab =  document.getElementById(`${namespace}-audio-speed`) || ''
+
         this.audio = document.getElementById(`${namespace}-audio-media`) || ''
         this.audioTab = document.getElementById(`${namespace}-audio`) || ''
+        this.audioTabImg =  this.audioTab.getElementsByTagName('img')[0]
+
+        this.speed =  cookie.get('speed',namespace)
+        this.speedTab =  document.getElementById(`${namespace}-audio-speed`) || ''
+        this.speedTabImg =   this.speedTab.getElementsByTagName('img')[0]
+      
         this.setEvents()
     },
     setEvents() {
@@ -22,13 +27,13 @@ const Audio = {
             this.addEventMove()
             addEvent(document,'click',this.forceSafariPlayAudio) // 苹果浏览器需要用户跟浏览器有个交互才可以播放语音
         } else {
-            this.audioTab.getElementsByTagName('img')[0].src = this.audioTab.getElementsByTagName('img')[0].getAttribute('selected-src')
+            this.audioTabImg.src = this.audioTabImg.getAttribute('selected-src')
         }
 
         if(this.speed == 'fast') {
-            this.speedTab.getElementsByTagName('img')[0].src = this.speedTab.getElementsByTagName('img')[0].getAttribute('selected-src')
+            this.speedTabImg.src = this.speedTabImg.getAttribute('selected-src')
         } else {
-            this.speedTab.getElementsByTagName('img')[0].src = this.speedTab.getElementsByTagName('img')[0].getAttribute('source-src')
+            this.speedTabImg.src = this.speedTabImg.getAttribute('source-src')
         }
     },
     toggleAudio() {
@@ -38,21 +43,21 @@ const Audio = {
               this.removeEventMove()
               this.isAudio = false
               cookie.set('audio', false, namespace)
-              this.audioTab.getElementsByTagName('img')[0].src = this.audioTab.getElementsByTagName('img')[0].getAttribute('selected-src')
+              this.audioTabImg.src = this.audioTabImg.getAttribute('selected-src')
             } else {
               this.addEventMove()
               this.isAudio = true
               cookie.set('audio', true, namespace)
-              this.audioTab.getElementsByTagName('img')[0].src = this.audioTab.getElementsByTagName('img')[0].getAttribute('source-src')
+              this.audioTabImg.src = this.audioTabImg.getAttribute('source-src')
             }
         }
         this.speedTab.onclick = () => {
             if(this.speed == 'middle') {
                 this.speed = 'fast'
-                this.speedTab.getElementsByTagName('img')[0].src = this.speedTab.getElementsByTagName('img')[0].getAttribute('source-src')
+                this.speedTabImg.src =  this.speedTabImg.getAttribute('selected-src')
             } else {
                 this.speed = 'middle'
-                this.speedTab.getElementsByTagName('img')[0].src = this.speedTab.getElementsByTagName('img')[0].getAttribute('selected-src')
+                this.speedTabImg.src =  this.speedTabImg.getAttribute('source-src')
             }
             cookie.set('speed', this.speed, namespace)
         }

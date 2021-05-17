@@ -44,20 +44,18 @@ const TopBar = {
 
         if(__name == 'audio') {
             if(cookie.get('audio',TopBar.namespace)) {
-             console.log('11111',cookie.get('audio',TopBar.namespace))
              target.src = __hover
             } else {
-                console.log('22222')
              target.src = target.getAttribute('selected-hover-src')
             }
          
         } else if (__name == 'speed') {
             if(cookie.get('speed',TopBar.namespace) == 'fast' ) {
             console.log('333',cookie.get('speed',TopBar.namespace))
-              target.src = __hover
+              target.src = target.getAttribute('selected-hover-src')
             } else {
                 console.log('444')
-              target.src = target.getAttribute('selected-hover-src')
+              target.src = __hover
             }
         } else {
             target.src = __hover
@@ -73,29 +71,22 @@ const TopBar = {
         }
         const __name = target.getAttribute('name')
         const __source = target.getAttribute('source-src')
-       // this.isAudio  = cookie.get('audio',TopBar.namespace)
        if(__name == 'audio') {
            if(cookie.get('audio',TopBar.namespace)) {
-            console.log('11111',cookie.get('audio',TopBar.namespace))
-            target.src = __source
+              target.src = __source
            } else {
-               console.log('22222')
-            target.src = target.getAttribute('selected-src')
+              target.src = target.getAttribute('selected-src')
            }
         
        } else if (__name == 'speed') {
             if(cookie.get('speed',TopBar.namespace) == 'fast' ) {
-            console.log('333',cookie.get('speed',TopBar.namespace))
-            target.src = __source
+               target.src = target.getAttribute('selected-src')
             } else {
-                console.log('444')
-            target.src =  target.getAttribute('selected-src')
+               target.src =  __source
             }
        } else {
             target.src = __source
        }
-       console.log('name-----', __name)
-       
     }
 };
 
