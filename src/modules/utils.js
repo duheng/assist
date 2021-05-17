@@ -4,7 +4,7 @@ const cookie = {
     set:(key,value, namespace) => {
      let memory = {
         show: false,   // 是否展示无障碍
-        audio: false,  // 是否开启声音
+        audio: true,  // 是否开启声音
         speed: 'middle', // 语速
         zomm: 0.1,     // 缩放倍数
         cursor: false, // 是否替换鼠标样式
