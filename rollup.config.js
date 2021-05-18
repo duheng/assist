@@ -9,6 +9,8 @@ import sass from 'rollup-plugin-sass';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import image from '@rollup/plugin-image';
+import { terser } from "rollup-plugin-terser";
+
 // import hash from 'rollup-plugin-hash';
 
 //import copy from 'rollup-plugin-copy'
@@ -41,6 +43,7 @@ function generateWebConfig(isBrowser,input) {
                 browser: isBrowser,
             }),
             commonjs(),
+            terser({ compress: { drop_console: false } })
             // copy({
             //     targets: [
             //       { src: 'src/assets/**/*', dest: 'dist/assets' }

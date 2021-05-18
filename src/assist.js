@@ -11,9 +11,11 @@ class Assist extends Base {
   
     constructor(opts = {}) {
       super(opts);
+  
       // 合并参数
       this.mergeConfig(opts);
       this.init();
+   
       if(cookie.get('show',this.config.namespace)) {
         this.isShowTopBar(true)
       }

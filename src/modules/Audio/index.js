@@ -105,9 +105,10 @@ const Audio = {
     },
     reset() {
         const { namespace } = Audio
-        this.removeEventMove()
         this.isAudio = true
         this.audio.pause()
+        this.removeEventMove()
+        this.addEventMove()
         this.audioTabImg.src = this.audioTabImg.getAttribute('source-src')
         this.speedTabImg.src = this.speedTabImg.getAttribute('source-src')
         cookie.set('audio', true, namespace)
