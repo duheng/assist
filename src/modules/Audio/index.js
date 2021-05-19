@@ -87,7 +87,7 @@ const Audio = {
     playAudio(text) {
         const { namespace, audio, speed, forceSafariPlayAudio } = Audio
         let __speed = speed == 'middle' ? 5 : 7
-        var __url = `http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=${__speed}&text=${text}`
+        var __url = `https://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=${__speed}&text=${text}`
         var __url2 = 'https://s.qunarzz.com/common/assist/song.mp3'
         audio.src = __url
         document.getElementById(`${namespace}-audio-source`).src = __url
