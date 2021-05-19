@@ -15,16 +15,24 @@
   "bugs": {
     "url": "https://github.com/duheng/assist/issues"
   },
+    "browserslist": [ 
+      "> 1%",
+      "last 2 versions",
+      "ie 6-11"
+    ]
+  ,
   "homepage": "https://github.com/duheng/assist#readme",
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
     "@babel/plugin-transform-async-to-generator": "^7.10.1",
     "@babel/plugin-transform-classes": "^7.13.0",
+    "@babel/preset-env": "^7.14.2",
     "@rollup/plugin-commonjs": "^12.0.0",
     "@rollup/plugin-image": "^2.0.6",
     "@rollup/plugin-json": "^4.0.2",
     "@rollup/plugin-node-resolve": "^8.0.0",
+    "core-js": "^3.12.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-plugin-import": "^2.20.1",

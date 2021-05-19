@@ -34,6 +34,24 @@ function generateWebConfig(isBrowser,input) {
             image(),
             babelPlugin({
                 exclude: 'node_modules/**',
+                presets: [
+                    [
+                      '@babel/env',
+                      {
+                        modules: false,
+                        targets: {
+                          browsers: [ 
+                            "> 1%",
+                            "last 2 versions",
+                            "ie 9-11"
+                          ],
+                         // node: 8
+                        },
+                        corejs: 3, // 声明corejs版本
+                        useBuiltIns: 'usage'
+                      }
+                    ]
+                ],
                 plugins: [
                     '@babel/plugin-proposal-object-rest-spread',
                     '@babel/plugin-transform-classes',
