@@ -133,11 +133,39 @@ const ajax = {
     }
   }
 
+/**
+ * 判断是否是IE
+ */
+const isIE = () => {
+    if (!!window.ActiveXobject || "ActiveXObject" in window) {
+        return true;
+    } else {
+        return false;
+    }
+}
+/**
+ * 判断是否是IE11
+ */
+const isIE11 = () => {
+    if((/Trident\/7\./).test(navigator.userAgent)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+const removeNode = (item) => {
+　　if( isIE()||isIE11() ) {
+        item.removeNode(true);
+　　} else {
+    　　item.remove();
+   }
+}
 export {
     cookie,
     addEvent,
     removeEvent,
     parseTagText,
     ajax,
-    triggerEvent
+    triggerEvent,
+    removeNode
 };

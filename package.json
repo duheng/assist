@@ -15,12 +15,11 @@
   "bugs": {
     "url": "https://github.com/duheng/assist/issues"
   },
-    "browserslist": [ 
-      "> 1%",
-      "last 2 versions",
-      "ie 6-11"
-    ]
-  ,
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "ie 6-11"
+  ],
   "homepage": "https://github.com/duheng/assist#readme",
   "devDependencies": {
     "@babel/core": "^7.8.7",

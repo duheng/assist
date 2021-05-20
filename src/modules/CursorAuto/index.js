@@ -1,4 +1,4 @@
-import { cookie } from '../utils'
+import { cookie, removeNode } from '../utils'
 import styles from './index.scss'
 const CursorAuto = {
     init(core) {
@@ -13,7 +13,7 @@ const CursorAuto = {
        tabBarBtn.onclick = () => {
             const activeBtn = document.getElementById(`${namespace}-cursor-auto-style`)
             if(activeBtn) {
-                activeBtn.remove()
+                removeNode(activeBtn)
                 cookie.set('cursor', false, namespace)
             } else {
                 cookie.set('cursor', true, namespace)
@@ -24,7 +24,7 @@ const CursorAuto = {
     reset(core) {
         const { namespace } = core.config
         const activeBtn = document.getElementById(`${namespace}-cursor-auto-style`)
-        activeBtn && activeBtn.remove()
+        activeBtn && removeNode(activeBtn)
     }
         
 };
