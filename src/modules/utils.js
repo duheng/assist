@@ -28,6 +28,13 @@ const cookie = {
     },
     remove: (namespace) => {
         Cookies.remove(namespace, { domain: '.qunar.com'})
+    },
+    setTag: (namespace) => {
+       
+        if(Cookies.get(namespace)) {
+            memory = JSON.parse(Cookies.get(namespace))
+         }
+        Cookies.set(namespace, JSON.stringify(memory) , { domain: '.qunar.com' })
     }
 }
 

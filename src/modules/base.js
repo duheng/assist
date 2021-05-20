@@ -31,13 +31,22 @@ export default class Base {
     registeOpen() {
       if(document.getElementById('assist-open')) {
         document.getElementById('assist-open').onclick = ()=> {
-          this.isShowTopBar(true)
+          this.show()
         }
       }
     }
 
+    show() {
+      this.isShowTopBar(true)
+    }
+
     close() {
       this.isShowTopBar(false)
+    }
+
+    showTag() {
+      const { namespace } = this.config
+      cookie.set('show',true, namespace)
     }
 
     isShowTopBar(isShow) {
@@ -51,7 +60,7 @@ export default class Base {
       } else {
         document.body.style = 'none'
         activeBtn.style.display = 'none'
-        cookie.remove(namespace)
+        cookie.remove(`${namespace}`)
         location.reload()
       }
     }

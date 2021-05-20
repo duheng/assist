@@ -79,6 +79,7 @@ const Audio = {
         var __text = parseTagText(target)
         var __parentNodeId  =  target.parentNode.id
         var __isAssist = __parentNodeId.indexOf(Audio.namespace) > -1
+        console.log('AAAAA')
         if(__text == '' || __isAssist ) {
             return
         }
