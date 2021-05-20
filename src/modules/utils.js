@@ -30,11 +30,23 @@ const cookie = {
         Cookies.remove(namespace, { domain: '.qunar.com'})
     },
     setTag: (namespace) => {
-       
-        if(Cookies.get(namespace)) {
-            memory = JSON.parse(Cookies.get(namespace))
+        const __key = `${namespace}-ignore`
+        let __data = []
+        if(Cookies.get(__key)) {
+            __data = JSON.parse(Cookies.get(__key))
          }
-        Cookies.set(namespace, JSON.stringify(memory) , { domain: '.qunar.com' })
+         const { origin, pathname } = location
+         const __ignoreUrl = `${origin}${pathname}`
+        !__data.includes(__ignoreUrl) && __data.push(`${origin}${pathname}`)
+        Cookies.set(__key, JSON.stringify(__data) , { domain: '.qunar.com' })
+    },
+    getTag: (namespace) => {
+        const __key = `${namespace}-ignore`
+        let __data = []
+        if(Cookies.get(__key)) {
+            __data = JSON.parse(Cookies.get(__key))
+        }
+        return __data
     }
 }
 

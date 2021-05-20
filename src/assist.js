@@ -11,17 +11,13 @@ class Assist extends Base {
   
     constructor(opts = {}) {
       super(opts);
-  
       // 合并参数
       this.mergeConfig(opts);
       this.init();
-   
-      if(cookie.get('show',this.config.namespace)) {
-        this.isShowTopBar(true)
-      }
+      this.isShow();
       this.resetAction = this.reset
     }
-  
+
     init() {
       this.use(TopBar);
       this.use(Audio);
@@ -30,6 +26,7 @@ class Assist extends Base {
       this.use(CursorAuto);
       this.use(BigText);
     }
+    
     reset() {
       Audio.reset()
       ZoomPage.reset()
@@ -37,6 +34,6 @@ class Assist extends Base {
       PointerFllow.reset(this)
       BigText.reset(this)
     }
-    
+   
   }
   export default Assist;

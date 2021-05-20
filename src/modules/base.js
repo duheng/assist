@@ -31,9 +31,23 @@ export default class Base {
     registeOpen() {
       if(document.getElementById('assist-open')) {
         document.getElementById('assist-open').onclick = ()=> {
-          this.show()
+          !this.existIgnore() && this.show()
         }
       }
+    }
+
+    isShow() {
+      const { namespace } = this.config
+      if(cookie.get('show',namespace) && !this.existIgnore()) {
+        this.isShowTopBar(true)
+      }
+    }
+
+    existIgnore() {
+      const { namespace } = this.config
+      const { origin, pathname } = location
+      const __key = `${origin}${pathname}`
+      return cookie.getTag(namespace).includes(__key)
     }
 
     show() {
@@ -46,7 +60,7 @@ export default class Base {
 
     showTag() {
       const { namespace } = this.config
-      cookie.set('show',true, namespace)
+      cookie.setTag(namespace)
     }
 
     isShowTopBar(isShow) {
