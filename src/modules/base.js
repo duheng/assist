@@ -61,6 +61,8 @@ export default class Base {
     showTag() {
       const { namespace } = this.config
       cookie.setTag(namespace)
+      cookie.set('show',true, namespace)
+      this.resetAction()
     }
 
     isShowTopBar(isShow) {

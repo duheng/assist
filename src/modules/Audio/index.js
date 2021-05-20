@@ -18,10 +18,13 @@ const Audio = {
         this.speed =  cookie.get('speed',namespace)
         this.speedTab =  document.getElementById(`${namespace}-audio-speed`) || ''
         this.speedTabImg =   this.speedTab.getElementsByTagName('img')[0]
-      
+
+        this.pointeReadTab =  document.getElementById(`${namespace}-pointeread`) || ''
+
         this.setEvents()
     },
     setEvents() {
+        
         this.toggleAudio()
         if(this.isAudio) {
             this.addEventMove()
@@ -38,19 +41,7 @@ const Audio = {
     },
     toggleAudio() {
         const { namespace } = Audio
-        this.audioTab.onclick = () => {
-            if(this.isAudio) {
-              this.removeEventMove()
-              this.isAudio = false
-              cookie.set('audio', false, namespace)
-              this.audioTabImg.src = this.audioTabImg.getAttribute('selected-src')
-            } else {
-              this.addEventMove()
-              this.isAudio = true
-              cookie.set('audio', true, namespace)
-              this.audioTabImg.src = this.audioTabImg.getAttribute('source-src')
-            }
-        }
+        this.audioTab.onclick = () => this.isAudio ? this.closeAudio() : this.showAudio(); 
         this.speedTab.onclick = () => {
             if(this.speed == 'middle') {
                 this.speed = 'fast'
@@ -61,6 +52,29 @@ const Audio = {
             }
             cookie.set('speed', this.speed, namespace)
         }
+
+        this.pointeReadTab.onclick = () => {
+            this.showAudio(); 
+            Audio.playAudio('指读模式已打开')
+        }
+
+
+
+    },
+    showAudio() {
+        const { namespace } = Audio
+        this.isAudio = true
+        this.addEventMove()
+        cookie.set('audio', true, namespace)
+        this.audioTabImg.src = this.audioTabImg.getAttribute('source-src')
+    },
+    closeAudio() {
+        const { namespace } = Audio
+        this.isAudio = false
+        this.audio.pause()
+        this.removeEventMove()
+        cookie.set('audio', false, namespace)
+        this.audioTabImg.src = this.audioTabImg.getAttribute('selected-src')
     },
     addEventMove() {
         addEvent(this.body,'mouseover',this.mouseOver)
@@ -79,7 +93,6 @@ const Audio = {
         var __text = parseTagText(target)
         var __parentNodeId  =  target.parentNode.id
         var __isAssist = __parentNodeId.indexOf(Audio.namespace) > -1
-        console.log('AAAAA')
         if(__text == '' || __isAssist ) {
             return
         }
@@ -106,13 +119,9 @@ const Audio = {
     },
     reset() {
         const { namespace } = Audio
-        this.isAudio = true
-        this.audio.pause()
-        this.removeEventMove()
-        this.addEventMove()
-        this.audioTabImg.src = this.audioTabImg.getAttribute('source-src')
+        this.closeAudio()
         this.speedTabImg.src = this.speedTabImg.getAttribute('source-src')
-        cookie.set('audio', true, namespace)
+        this.speed =  'middle'
         cookie.set('speed', 'middle', namespace)
     }   
         
