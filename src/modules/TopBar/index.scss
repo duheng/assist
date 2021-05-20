@@ -22,6 +22,7 @@
         display: flex;
         justify-content: center;
         &-item {
+            cursor: pointer;
             margin: 0 6px;
             display: flex;
             flex-direction: column;
