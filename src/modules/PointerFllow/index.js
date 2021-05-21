@@ -1,5 +1,8 @@
                
 import { cookie, addEvent, removeEvent } from '../utils'
+import audioTabText from '../constans'
+import Audio from '../Audio';
+
 import styles from './index.scss'
 import tmpl from './index.tmpl.js'
 const PointerFllow = {
@@ -29,8 +32,10 @@ const PointerFllow = {
         tabBarBtn.onclick = () => {
             if( activeBtn.style.display == 'block' ) {
                 this.reset(core)
+                Audio.playAudio(audioTabText.pointerFollowClose)
             } else {
                 this.show(core)
+                Audio.playAudio(audioTabText.pointerFollowOpen)
             }
         }
     },

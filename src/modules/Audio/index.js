@@ -1,4 +1,5 @@
 import { cookie, ajax, addEvent, removeEvent, parseTagText, triggerEvent } from '../utils'
+import audioTabText from '../constans'
 
 import styles from './index.scss'
 import tmpl from './index.tmpl.js'
@@ -41,21 +42,31 @@ const Audio = {
     },
     toggleAudio() {
         const { namespace } = Audio
-        this.audioTab.onclick = () => this.isAudio ? this.closeAudio() : this.showAudio(); 
+        this.audioTab.onclick = () => {
+            if(this.isAudio) {
+                this.closeAudio()
+            }else {
+                this.showAudio()
+                Audio.playAudio(audioTabText.audioOpen)
+            }
+        } 
+
         this.speedTab.onclick = () => {
             if(this.speed == 'middle') {
                 this.speed = 'fast'
                 this.speedTabImg.src =  this.speedTabImg.getAttribute('selected-src')
+                Audio.playAudio(audioTabText.speedQuick)
             } else {
                 this.speed = 'middle'
                 this.speedTabImg.src =  this.speedTabImg.getAttribute('source-src')
+                Audio.playAudio(audioTabText.speedMiddle)
             }
             cookie.set('speed', this.speed, namespace)
         }
 
         this.pointeReadTab.onclick = () => {
             this.showAudio(); 
-            Audio.playAudio('指读模式已打开')
+            Audio.playAudio(audioTabText.pointeread)
         }
 
 
@@ -99,7 +110,10 @@ const Audio = {
         Audio.playAudio(__text)
     },
     playAudio(text) {
-        const { namespace, audio, speed, forceSafariPlayAudio } = Audio
+        const { namespace, isAudio, audio, speed, forceSafariPlayAudio } = Audio
+        if(!isAudio) {
+            return
+        }
         let __speed = speed == 'middle' ? 5 : 7
         var __url = `https://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=${__speed}&text=${encodeURI(text)}`
         var __url2 = 'https://s.qunarzz.com/common/assist/song.mp3'

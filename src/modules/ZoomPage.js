@@ -1,4 +1,6 @@
 import { cookie } from './utils'
+import audioTabText from './constans'
+import Audio from './Audio';
 
 const ZoomPage = {
     init(core) {
@@ -21,18 +23,22 @@ const ZoomPage = {
     zoomOut() {
         if(this.size >= 1.3) {
             console.log('已最大')
+            Audio.playAudio(audioTabText.zoomOutEnd)
             return
         }
         this.size = parseFloat((this.size+0.1).toFixed(10));  
         this.set(); 
+        Audio.playAudio(audioTabText.zoomOut)
     },
     zoomMin() {
         if(this.size <= 1.0) {
             console.log('已最小')
+            Audio.playAudio(audioTabText.zoomMinEnd)
             return
         }
         this.size = parseFloat((this.size-0.1).toFixed(10));  
         this.set(); 
+        Audio.playAudio(audioTabText.zoomMin)
     },
     set() {  
         [].forEach.call( document.body.children, (el)=> {

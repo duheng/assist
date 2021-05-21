@@ -1,4 +1,7 @@
 import { cookie, addEvent, removeEvent, parseTagText } from '../utils'
+import audioTabText from '../constans'
+import Audio from '../Audio';
+
 import styles from './index.scss'
 import tmpl from './index.tmpl.js'
 const BigText = {
@@ -28,8 +31,10 @@ const BigText = {
              const activeBtn = document.getElementById(`${namespace}-bigtext-html`)
              if( activeBtn.style.display == 'block' ) {
                 this.reset(core)
+                Audio.playAudio(audioTabText.bigtextClose)
              } else {
                 this.show(core)
+                Audio.playAudio(audioTabText.bigtextOpen)
              }
         }
     },
