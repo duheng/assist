@@ -12,20 +12,11 @@ const Audio = {
         core.creatHtml('audio-html',tmpl)
         this.isAudio  = cookie.get('audio',namespace)
 
-        this.audio = document.getElementById(`${namespace}-audio-media`) || ''
-        this.audioTab = document.getElementById(`${namespace}-audio`) || ''
-        this.audioTabImg =  this.audioTab.getElementsByTagName('img')[0]
-
-        this.speed =  cookie.get('speed',namespace)
-        this.speedTab =  document.getElementById(`${namespace}-audio-speed`) || ''
-        this.speedTabImg =   this.speedTab.getElementsByTagName('img')[0]
-
-        this.pointeReadTab =  document.getElementById(`${namespace}-pointeread`) || ''
-
-        this.setEvents()
+       
     },
-    setEvents() {
-        
+    setEvents(core) {
+        const { namespace } = core.config
+        this.registeDom(namespace)
         this.toggleAudio()
         if(this.isAudio) {
             this.addEventMove()
@@ -39,6 +30,17 @@ const Audio = {
         } else {
             this.speedTabImg.src = this.speedTabImg.getAttribute('source-src')
         }
+    },
+    registeDom(namespace) {
+        this.audio = document.getElementById(`${namespace}-audio-media`) || ''
+        this.audioTab = document.getElementById(`${namespace}-audio`) || ''
+        this.audioTabImg =  this.audioTab.getElementsByTagName('img')[0]
+
+        this.speed =  cookie.get('speed',namespace)
+        this.speedTab =  document.getElementById(`${namespace}-audio-speed`) || ''
+        this.speedTabImg =   this.speedTab.getElementsByTagName('img')[0]
+
+        this.pointeReadTab =  document.getElementById(`${namespace}-pointeread`) || ''
     },
     toggleAudio() {
         const { namespace } = Audio

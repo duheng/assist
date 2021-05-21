@@ -7,8 +7,6 @@ const TopBar = {
         this.namespace = namespace
         core.creatStyle('topbar-style',styles)
         core.creatHtml('topbar-html',tmpl)
-        this.setEvents(core)
-        
     },
     setEvents(core) {
 

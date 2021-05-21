@@ -61,7 +61,7 @@ function generateWebConfig(isBrowser,input) {
                 browser: isBrowser,
             }),
             commonjs(),
-            terser({ compress: { drop_console: false } })
+           // terser({ compress: { drop_console: false } })
             // copy({
             //     targets: [
             //       { src: 'src/assets/**/*', dest: 'dist/assets' }

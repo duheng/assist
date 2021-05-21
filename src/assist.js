@@ -7,6 +7,8 @@ import ZoomPage from './modules/ZoomPage';
 import PointerFllow from './modules/PointerFllow';
 import CursorAuto from './modules/CursorAuto';
 import BigText from './modules/BigText';
+
+const InitModules = [ TopBar, Audio, ZoomPage, PointerFllow, CursorAuto, BigText ]
 class Assist extends Base {
   
     constructor(opts = {}) {
@@ -19,12 +21,9 @@ class Assist extends Base {
     }
 
     init() {
-      this.use(TopBar);
-      this.use(Audio);
-      this.use(ZoomPage);
-      this.use(PointerFllow);
-      this.use(CursorAuto);
-      this.use(BigText);
+      InitModules.map(item=>this.use(item))
+      this.registeHtml()
+      InitModules.map(item=>this.useEvent(item))
     }
     
     reset() {

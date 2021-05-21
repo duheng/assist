@@ -11,12 +11,12 @@ const PointerFllow = {
         this.body =  document.body
         core.creatStyle('pointer-follow-style',styles)
         core.creatHtml('pointer-follow-html',tmpl)
-        this.setEvents(core, namespace)
         if(cookie.get('pointer',namespace)) {
             this.show(core)
         }
     },
-    setEvents(core, namespace) {
+    setEvents(core) {
+        const { namespace } = core.config
         this.togglePointer(core, namespace)
        
     },

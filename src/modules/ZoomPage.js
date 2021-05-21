@@ -5,13 +5,13 @@ import Audio from './Audio';
 const ZoomPage = {
     init(core) {
         const { namespace } = core.config
-        this.setEvents(namespace)
         this.size = cookie.get('zomm',namespace) || 1.0
         this.ignore = ['LINK','SCRIPT']
         this.namespace = namespace
         this.set()
     },
-    setEvents(namespace) {
+    setEvents(core) {
+       const { namespace } = core.config
        document.getElementById(`${namespace}-zoom-out`).onclick = () => {
         this.zoomOut() 
        }

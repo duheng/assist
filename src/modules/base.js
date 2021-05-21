@@ -6,6 +6,7 @@ export default class Base {
         namespace: 'mozi-assist',
         url: ''
       };
+      this.tmplHtml = []
       this.registeOpen()
     }
 
@@ -16,6 +17,10 @@ export default class Base {
   
     use(plugin, ...args) {
       plugin.init(this, ...args);
+    }
+
+    useEvent(plugin, ...args) {
+      plugin.setEvents(this, ...args);
     }
 
     creatContainer() {
@@ -115,7 +120,12 @@ export default class Base {
         }
         const __html = htmlFn(namespace)
         DomContainer.innerHTML = __html
-        document.getElementById(namespace).appendChild(DomContainer)
+        this.tmplHtml.push(DomContainer.outerHTML)
+       // document.getElementById(namespace).appendChild(DomContainer)
+    }
+    registeHtml() {
+      const { namespace } = this.config
+      document.getElementById(namespace).innerHTML = this.tmplHtml.join('')
     }
   }
   
