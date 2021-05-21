@@ -8,7 +8,7 @@ const CursorAuto = {
     init(core) {
         const { namespace } = core.config
         if(cookie.get('cursor',namespace)) {
-            core.creatStyle('cursor-auto-style',styles)
+            core.creatStyle('cursor-auto-style',styles,true)
         }
     },
     setEvents(core) {

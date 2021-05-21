@@ -1512,6 +1512,7 @@
         namespace: 'mozi-assist',
         url: ''
       };
+      this.tmplStyle = [];
       this.tmplHtml = [];
       this.registeOpen();
     }
@@ -1646,6 +1647,7 @@
           styleNode.innerHTML = css;
         }
 
+        this.tmplStyle.push(styleNode.outerHTML);
         document.getElementsByTagName('head')[0].appendChild(styleNode);
       }
     }, {
@@ -1672,6 +1674,7 @@
       value: function registeHtml() {
         var namespace = this.config.namespace;
         document.getElementById(namespace).innerHTML = this.tmplHtml.join('');
+        console.log('this.tmplStyle');
       }
     }]);
 
@@ -2272,7 +2275,7 @@
       var namespace = core.config.namespace;
 
       if (cookie.get('cursor', namespace)) {
-        core.creatStyle('cursor-auto-style', styles$1);
+        core.creatStyle('cursor-auto-style', styles$1, true);
       }
     },
     setEvents: function setEvents(core) {

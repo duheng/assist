@@ -6,6 +6,7 @@ export default class Base {
         namespace: 'mozi-assist',
         url: ''
       };
+      this.tmplStyle = []
       this.tmplHtml = []
       this.registeOpen()
     }
@@ -105,6 +106,7 @@ export default class Base {
         } else {
             styleNode.innerHTML = css
         }
+        this.tmplStyle.push(styleNode.outerHTML)
         document.getElementsByTagName('head')[0].appendChild(styleNode);  
     }
 
@@ -125,7 +127,9 @@ export default class Base {
     }
     registeHtml() {
       const { namespace } = this.config
+      
       document.getElementById(namespace).innerHTML = this.tmplHtml.join('')
+      console.log('this.tmplStyle')
     }
   }
   
