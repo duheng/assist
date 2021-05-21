@@ -69,46 +69,61 @@ const removeEvent = (element, type, callback) => {
         element['on' + type] = null;
     }
 }
+const ruleType = (target) => {
+  const __role = !!target.getAttribute('role') && target.getAttribute('role').toUpperCase() 
+  const __roleName = {
+    IMG: '图片',
+    BUTTON: '按钮',
+    INPUT: '输入框',
+    CHECKBOX: '复选框',
+    RADIO: '单选框',
+    A: '链接'
+  }
+  if(__role == 'INPUT') {
+    if(target.type == 'radio') {
+        return '单选框';
+    }else if(target.type == 'checkbox') {
+        return '复选框';
+    } else {
+        return '输入框';
+    }
+  }
+  return __roleName[__role] || '文本'
+}
 
 const parseTagText = (target) => {
+    const __name = ruleType(target)
+    const __role = !!target.getAttribute('role') && target.getAttribute('role').toUpperCase() 
     if (target.children.length === 0  ){
-        if (target.role === 'IMG' ||target.tagName === 'IMG') {
+        if (__role === 'IMG' ||target.tagName === 'IMG') {
             console.log('这是一张图片:' + target.alt || target.title);
             return `图片 ${target.alt || target.title}`;
         }
-        if (target.role === 'BUTTON' ||target.tagName === 'BUTTON') {
+        if (__role === 'BUTTON' ||target.tagName === 'BUTTON') {
             console.log('这是一个按钮:' +  target.innerText);
             return `按钮 ${target.alt || target.title || target.innerText}`;
         }
-        if (target.role === 'INPUT' ||target.tagName === 'INPUT') {
-            if(target.type == 'radio') {
-                console.log('这是一个单选框:' + target);
-                return `单选框 ${target.alt || target.title || target.value}`;
-            }else if(target.type == 'checkbox') {
-                console.log('这是一个复选框:' + target.alt || target.title || target.value);
-                return `复选框 ${target.alt || target.title || target.value}`;
-            }
-            
-            console.log('这是一个输入框:' + target.alt || target.title || target.value);
-            return `输入框 ${target.alt || target.title || target.value}`;
+        if (__role === 'INPUT' ||target.tagName === 'INPUT') {
+            console.log(`这是一个${__name}:` + target.alt || target.title || target.value);
+            return `${__name} ${target.alt || target.title || target.value}`;
         }
 
         if (target.alt || target.title || target.innerText){
-            console.log(`文本 ${target.alt || target.title || target.innerText}`);
-            return `文本 ${target.alt || target.title || target.innerText}`;
+            console.log(`${__name} ${target.alt || target.title || target.innerText}`);
+            return `${__name} ${target.alt || target.title || target.innerText}`;
         }
     
         return ''
     } 
    
-    if (target.role === 'A' || target.tagName === 'A') {
+    if (__role === 'A' || target.tagName === 'A') {
         console.log('这是一个链接:' + target.alt || target.title || target.innerText);
         return `链接 ${target.alt || target.title || target.innerText}`;
     }
 
     if (target.alt || target.title){
-        console.log(`文本 ${target.alt || target.title}`);
-        return `文本 ${target.alt || target.title}`;
+        console.log(`${__name} ${target.alt || target.title}`);
+        return `${__name} ${target.alt || target.title}`;
     }
     
     return ''
