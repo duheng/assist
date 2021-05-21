@@ -100,11 +100,17 @@ const parseTagText = (target) => {
     
         return ''
     } 
-
+   
     if (target.role === 'A' || target.tagName === 'A') {
         console.log('这是一个链接:' + target.alt || target.title || target.innerText);
         return `链接 ${target.alt || target.title || target.innerText}`;
     }
+
+    if (target.alt || target.title){
+        console.log(`文本 ${target.alt || target.title}`);
+        return `文本 ${target.alt || target.title}`;
+    }
+    
     return ''
     
 }
