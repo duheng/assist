@@ -81,8 +81,8 @@ export default class Base {
         cookie.set('show',true, namespace)
         this.hideModules()
       } else {
-        document.body.style = 'none'
-        activeBtn.style.display = 'none'
+        // document.body.style = 'none'
+        // activeBtn.style.display = 'none'
         cookie.remove(`${namespace}`)
         location.reload()
       }
@@ -128,7 +128,7 @@ export default class Base {
         DomContainer.innerHTML = __html
         this.tmplHtml.push(DomContainer.outerHTML)
     }
-    
+
     registeHtml() {
       const { namespace } = this.config
       document.getElementById(namespace).innerHTML = this.tmplHtml.join('')
