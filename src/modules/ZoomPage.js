@@ -13,30 +13,40 @@ const ZoomPage = {
     setEvents(core) {
        const { namespace } = core.config
        document.getElementById(`${namespace}-zoom-out`).onclick = () => {
-        this.zoomOut() 
+        this.zoomOut(core) 
        }
 
        document.getElementById(`${namespace}-zoom-min`).onclick = () => {
-        this.zoomMin() 
+        this.zoomMin(core) 
        }
     },
-    zoomOut() {
+    updateZoomState(core) {
+        let { zoomState } = core
+        if(typeof(zoomState) == 'function') {
+            zoomState(this.size)
+        }
+    },
+    zoomOut(core) {
         if(this.size >= 1.3) {
             console.log('已最大')
             Audio.playAudio(audioTabText.zoomOutEnd)
+            this.updateZoomState(core)
             return
         }
         this.size = parseFloat((this.size+0.1).toFixed(10));  
+        this.updateZoomState(core)
         this.set(); 
         Audio.playAudio(audioTabText.zoomOut)
     },
-    zoomMin() {
+    zoomMin(core) {
         if(this.size <= 1.0) {
             console.log('已最小')
             Audio.playAudio(audioTabText.zoomMinEnd)
+            this.updateZoomState(core)
             return
         }
         this.size = parseFloat((this.size-0.1).toFixed(10));  
+        this.updateZoomState(core)
         this.set(); 
         Audio.playAudio(audioTabText.zoomMin)
     },

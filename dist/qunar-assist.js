@@ -1511,6 +1511,7 @@
         namespace: 'mozi-assist',
         url: ''
       };
+      this.zoomState = null;
       this.tmplStyle = [];
       this.tmplHtml = [];
       this.registeOpen();
@@ -2169,32 +2170,43 @@
       var namespace = core.config.namespace;
 
       document.getElementById("".concat(namespace, "-zoom-out")).onclick = function () {
-        _this.zoomOut();
+        _this.zoomOut(core);
       };
 
       document.getElementById("".concat(namespace, "-zoom-min")).onclick = function () {
-        _this.zoomMin();
+        _this.zoomMin(core);
       };
     },
-    zoomOut: function zoomOut() {
+    updateZoomState: function updateZoomState(core) {
+      var zoomState = core.zoomState;
+
+      if (typeof zoomState == 'function') {
+        zoomState(this.size);
+      }
+    },
+    zoomOut: function zoomOut(core) {
       if (this.size >= 1.3) {
         console.log('已最大');
         Audio.playAudio(audioTabText.zoomOutEnd);
+        this.updateZoomState(core);
         return;
       }
 
       this.size = parseFloat((this.size + 0.1).toFixed(10));
+      this.updateZoomState(core);
       this.set();
       Audio.playAudio(audioTabText.zoomOut);
     },
-    zoomMin: function zoomMin() {
+    zoomMin: function zoomMin(core) {
       if (this.size <= 1.0) {
         console.log('已最小');
         Audio.playAudio(audioTabText.zoomMinEnd);
+        this.updateZoomState(core);
         return;
       }
 
       this.size = parseFloat((this.size - 0.1).toFixed(10));
+      this.updateZoomState(core);
       this.set();
       Audio.playAudio(audioTabText.zoomMin);
     },

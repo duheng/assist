@@ -6,6 +6,7 @@ export default class Base {
         namespace: 'mozi-assist',
         url: ''
       };
+      this.zoomState = null
       this.tmplStyle = []
       this.tmplHtml = []
       this.registeOpen()
