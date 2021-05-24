@@ -1617,8 +1617,8 @@
           cookie.set('show', true, namespace);
           this.hideModules();
         } else {
-          document.body.style = 'none';
-          activeBtn.style.display = 'none';
+          // document.body.style = 'none'
+          // activeBtn.style.display = 'none'
           cookie.remove("".concat(namespace));
           location.reload();
         }
@@ -1637,21 +1637,22 @@
       key: "creatStyle",
       value: function creatStyle(id, css) {
         var flag = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-        var namespace = this.config.namespace;
-        var styleNode = document.createElement('style');
-        styleNode.type = 'text/css';
-        styleNode.id = "".concat(namespace, "-").concat(id);
-        styleNode.className = id;
-
-        if (styleNode.styleSheet) {
-          styleNode.styleSheet.cssText = css;
-        } else {
-          styleNode.innerHTML = css;
-        }
 
         if (!flag) {
-          this.tmplStyle.push(styleNode.innerHTML);
+          this.tmplStyle.push(css);
         } else {
+          var namespace = this.config.namespace;
+          var styleNode = document.createElement('style');
+          styleNode.type = 'text/css';
+          styleNode.id = "".concat(namespace, "-").concat(id);
+          styleNode.className = id;
+
+          if (styleNode.styleSheet) {
+            styleNode.styleSheet.cssText = css;
+          } else {
+            styleNode.innerHTML = css;
+          }
+
           document.getElementsByTagName('head')[0].appendChild(styleNode);
         }
       }
