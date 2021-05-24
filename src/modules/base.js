@@ -97,7 +97,10 @@ export default class Base {
     }
 
     creatStyle(id, css, flag = false) {
-      const { namespace } = this.config
+      if(!flag) {
+        this.tmplStyle.push(css)
+      } else {
+        const { namespace } = this.config
         let styleNode = document.createElement('style')
         styleNode.type  = 'text/css'
         styleNode.id = `${namespace}-${id}`
@@ -107,11 +110,8 @@ export default class Base {
         } else {
             styleNode.innerHTML = css
         }
-        if(!flag) {
-          this.tmplStyle.push(styleNode.innerHTML)
-        } else {
-          document.getElementsByTagName('head')[0].appendChild(styleNode);  
-        }
+        document.getElementsByTagName('head')[0].appendChild(styleNode);  
+      }
     }
 
     creatHtml(id,htmlFn) {
@@ -128,6 +128,7 @@ export default class Base {
         DomContainer.innerHTML = __html
         this.tmplHtml.push(DomContainer.outerHTML)
     }
+    
     registeHtml() {
       const { namespace } = this.config
       document.getElementById(namespace).innerHTML = this.tmplHtml.join('')
