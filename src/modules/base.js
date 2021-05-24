@@ -95,7 +95,7 @@ export default class Base {
       }
     }
 
-    creatStyle(id, css) {
+    creatStyle(id, css, flag = false) {
       const { namespace } = this.config
         let styleNode = document.createElement('style')
         styleNode.type  = 'text/css'
@@ -106,8 +106,11 @@ export default class Base {
         } else {
             styleNode.innerHTML = css
         }
-        this.tmplStyle.push(styleNode.outerHTML)
-        document.getElementsByTagName('head')[0].appendChild(styleNode);  
+        if(!flag) {
+          this.tmplStyle.push(styleNode.innerHTML)
+        } else {
+          document.getElementsByTagName('head')[0].appendChild(styleNode);  
+        }
     }
 
     creatHtml(id,htmlFn) {
@@ -123,13 +126,24 @@ export default class Base {
         const __html = htmlFn(namespace)
         DomContainer.innerHTML = __html
         this.tmplHtml.push(DomContainer.outerHTML)
-       // document.getElementById(namespace).appendChild(DomContainer)
     }
     registeHtml() {
       const { namespace } = this.config
-      
       document.getElementById(namespace).innerHTML = this.tmplHtml.join('')
-      console.log('this.tmplStyle')
+    }
+
+    registeStyle() {
+      const { namespace } = this.config
+      let styleNode = document.createElement('style')
+      styleNode.type  = 'text/css'
+      styleNode.id = `${namespace}-style`
+      let __css = this.tmplStyle.join('\n')
+      if(styleNode.styleSheet) {
+          styleNode.styleSheet.cssText = __css;  
+      } else {
+          styleNode.innerHTML = __css
+      }
+      document.getElementsByTagName('head')[0].appendChild(styleNode); 
     }
   }
   

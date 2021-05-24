@@ -22,6 +22,7 @@ class Assist extends Base {
 
     init() {
       InitModules.map(item=>this.use(item))
+      this.registeStyle()
       this.registeHtml()
       InitModules.map(item=>this.useEvent(item))
     }

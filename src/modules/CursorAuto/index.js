@@ -22,7 +22,7 @@ const CursorAuto = {
                 Audio.playAudio(audioTabText.cursorAutoClose)
             } else {
                 cookie.set('cursor', true, namespace)
-                core.creatStyle('cursor-auto-style',styles)
+                core.creatStyle('cursor-auto-style',styles,true)
                 Audio.playAudio(audioTabText.cursorAutoOpen)
             }
        }

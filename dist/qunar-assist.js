@@ -1634,6 +1634,7 @@
     }, {
       key: "creatStyle",
       value: function creatStyle(id, css) {
+        var flag = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
         var namespace = this.config.namespace;
         var styleNode = document.createElement('style');
         styleNode.type = 'text/css';
@@ -1646,8 +1647,11 @@
           styleNode.innerHTML = css;
         }
 
-        this.tmplStyle.push(styleNode.outerHTML);
-        document.getElementsByTagName('head')[0].appendChild(styleNode);
+        if (!flag) {
+          this.tmplStyle.push(styleNode.innerHTML);
+        } else {
+          document.getElementsByTagName('head')[0].appendChild(styleNode);
+        }
       }
     }, {
       key: "creatHtml",
@@ -1666,14 +1670,31 @@
         var __html = htmlFn(namespace);
 
         DomContainer.innerHTML = __html;
-        this.tmplHtml.push(DomContainer.outerHTML); // document.getElementById(namespace).appendChild(DomContainer)
+        this.tmplHtml.push(DomContainer.outerHTML);
       }
     }, {
       key: "registeHtml",
       value: function registeHtml() {
         var namespace = this.config.namespace;
         document.getElementById(namespace).innerHTML = this.tmplHtml.join('');
-        console.log('this.tmplStyle');
+      }
+    }, {
+      key: "registeStyle",
+      value: function registeStyle() {
+        var namespace = this.config.namespace;
+        var styleNode = document.createElement('style');
+        styleNode.type = 'text/css';
+        styleNode.id = "".concat(namespace, "-style");
+
+        var __css = this.tmplStyle.join('\n');
+
+        if (styleNode.styleSheet) {
+          styleNode.styleSheet.cssText = __css;
+        } else {
+          styleNode.innerHTML = __css;
+        }
+
+        document.getElementsByTagName('head')[0].appendChild(styleNode);
       }
     }]);
 
@@ -2290,7 +2311,7 @@
           Audio.playAudio(audioTabText.cursorAutoClose);
         } else {
           cookie.set('cursor', true, namespace);
-          core.creatStyle('cursor-auto-style', styles$1);
+          core.creatStyle('cursor-auto-style', styles$1, true);
           Audio.playAudio(audioTabText.cursorAutoOpen);
         }
       };
@@ -2417,6 +2438,7 @@
         InitModules.map(function (item) {
           return _this2.use(item);
         });
+        this.registeStyle();
         this.registeHtml();
         InitModules.map(function (item) {
           return _this2.useEvent(item);
