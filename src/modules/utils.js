@@ -77,6 +77,7 @@ const ruleType = (target) => {
     INPUT: '输入框',
     CHECKBOX: '复选框',
     RADIO: '单选框',
+    OPTION: '下拉框',
     A: '链接'
   }
   if(__role == 'INPUT') {

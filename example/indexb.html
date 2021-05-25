@@ -1187,5 +1187,14 @@ QNR.hfUtils.setNav('flight')
     <script>
         document.write('<script src="../dist/qunar-assist.js?v='+window.__version+'"><\/script>');
       </script>
-    
+    <script>
+        ~(()=>{
+            QunarAssist.zoomState = (res) => {
+                console.log(res) // 返回放大倍数
+            }
+            QunarAssist.openState = (res) => {
+                console.log(res) // 返回插件打开状态
+            }
+        })()
+    </script>
 </body></html>

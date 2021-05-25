@@ -7,6 +7,7 @@ export default class Base {
         url: ''
       };
       this.zoomState = null
+      this.openState = null
       this.tmplStyle = []
       this.tmplHtml = []
       this.registeOpen()
@@ -75,6 +76,7 @@ export default class Base {
     isShowTopBar(isShow) {
       const { namespace } = this.config
       const activeBtn =  document.getElementById(`${namespace}-topbar-html`)
+      this.updateOpenState(isShow)
       if(isShow) {
         document.body.style.marginTop = '100px'
         activeBtn.style.display = 'block'
@@ -86,6 +88,13 @@ export default class Base {
         cookie.remove(`${namespace}`)
         location.reload()
       }
+     
+    }
+
+    updateOpenState(state) {
+        if(typeof(this.openState) == 'function') {
+          this.openState(state)
+        }
     }
 
     hideModules() {

@@ -1394,6 +1394,7 @@
       INPUT: '输入框',
       CHECKBOX: '复选框',
       RADIO: '单选框',
+      OPTION: '下拉框',
       A: '链接'
     };
 
@@ -1513,6 +1514,7 @@
         url: ''
       };
       this.zoomState = null;
+      this.openState = null;
       this.tmplStyle = [];
       this.tmplHtml = [];
       this.registeOpen();
@@ -1610,6 +1612,7 @@
       value: function isShowTopBar(isShow) {
         var namespace = this.config.namespace;
         var activeBtn = document.getElementById("".concat(namespace, "-topbar-html"));
+        this.updateOpenState(isShow);
 
         if (isShow) {
           document.body.style.marginTop = '100px';
@@ -1621,6 +1624,13 @@
           // activeBtn.style.display = 'none'
           cookie.remove("".concat(namespace));
           location.reload();
+        }
+      }
+    }, {
+      key: "updateOpenState",
+      value: function updateOpenState(state) {
+        if (typeof this.openState == 'function') {
+          this.openState(state);
         }
       }
     }, {
