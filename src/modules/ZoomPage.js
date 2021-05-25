@@ -57,8 +57,8 @@ const ZoomPage = {
                 return
             }
             el.style.zoom = this.size;
-            el.style.transform = `scale(${this.size})`
-            el.style.transformOrigin = '0px 0px'
+          //  el.style.transform = `scale(${this.size})`
+            //el.style.transformOrigin = '0px 0px'
         });
         cookie.set('zomm', this.size, this.namespace)
     },

@@ -46,8 +46,12 @@ export default class Base {
 
     isShow() {
       const { namespace } = this.config
-      if(cookie.get('show',namespace) && !this.existIgnore()) {
-        this.isShowTopBar(true)
+      if(cookie.get('show',namespace)) {
+        !this.existIgnore() && this.isShowTopBar(true)
+        console.log('AAAA')
+      } else {
+        console.log('BBBB')
+        this.updateOpenState(false)
       }
     }
 
@@ -76,6 +80,7 @@ export default class Base {
     isShowTopBar(isShow) {
       const { namespace } = this.config
       const activeBtn =  document.getElementById(`${namespace}-topbar-html`)
+      console.log('AAAA00000')
       this.updateOpenState(isShow)
       if(isShow) {
         document.body.style.marginTop = '100px'
@@ -93,8 +98,10 @@ export default class Base {
 
     updateOpenState(state) {
         if(typeof(this.openState) == 'function') {
+          console.log('CCCCC00000')
           this.openState(state)
         }
+        console.log('CCCCC222')
     }
 
     hideModules() {
