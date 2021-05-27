@@ -11,11 +11,13 @@ export default class Base {
       this.tmplStyle = []
       this.tmplHtml = []
       this.registeOpen()
+     
     }
 
     mergeConfig(opts) {
       this.config = { ...this.config, ...opts }; 
       this.creatContainer()
+    
     }
   
     use(plugin, ...args) {
@@ -34,6 +36,7 @@ export default class Base {
       const Container = document.createElement("div");
       Container.id = namespace
       document.body.appendChild(Container)
+     
     }
 
     registeOpen() {
@@ -48,9 +51,7 @@ export default class Base {
       const { namespace } = this.config
       if(cookie.get('show',namespace)) {
         !this.existIgnore() && this.isShowTopBar(true)
-        console.log('AAAA')
       } else {
-        console.log('BBBB')
         this.updateOpenState(false)
       }
     }
@@ -80,13 +81,13 @@ export default class Base {
     isShowTopBar(isShow) {
       const { namespace } = this.config
       const activeBtn =  document.getElementById(`${namespace}-topbar-html`)
-      console.log('AAAA00000')
       this.updateOpenState(isShow)
       if(isShow) {
         document.body.style.marginTop = '100px'
         activeBtn.style.display = 'block'
         cookie.set('show',true, namespace)
         this.hideModules()
+       
       } else {
         // document.body.style = 'none'
         // activeBtn.style.display = 'none'
@@ -98,10 +99,8 @@ export default class Base {
 
     updateOpenState(state) {
         if(typeof(this.openState) == 'function') {
-          console.log('CCCCC00000')
           this.openState(state)
         }
-        console.log('CCCCC222')
     }
 
     hideModules() {
@@ -163,5 +162,19 @@ export default class Base {
       }
       document.getElementsByTagName('head')[0].appendChild(styleNode); 
     }
+
+    formatLongText() {
+      const { namespace } = this.config
+      const longText = document.getElementsByClassName(`${namespace}-long-text`) || [];
+      [].forEach.call( longText, (el)=> {
+        const __el = el.innerText.split('。')
+        let __elItem = []
+        __el.map(item=> {
+          __elItem.push(`<label>${item}</label>`)
+        })
+        el.innerHTML = __elItem.join('。')
+      });
+    }
+    
   }
   

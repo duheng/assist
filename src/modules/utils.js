@@ -131,6 +131,7 @@ const parseTagText = (target) => {
     
 }
 
+
 const triggerEvent = (element, eventType) =>{
     var e;
     if(element.dispatchEvent){//正常情况

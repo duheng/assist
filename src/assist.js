@@ -15,8 +15,11 @@ class Assist extends Base {
       super(opts);
       // 合并参数
       this.mergeConfig(opts);
+      // 初始化插件
       this.init();
       this.isShow();
+      // 格式化大段文本
+      this.formatLongText()
       this.resetAction = this.reset
     }
 
