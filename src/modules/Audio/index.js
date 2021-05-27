@@ -11,8 +11,6 @@ const Audio = {
         core.creatStyle('audio-style',styles)
         core.creatHtml('audio-html',tmpl)
         this.isAudio  = cookie.get('audio',namespace)
-
-       
     },
     setEvents(core) {
         const { namespace } = core.config

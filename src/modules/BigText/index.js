@@ -11,12 +11,12 @@ const BigText = {
         this.namespace = namespace
         core.creatStyle('bigtext-style',styles)
         core.creatHtml('bigtext-html',tmpl)
-        if(cookie.get('bigtext',namespace)) {
-            this.show(core)
-        }
     },
     setEvents(core) {
       const { namespace } = core.config
+      if(cookie.get('bigtext',namespace)) {
+        this.show(core)
+      }
       this.toggleBigText(core, namespace)
     },
     addEventMove() {

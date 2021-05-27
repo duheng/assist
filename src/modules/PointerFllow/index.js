@@ -11,14 +11,14 @@ const PointerFllow = {
         this.body =  document.body
         core.creatStyle('pointer-follow-style',styles)
         core.creatHtml('pointer-follow-html',tmpl)
-        if(cookie.get('pointer',namespace)) {
-            this.show(core)
-        }
+      
     },
     setEvents(core) {
         const { namespace } = core.config
+        if(cookie.get('pointer',namespace)) {
+            this.show(core)
+        }
         this.togglePointer(core, namespace)
-       
     },
     addEventMove() {
         addEvent(this.body,'mousemove',this.mouseMove)

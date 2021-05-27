@@ -7,12 +7,13 @@ import styles from './index.scss'
 const CursorAuto = {
     init(core) {
         const { namespace } = core.config
-        if(cookie.get('cursor',namespace)) {
-            core.creatStyle('cursor-auto-style',styles,true)
-        }
+      
     },
     setEvents(core) {
-        const { namespace } = core.config
+       const { namespace } = core.config
+       if(cookie.get('cursor',namespace)) {
+          core.creatStyle('cursor-auto-style',styles,true)
+       }
        const tabBarBtn = document.getElementById(`${namespace}-cursor-auto`)
        tabBarBtn.onclick = () => {
             const activeBtn = document.getElementById(`${namespace}-cursor-auto-style`)

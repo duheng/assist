@@ -9,9 +9,7 @@ const TopBar = {
         core.creatHtml('topbar-html',tmpl)
     },
     setEvents(core) {
-
         const { namespace } = core.config
-
         const BtnClose = document.getElementById(`${namespace}-close`)
         const BtnReset = document.getElementById(`${namespace}-reset`)
         const HoverItem = document.getElementById(`${namespace}-topbar-html-content`)
