@@ -9,6 +9,7 @@ const ZoomPage = {
         this.ignore = ['LINK','SCRIPT']
         this.namespace = namespace
         this.set()
+       
     },
     setEvents(core) {
        const { namespace } = core.config
@@ -19,6 +20,7 @@ const ZoomPage = {
        document.getElementById(`${namespace}-zoom-min`).onclick = () => {
         this.zoomMin(core) 
        }
+       setTimeout(_=>this.updateZoomState(core),0)
     },
     updateZoomState(core) {
         let { zoomState } = core

@@ -116,10 +116,10 @@ const Audio = {
         }
         let __speed = speed == 'middle' ? 5 : 7
         var __url = `https://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=${__speed}&text=${encodeURI(text)}`
-        var __url2 = 'https://s.qunarzz.com/common/assist/song.mp3'
-        audio.src = __url
-        document.getElementById(`${namespace}-audio-source`).src = __url
-        document.getElementById(`${namespace}-audio-embed`).src = __url
+        var __url2 = 'http://l-home2.wap.beta.cn0.qunar.com:8008/voice/testAudio'
+        audio.src = __url2
+        document.getElementById(`${namespace}-audio-source`).src = __url2
+        document.getElementById(`${namespace}-audio-embed`).src = __url2
        let playPromise =  audio.play();
        if(playPromise) {
           playPromise.then(_ => {

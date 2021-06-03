@@ -21,6 +21,7 @@ class Assist extends Base {
       // 格式化大段文本
       this.formatLongText()
       this.resetAction = this.reset
+     
     }
 
     init() {
@@ -28,6 +29,7 @@ class Assist extends Base {
       this.registeStyle()
       this.registeHtml()
       InitModules.map(item=>this.useEvent(item))
+     
     }
     
     reset() {
@@ -37,6 +39,7 @@ class Assist extends Base {
       PointerFllow.reset(this)
       BigText.reset(this)
     }
+   
    
   }
   export default Assist;

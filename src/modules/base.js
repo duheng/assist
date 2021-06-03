@@ -11,13 +11,11 @@ export default class Base {
       this.tmplStyle = []
       this.tmplHtml = []
       this.registeOpen()
-     
     }
 
     mergeConfig(opts) {
       this.config = { ...this.config, ...opts }; 
       this.creatContainer()
-    
     }
   
     use(plugin, ...args) {
@@ -49,8 +47,8 @@ export default class Base {
 
     isShow() {
       const { namespace } = this.config
-      if(cookie.get('show',namespace)) {
-        !this.existIgnore() && this.isShowTopBar(true)
+      if(cookie.get('show',namespace) && !this.existIgnore()) {
+        this.isShowTopBar(true)
       } else {
         this.updateOpenState(false)
       }
@@ -87,10 +85,9 @@ export default class Base {
         activeBtn.style.display = 'block'
         cookie.set('show',true, namespace)
         this.hideModules()
-       
       } else {
-        // document.body.style = 'none'
-        // activeBtn.style.display = 'none'
+        document.body.style = ''
+        //activeBtn.style.display = 'none'
         cookie.remove(`${namespace}`)
         location.reload()
       }
@@ -98,9 +95,10 @@ export default class Base {
     }
 
     updateOpenState(state) {
-        if(typeof(this.openState) == 'function') {
-          this.openState(state)
-        }
+      setTimeout(_=>{
+        typeof(this.openState) == 'function' && this.openState(state)
+      },0)
+       
     }
 
     hideModules() {
