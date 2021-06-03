@@ -5,9 +5,10 @@ import styles from './index.scss'
 import tmpl from './index.tmpl.js'
 const Audio = {
     init(core) {
-        const { namespace } = core.config
+        const { namespace, url } = core.config
         this.body =  document.body
         this.namespace = namespace
+        this.AudioApi = url
         core.creatStyle('audio-style',styles)
         core.creatHtml('audio-html',tmpl)
         this.isAudio  = cookie.get('audio',namespace)
@@ -110,26 +111,36 @@ const Audio = {
         Audio.playAudio(__text)
     },
     playAudio(text) {
-        const { namespace, isAudio, audio, speed, forceSafariPlayAudio } = Audio
+        const { namespace, AudioApi, isAudio, audio, speed, forceSafariPlayAudio } = Audio
         if(!isAudio) {
             return
         }
         let __speed = speed == 'middle' ? 5 : 7
+
         var __url = `https://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=${__speed}&text=${encodeURI(text)}`
-        var __url2 = 'http://l-home2.wap.beta.cn0.qunar.com:8008/voice/testAudio'
-        audio.src = __url2
-        document.getElementById(`${namespace}-audio-source`).src = __url2
-        document.getElementById(`${namespace}-audio-embed`).src = __url2
-       let playPromise =  audio.play();
-       if(playPromise) {
-          playPromise.then(_ => {
-           // audio.pause();
-            removeEvent(document,'click', forceSafariPlayAudio)
-          })
-          .catch(error => {
-            console.log(error)
-          });
-       }
+        var __url2 = 'http://l-home2.wap.beta.cn0.qunar.com:8008/voice/stream'
+        console.log('url------', AudioApi)
+        ajax.post(AudioApi,JSON.stringify({speed:0,content:'我爱你中国'}),(res)=>{
+            console.log('res------', res)
+            if(res) {
+                audio.src = res
+                document.getElementById(`${namespace}-audio-source`).src = res
+                document.getElementById(`${namespace}-audio-embed`).src = res
+                let playPromise =  audio.play();
+                if(playPromise) {
+                    playPromise.then(_ => {
+                    // audio.pause();
+                        removeEvent(document,'click', forceSafariPlayAudio)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+                }
+            }
+           
+        })
+      
+        
     },
     reset() {
         const { namespace } = Audio

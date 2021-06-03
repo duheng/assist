@@ -25,10 +25,10 @@ class Assist extends Base {
     }
 
     init() {
-      InitModules.map(item=>this.use(item))
+      InitModules.map(item=>this.use(item)) // 初始化dom
       this.registeStyle()
       this.registeHtml()
-      InitModules.map(item=>this.useEvent(item))
+      InitModules.map(item=>this.useEvent(item)) // 初始化事件
      
     }
     
