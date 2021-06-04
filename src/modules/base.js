@@ -86,7 +86,11 @@ export default class Base {
         cookie.set('show',true, namespace)
         this.hideModules()
       } else {
-        document.body.style = ''
+        if(document.body.style.cssText) {
+          document.body.style.cssText = ''
+        } else {
+          document.body.style = ''
+        }
         //activeBtn.style.display = 'none'
         cookie.remove(`${namespace}`)
         location.reload()
@@ -99,6 +103,10 @@ export default class Base {
         typeof(this.openState) == 'function' && this.openState(state)
       },0)
        
+    }
+
+    getOpenState() {
+      console.log('KKKKKKKKK')
     }
 
     hideModules() {
