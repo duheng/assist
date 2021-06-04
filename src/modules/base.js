@@ -1,4 +1,5 @@
-import { cookie } from './utils'
+import { cookie , addEvent, removeEvent } from './utils'
+import pubSub from './pubSub'
 
 export default class Base {
     constructor() {
@@ -6,8 +7,7 @@ export default class Base {
         namespace: 'mozi-assist',
         url: ''
       };
-      this.zoomState = null
-      this.openState = null
+      this.message = pubSub
       this.tmplStyle = []
       this.tmplHtml = []
       this.registeOpen()
@@ -47,11 +47,14 @@ export default class Base {
 
     isShow() {
       const { namespace } = this.config
-      if(cookie.get('show',namespace) && !this.existIgnore()) {
-        this.isShowTopBar(true)
-      } else {
-        this.updateOpenState(false)
-      }
+      addEvent(window,'DOMContentLoaded',()=>{
+        if(cookie.get('show',namespace) && !this.existIgnore()) {
+          this.isShowTopBar(true)
+          this.message.publish('openState',true)
+        } else {
+          this.message.publish('openState',false)
+        }
+      })
     }
 
     existIgnore() {
@@ -79,7 +82,6 @@ export default class Base {
     isShowTopBar(isShow) {
       const { namespace } = this.config
       const activeBtn =  document.getElementById(`${namespace}-topbar-html`)
-      this.updateOpenState(isShow)
       if(isShow) {
         document.body.style.marginTop = '100px'
         activeBtn.style.display = 'block'
@@ -96,17 +98,6 @@ export default class Base {
         location.reload()
       }
      
-    }
-
-    updateOpenState(state) {
-      setTimeout(_=>{
-        typeof(this.openState) == 'function' && this.openState(state)
-      },0)
-       
-    }
-
-    getOpenState() {
-      console.log('KKKKKKKKK')
     }
 
     hideModules() {

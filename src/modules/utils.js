@@ -51,22 +51,26 @@ const cookie = {
 }
 
 const addEvent = (element, type, callback) => {
+    const ignore = ['DOMContentLoaded']
+    let __type = ignore.includes(type) ? type : 'on' + type
     if(element.addEventListener){
         element.addEventListener(type, callback, false);
     } else if(element.attachEvent){
-        element.attachEvent('on' + type, callback);
+        element.attachEvent(__type, callback);
     } else {
-        element['on' + type] = callback;
+        element[__type] = callback;
     }
 }
 
 const removeEvent = (element, type, callback) => {
+    const ignore = ['DOMContentLoaded']
+    let __type = ignore.includes(type) ? type : 'on' + type
     if(element.removeEventListener){
         element.removeEventListener(type, callback);
     } else if(element.detachEvent){
-        element.detachEvent('on' + type, callback);
+        element.detachEvent(__type, callback);
     } else {
-        element['on' + type] = null;
+        element[__type] = null;
     }
 }
 const ruleType = (target) => {

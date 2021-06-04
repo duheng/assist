@@ -1883,13 +1883,12 @@
         </script>
         <script>
             ~(function(){
-                QunarAssist.openState = (res) => {
-                    console.log('CCC----',!!res) // 返回插件打开状态
-                }
-
-                QunarAssist.zoomState = (res) => {
-                console.log('AAAABB-----',res) // 返回放大倍数
-                }
+                QunarAssist.message.subscribe('zoomState', state => {
+                    console.log(`页面放大倍数：${state}`);
+                })
+                QunarAssist.message.subscribe('openState', state => {
+                    console.log(`是否开启无障碍模式：${state}`);
+                })
             })()
    </script>
     </body></html>

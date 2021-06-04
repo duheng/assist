@@ -1,4 +1,3 @@
-import { cookie } from './modules/utils'
 
 import Base from './modules/base';
 import TopBar from './modules/TopBar';
@@ -18,17 +17,18 @@ class Assist extends Base {
       // 初始化插件
       this.init();
       this.isShow();
-      // 格式化大段文本
-      this.formatLongText()
       this.resetAction = this.reset
-     
     }
 
     init() {
-      InitModules.map(item=>this.use(item)) // 初始化dom
+       // 初始化dom
+      InitModules.map(item=>this.use(item))
       this.registeStyle()
       this.registeHtml()
-      InitModules.map(item=>this.useEvent(item)) // 初始化事件
+      // 初始化事件
+      InitModules.map(item=>this.useEvent(item)) 
+      // 格式化大段文本
+      this.formatLongText()
      
     }
     
@@ -39,7 +39,6 @@ class Assist extends Base {
       PointerFllow.reset(this)
       BigText.reset(this)
     }
-   
-   
+
   }
   export default Assist;

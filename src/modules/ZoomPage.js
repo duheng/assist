@@ -1,4 +1,4 @@
-import { cookie } from './utils'
+import { cookie, addEvent, removeEvent } from './utils'
 import audioTabText from './constans'
 import Audio from './Audio';
 
@@ -20,13 +20,13 @@ const ZoomPage = {
        document.getElementById(`${namespace}-zoom-min`).onclick = () => {
         this.zoomMin(core) 
        }
-       setTimeout(_=>this.updateZoomState(core),0)
+       addEvent(window,'DOMContentLoaded',()=>{
+           this.updateZoomState(core)
+       })
     },
     updateZoomState(core) {
-        let { zoomState } = core
-        if(typeof(zoomState) == 'function') {
-            zoomState(this.size)
-        }
+        let { message } = core
+        message.publish('zoomState',this.size)
     },
     zoomOut(core) {
         if(this.size >= 1.3) {
