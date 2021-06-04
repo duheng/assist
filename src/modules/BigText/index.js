@@ -27,6 +27,7 @@ const BigText = {
     },
     toggleBigText(core, namespace) {
         const tabBarBtn = document.getElementById(`${namespace}-bigtext`)
+        const tabBarBtnClose = document.getElementById(`${namespace}-bigtext-close`)
         tabBarBtn.onclick = () => {
              const activeBtn = document.getElementById(`${namespace}-bigtext-html`)
              if( activeBtn.style.display == 'block' ) {
@@ -36,6 +37,11 @@ const BigText = {
                 this.show(core)
                 Audio.playAudio(audioTabText.bigtextOpen)
              }
+        }
+
+        tabBarBtnClose.onclick = ()=> {
+            this.reset(core)
+            Audio.playAudio(audioTabText.bigtextClose)
         }
     },
     mouseOver(event){
@@ -55,14 +61,18 @@ const BigText = {
     show(core) {
         const { namespace } = core.config
         const activeBtn =  document.getElementById(`${namespace}-bigtext-html`)
+        const tabBar = document.getElementById(namespace)
         activeBtn.style.display = 'block'
+        tabBar.style.marginTop = '151px'
         this.addEventMove()
         cookie.set('bigtext', true, namespace)
     },
     reset(core) {
         const { namespace } = core.config
         const activeBtn =  document.getElementById(`${namespace}-bigtext-html`)
+        const tabBar = document.getElementById(namespace)
         activeBtn.style.display = 'none'
+        tabBar.style.marginTop = '0px'
         this.removeEventMove()
         cookie.set('bigtext', false, namespace)
     }

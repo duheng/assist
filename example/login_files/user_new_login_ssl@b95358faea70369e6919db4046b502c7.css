@@ -1,0 +1,259 @@
+@charset "utf-8";html{background-color:#fff;color:#000;font-size:12px}
+body,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,figure,form,fieldset,legend,input,textarea,button,p,blockquote,th,td,pre,xmp{margin:0;padding:0}
+body,input,textarea,button,select,pre,xmp,tt,code,kbd,samp{line-height:1.5;font-family:tahoma,arial,"Hiragino Sans GB",simsun,sans-serif}
+h1,h2,h3,h4,h5,h6,small,big,input,textarea,button,select{font-size:100%}
+h1,h2,h3,h4,h5,h6{font-family:tahoma,arial,"Hiragino Sans GB","微软雅黑",simsun,sans-serif}
+h1,h2,h3,h4,h5,h6,b,strong{font-weight:normal}
+address,cite,dfn,em,i,optgroup,var{font-style:normal}
+table{border-collapse:collapse;border-spacing:0;text-align:left}
+caption,th{text-align:inherit}
+ul,ol,menu{list-style:none}
+fieldset,img{border:0}
+img,object,input,textarea,button,select{vertical-align:middle}
+article,aside,footer,header,section,nav,figure,figcaption,hgroup,details,menu{display:block}
+audio,canvas,video{display:inline-block;*display:inline;*zoom:1}
+blockquote:before,blockquote:after,q:before,q:after{content:"\0020"}
+textarea{overflow:auto;resize:vertical}
+input,textarea,button,select,a{outline:0 none}
+button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}
+mark{background-color:transparent}
+a,ins,s,u,del{text-decoration:none}
+sup,sub{vertical-align:baseline}
+a{color:#0069ca}
+a:hover{text-decoration:none;color:#f60}
+.clr,.clear{clear:both;height:0;overflow:hidden}
+.fix{*zoom:1}
+.fix:after{clear:both;display:block;height:0;visibility:hidden;content:"\20"}
+.clr_after{height:1%}
+.clr_after:after{clear:both;display:block;height:0;visibility:hidden;content:"."}
+.pointer{cursor:pointer}
+.clearfix:after{content:'';display:block;overflow:hidden;height:0;clear:both}
+.clearfix{zoom:1}
+.qn_footer{clear:both;margin:0 auto;padding:10px 0;width:979px;line-height:1.231;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#848484}
+.qn_footer .inner{margin:0 10px;text-align:right}
+.qn_footer .gs{float:right;margin:0 15px 0 0}
+.qn_footer .cr{margin-right:58px;padding-bottom:12px}
+.jx-ie6 .qn_footer .cr{margin-right:60px}
+.qn_footer .links{margin:0;padding:2px 0 0;list-style:none}
+.qn_footer .links a,.qn_footer .links a:visited{margin:0 5px;text-decoration:none;color:#848484}
+.qn_footer .links a:hover{color:#f60}
+.qn_footer .links a.hl,.qn_footer .links a.hl:visited{color:#f60}
+.qn_footer .copyright{margin:0;padding:8px 5px 0 0}
+.qn_footer .copyright2{margin:0;padding:8px 5px 0 0;text-align:center}
+.qn_footer .copyright a,.qn_footer .copyright a:visited{text-decoration:none;color:#848484}
+.seo{border-top:1px solid #ddd}
+.seo .seo_links{clear:both;margin:10px 0 0;padding:0;color:#a7a7a7}
+.seo .seo_links a,.seo .seo_links a:visited{margin-right:6px;text-decoration:none;color:#a7a7a7}
+.seo .seo_links dt{float:left;padding-left:25px;font-weight:700}
+.seo .seo_links dd{margin-left:88px;padding:0;word-spacing:5px}
+.seo .seo_links dd span{float:left;margin-right:6px;white-space:nowrap}
+.qn_s_header{width:100%;height:28px;border-bottom:1px solid #ddd;background-color:#f5f5f5}
+.qn_s_header .q_s_header_tnav{width:980px;margin:0 auto}
+.qn_s_header .q_s_header_tnav ul{float:right;display:inline;line-height:14px;padding-top:8px;font-family:tahoma,arial,sans-serif;height:14px}
+.qn_s_header .q_s_header_tnav li{float:left;display:inline}
+.qn_s_header .q_s_header_tnav li a{text-decoration:none;color:#555}
+.qn_s_header .q_s_header_tnav li .q_s_header_a{padding:0 8px}
+.qn_s_header .q_s_header_tnav li .q_s_header_uname{font-family:tahoma;color:#f60}
+/*\*/.qn_page{width:980px;margin:0 auto;background:#fff}
+.qn_page .qn_page_tit{width:980px;height:53px;padding:20px 11px}
+.qn_page .qn_page_tit .qn_page_logo{width:138px;height:53px;float:left;cursor:pointer;background:url(https://user.qunar.com/images/ugc/ucenter/login-logo.png)}
+.qn_page .qn_page_tit .qn_tit{font:normal 18px/18px "microsoft yahei",arial,sans-serif;padding-left:20px;float:left;padding-top:34px}
+.qn_page .qn_wrap{width:980px;background:#fff;border-top:1px solid #ddd;border-bottom:1px solid #ddd}
+/**/.qn_page .qn_wrap .qn_left{float:left;width:625px}
+.qn_left .left_txt{padding:20px 0 0 40px}
+.qn_left .left_txt dl{margin-bottom:20px;margin-top:10px}
+.qn_left .left_txt dt{font:normal 16px/24px "Microsoft YaHei",simsun,sans-serif;color:#75a100}
+.qn_left .left_txt dd{color:#888}
+.qn_left .ad_rect{padding-left:40px}
+#getcode{padding:0}
+.qn_page .qn_wrap .qn_right{float:right;width:355px;background-color:#f6f6f6;position:relative;height:auto!important;height:442px;min-height:442px!important}
+.regForm{padding:30px 0 0 60px;min-height:305px}
+.regForm input[type="button"]::-moz-focus-inner{border:0;padding:0}
+.regForm .login_type{color:#555;font-family:"宋体";font-size:12px;margin-bottom:10px;width:240px;overflow:hidden}
+.regForm .login_type .right_left{float:left}
+.regForm .login_type .right_radio{float:right}
+.regForm .login_type .active{font-weight:bold;font-size:14px}
+.regForm .login_type .radiobox{height:13px;width:13px;vertical-align:top;text-align:left;margin-left:0}
+.regForm .login_type .radiobox:focus{outline:1px solid #e59700}
+.regForm .login_type label{padding:0 0 0 5px;cursor:pointer}
+.regForm .info_list{margin-top:15px;width:240px;position:relative}
+.regForm .textbox{outline:0;border:1px solid transparent;*border:0;height:26px;padding:0 5px;width:190px;line-height:26px;background-color:#fff;vertical-align:middle;font-size:14px;font-family:tahoma,arial,sans-serif;color:#666}
+.regForm .remenber{cursor:pointer}
+.regForm .info_list .log_name{width:203px;padding:1px 0 0 35px;height:28px;border:1px solid #ccc;background:url(https://user.qunar.com/images/ugc/ucenter/user_login.png) -40px -64px no-repeat;background-color:#fff}
+.regForm .info_list .log_password{width:203px;position:relative;padding:1px 0 0 35px;height:28px;border:1px solid #ccc;background:url(https://user.qunar.com/images/ugc/ucenter/user_login.png) 0 -64px no-repeat;background-color:#fff}
+.regForm .info_list .disable{background-color:#e0e0e0;color:#555}
+.regForm .info_vcode{margin-top:10px}
+.regForm .info_vcode .log_vcode{width:240px;height:38px;position:relative}
+.regForm .info_vcode .v_code{width:114px;float:left;padding:5px;height:18px;border:1px solid #ccc;margin-top:6px;background-color:#fff;vertical-align:middle;font-size:14px;font-family:tahoma,arial,sans-serif;color:#666;line-height:18px}
+.regForm .info_vcode .vcode_img{vertical-align:bottom;float:right}
+.regForm .info_vcode .log_vcode .ch_vcode{position:absolute;right:-45px;bottom:-3px}
+.regForm .remember_paw{width:240px;position:relative}
+.regForm .remember_paw .checkbox{width:13px;height:13px;vertical-align:bottom;_vertical-align:top;margin-right:5px}
+.regForm .remember_paw .checkbox:focus{outline:1px solid #e59700}
+.regForm .remember_paw label{cursor:pointer}
+.regForm .remember_paw .right_pasw{position:absolute;right:0;bottom:0}
+.regForm .remember_paw .phone_get{background:url(https://user.qunar.com/images/ugc/ucenter/user_login.png) 0 -95px;height:22px;width:105px;border:0;cursor:pointer;color:#fff;font-size:12px;line-height:22px;vertical-align:middle;_padding-top:2px}
+.regForm .remember_paw .phone_get:hover{background-position:-109px -95px}
+.regForm .remember_paw .phone_geted{background-color:#f5f5f5;height:22px;width:105px;border:1px solid #ddd;font-size:12px;line-height:20px;vertical-align:middle;color:#000}
+.regForm .wrong_tip{width:238px;border:1px solid #f8d3a7;background-color:#fffedf;height:28px;font-size:12px;line-height:28px;vertical-align:middle;margin-bottom:10px}
+.regForm .wrong_tip .iwrong{width:16px;height:16px;vertical-align:middle;background:url(https://user.qunar.com/images/ugc/ucenter/user_login.png) 0 -120px;display:inline-block;margin:0 10px;_float:left;_margin-top:5px}
+.regForm .wrong_tip .irelog{width:16px;height:16px;vertical-align:middle;background:url(https://user.qunar.com/images/ugc/ucenter/user_login.png) -24px -120px;display:inline-block;margin:0 10px;_float:left;_margin-top:5px}
+.regForm .log_btn .button{margin-top:5px;width:238px;border:0;background:url(https://user.qunar.com/images/ugc/ucenter/user_login.png) 0 0;height:30px;font-weight:bold;font-size:14px;color:#fff;line-height:30px;vertical-align:middle;cursor:pointer}
+.regForm .log_btn .button:hover{background-position:0 -30px}
+.regForm .log_btn .button:focus{outline:1px solid #e59700}
+.regForm .warm_tip{text-align:right;margin-top:10px}
+.sina_tip{padding:10px 0 25px 35px;zoom:1;margin-top:10px;vertical-align:bottom}
+.sina_tip .title_sina{color:#0069ca;padding-bottom:8px}
+.sina_tip a{cursor:pointer;width:48px;padding-left:21px;display:inline-block;line-height:24px;color:#555;background:url(https://user.qunar.com/images/ugc/ucenter/icons/login_link_icon.png) no-repeat;zoom:1}
+.sina_tip a:hover{text-decoration:none;color:#f60}
+.sina_tip .login_sina{width:65px;background-position:0 4px}
+.sina_tip .login_baidu{background-position:0 -26px}
+.sina_tip .login_renren{background-position:0 -86px;width:55px}
+.sina_tip .login_douban{background-position:0 -56px}
+.sina_tip .login_tuan800{width:65px;background-position:0 -112px}
+.sina_tip .login_qq{background-position:0 -142px}
+.sina_tip .login_kaixin{background-position:0 -176px}
+.sina_tip .login_wechat{background:url(https://source.qunarzz.com/usercenter/login/icon16_wx_logo.png) no-repeat;background-position:0 5px}
+.ft_container{position:absolute;bottom:0;width:100%}
+.third_login{padding:0 38px}
+.third_login .left_line{width:90px;height:2px;background-color:#ebebeb;float:left;position:relative;top:8px;font-size:0;line-height:2px}
+.third_login .right_line{width:90px;height:2px;background-color:#ebebeb;float:right;position:relative;top:8px;font-size:0;line-height:2px}
+.third_login .title{float:left;padding-left:8px}
+.third_login .clear{clear:both;height:0;line-height:0;font-size:0}
+.b_layer{padding:5px;width:380px;text-align:left;zoom:1;background:-moz-linear-gradient(top,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.2) 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(0,0,0,0.2)),color-stop(100%,rgba(0,0,0,0.2)));background:-webkit-linear-gradient(top,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.2) 100%);background:-o-linear-gradient(top,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.2) 100%);background:-ms-linear-gradient(top,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.2) 100%);background:linear-gradient(to bottom,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.2) 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#33000000",endColorstr="#33000000",GradientType=0)}
+.b_layer .e_inner{background:#fff}
+.b_layer .e_tit{margin-bottom:0;padding:0 10px;height:34px;background:#eee;font:14px/34px Arial}
+.b_layer .e_tit .m_close{display:block;float:right;margin-top:10px;width:10px;height:10px;background:url(https://user.qunar.com/images/ugc/ico_comm_v15_png8.png) no-repeat -34px -424px}
+.e_dialog_close{position:absolute;z-index:1;top:8px;right:10px;width:15px;height:15px;background:url(https://user.qunar.com/images/qui/user/dialog_close.png) 0 0 no-repeat}
+.b_layer .e_con{padding:30px}
+.ico_warning{float:left;margin:3px 10px 0 0;width:16px;height:16px;background:url(https://user.qunar.com/images/ugc/ico_comm_v15_png8.png) no-repeat -29px -628px}
+.m_msg_warn{margin-top:-3px;zoom:1}
+.m_msg_warn dt{display:block;float:left;width:25px;*width:0}
+.m_msg_warn dd{padding-left:25px;line-height:24px}
+.m_msg_warn dd.f14{font-size:14px}
+.m_msg_warn dd.btn{margin-top:9px;text-align:center}
+.btn_blue,.btn_blue span,.btn_cancel,.btn_cancel span{display:inline-block;margin-right:8px;height:22px;line-height:22px;color:#fff;background:url(https://user.qunar.com/images/ugc/btn_com_v6.png) no-repeat 0 0;cursor:pointer}
+.btn_blue{padding-left:10px;background-position:0 -150px}
+.btn_blue span{padding:0 13px 0 3px;background-position:100% -180px}
+.btn_blue:hover{background-position:0 -220px}
+.btn_blue:hover span{background-position:100% -250px}
+.btn_cancel{padding:0 0 0 10px;background-position:0 -340px}
+.btn_cancel span{padding:0 13px 0 3px;background-position:100% -365px;color:#333}
+.btn_cancel:hover{background-position:0 -390px}
+.btn_cancel:hover span{background-position:100% -415px}
+.btn_check span.fc{color:#555}
+.btn_check span{background:url(https://user.qunar.com/images/site/images/btns/btn20.png) no-repeat scroll 100% -23px transparent;color:#aaa;display:inline-block;font-family:simsun;height:23px;line-height:23px;padding-right:12px;padding-left:12px}
+.btn_check{cursor:pointer}
+.regForm .info_list .log_password.log_password_iphoe{width:89px}
+.regForm .info_list .log_password.log_password_iphoe .textbox{outline:0;border:1px solid transparent;*border:0;height:26px;padding:0 5px;width:75px;line-height:26px;background-color:#fff;vertical-align:middle;font-size:14px;font-family:tahoma,arial,sans-serif;color:#666}
+.regForm .log_password label{cursor:pointer}
+.regForm .log_password .right_pasw{position:absolute;right:0;bottom:3px}
+.regForm .log_password .phone_get{line-height:22px;background:url(https://user.qunar.com/images/ugc/ucenter/user_login.png) 0 -95px;height:22px;width:105px;border:0;cursor:pointer;color:#fff;font-size:12px}
+.regForm .log_password .phone_get:hover{background-position:-109px -95px}
+.regForm .log_password .phone_get:focus{outline:5px auto #e59700}
+.login_btn_gray{background:#f9f9f9;padding:3px 0;position:absolute;left:134px;border:1px solid #dedede;width:105px}
+.login-box{text-align:center;width:100%;height:100%;display:flex;position:fixed}
+.login-news{width:242px;line-height:12px;background:#fff;display:inline-block;margin:auto;padding:20px}
+.news-lgoin-box{margin:45px auto 110px;width:249px;font:normal 12px/12px "宋体"}
+.news-lgoin-box .login-news-item i{width:13px;height:13px;float:left;margin:0 5px 0 0;*margin:-4px 8px 0 0;_margin:-2px 2px 0 0}
+.news-lgoin-box .login-news-item .cur{font:bold 14px/14px "宋体";_font:bold 14px/16px "宋体"}
+.news-lgoin-box .login-news-item label{cursor:pointer}
+.news-lgoin-box .login-news-item .log-sta-tit{color:#555;_height:20px;_line-height:20px}
+.news-lgoin-box .login-news-item .normal-type{float:left}
+.news-lgoin-box .login-news-item .mobile-type{float:right}
+.news-lgoin-box .login-news-static{margin-right:15px}
+.news-lgoin-box .field-news{background:#fff;margin-top:20px;position:relative;height:28px;border:1px solid #ccc}
+.news-lgoin-box .field-news label{position:absolute;left:43px;top:9px;_line-height:14px;color:#ccc;z-index:2}
+.news-lgoin-box .field-news input,.news-lgoin-box .field-news input.textbox{color:#666;font:bold 14px/14px Tahoma;float:left;border-left:1px solid #ccc;padding-left:10px;margin-top:5px;height:18px;line-height:18px;width:182px}
+.news-lgoin-box .field-login i{float:left;background:url(https://user.qunar.com/images/ugc/ucenter/login-icon-v2.png) no-repeat 0 0;width:11px;height:11px;margin:9px 10px 0}
+.news-lgoin-box .field-login .usermame-field i{background-position:-129px -90px}
+.news-lgoin-box .field-login .password-field i,.field-login .phone-field i{background-position:-129px -101px}
+.news-lgoin-box .field-login .psw{background-color:#fff;position:absolute;left:32px;padding-top:5px;padding-left:10px;width:205px;height:23px;line-height:23px;font:normal 14px Tahoma;color:#aaa}
+.news-lgoin-box .phone-field{float:left;width:135px}
+.news-lgoin-box .field-phone .field-news input{width:90px}
+.news-lgoin-box .field-phone a{float:right;width:110px;height:22px;line-height:22px;_line-height:24px;color:#fff;text-align:center;background:#0b58e8;overflow:hidden;margin-top:24px}
+.news-lgoin-box .field-phone a:hover{background-position:0 -112px}
+.news-lgoin-box .field-phone a.nopoint,.news-lgoin-box .field-phone a.nopoint:hover{background-position:0 -134px}
+.news-lgoin-box .field-phone a.cur,.news-lgoin-box .field-phone a.cur:hover{color:#666;background:transparent;border:1px solid #ccc}
+.news-lgoin-box .field-vercode .field-news{width:249px}
+.news-lgoin-box .field-vercode .field-news label{left:10px}
+.news-lgoin-box .field-vercode .field-news input{width:105px;border-left:0;position:absolute;z-index:1;left:0}
+.news-lgoin-box .field-vercode p{float:right;margin:20px 0 0;position:relative}
+.news-lgoin-box .field-vercode p a{position:absolute;right:-45px;top:0;line-height:30px}
+.news-lgoin-box .field-vercode a.nogo{color:#0069ca}
+.news-lgoin-box .new-login-btn,.new-login-nopoint{border:0;display:inline-block;background:url(https://source.qunarzz.com/usercenter/login-left/pic_v4.png) no-repeat 0 0;overflow:hidden;width:249px;height:30px;color:#fff;text-align:center;font:bold 14px/30px '宋体';_font:bold 14px/32px '宋体';margin:20px 0 0}
+.news-lgoin-box .new-login-btn:hover{background-position:-249px 0;color:#fff}
+.news-lgoin-box .new-login-nopoint{background-position:0 -60px}
+.news-lgoin-box .new-remember_paw{margin-top:20px;line-height:14px}
+.news-lgoin-box .new-warm_tip{text-align:right}
+.news-lgoin-box .new-warm_tip a{color:#0069ca}
+.news-lgoin-box .new-paw{float:left}
+.news-lgoin-box .new-paw i{float:left;margin-right:10px;*margin-top:-3px;_margin-top:-3px}
+.news-lgoin-box .new-paw:hover i{background-position:-105px -102px}
+.news-lgoin-box .new-paw i.cur{background-position:-105px -114px}
+.news-lgoin-box .new-paw span{float:left;color:#555;cursor:pointer}
+.news-lgoin-box .new-paw label{cursor:pointer}
+.news-lgoin-box .new-forpwd{float:right;color:#0069ca}
+.news-lgoin-box .new-forpwd .separator{font-family:Arial}
+.news-lgoin-box .infor-error{margin-top:20px;border:1px solid #f8d3a7;background:#fffedf;padding:6px}
+.news-lgoin-box .infor-error i{float:left;width:16px;height:16px;overflow:hidden;background:url(https://user.qunar.com/images/ugc/ucenter/icon-btn.png) no-repeat -48px -83px;margin-right:5px}
+.news-lgoin-box .infor-error i.btn-yellow{margin-top:2px}
+.news-lgoin-box .infor-error i.btn-green{background-position:-32px -83px}
+.news-lgoin-box .infor-error i.btn-blue{background-position:0 -83px}
+.news-lgoin-box .infor-error i.btn-red{background-position:-16px -83px}
+.news-lgoin-box .infor-error span{float:left;line-height:18px;width:210px;text-align:left;color:#666}
+.news-lgoin-box .infor-error a{cursor:pointer}
+.news-lgoin-box input{margin:0;padding:0}
+.news-lgoin-box .field-login input{border:0}
+.news-lgoin-box .warm_tip{margin-top:10px;text-align:right}
+.news-lgoin-box .field-login .disable{background-color:#e3e3e3;color:#6b6b6b}
+.news-lgoin-box .field-login .disable input{background-color:#e3e3e3;color:#6b6b6b;border-left:1px solid #8e8e8e}
+.news-lgoin-box .field-login .disable label{background-color:#e3e3e3;color:#6b6b6b}
+.news-lgoin-box .port-swift{position:absolute;top:-1px;right:-24px;width:12px;padding:10px 5px;line-height:1.2;background-color:#f7f7f7;text-decoration:none;color:#9b9b9b;border:1px solid #ddd;-webkit-box-shadow:inset 1px 0 2px rgba(222,222,222,0.4);box-shadow:inset 1px 0 2px rgba(222,222,222,0.4)}
+.news-lgoin-box .port-swift:hover{color:#0069ca}
+.news-lgoin-box .port-swift .icon-phone{display:inline-block;*display:inline;*zoom:1;width:12px;height:20px;background:url(https://source.qunarzz.com/usercenter/login/icon-phone.png) 0 0 no-repeat}
+.news-lgoin-box .port-swift:hover .icon-phone{background:url(https://source.qunarzz.com/usercenter/login/icon-phone.png) 0 -20px no-repeat}
+.qrcode-box .pwd-login-tip{position:absolute;top:10px;right:35px;width:144px;height:30px;background:#fff;border:1px solid #d8d8d8;font-size:12px;line-height:30px;text-align:center;color:#ff9800}
+.qrcode-box .pwd-login-tip .qr-tip-relative{vertical-align:middle;line-height:1;position:relative;top:9px}
+.qrcode-box .pwd-login-tip .tip-img{position:relative;top:-2px}
+.qrcode-box .pwd-login-tip .qr-tip-relative .qr-tip-arrow,.qrcode-box .pwd-login-tip .qr-tip-relative .qr-tip-arrow-overlay{position:absolute;right:-5px;top:2px;border:5px solid transparent;border-right:0;border-left:5px solid #d8d8d8}
+.qrcode-box .pwd-login-tip .qr-tip-relative .qr-tip-arrow-overlay{top:2px;right:-4px;border-left:5px solid #fff}
+.qrcode-box .trans-square{width:8px;height:8px;position:absolute;background:#fff;top:22px;right:31px;transform:rotate(45deg);border-top:1px solid #d8d8d8;border-right:1px solid #d8d8d8}
+.hide{display:none}
+.fl{float:left}
+.fr{float:right}
+.half-login-field-news{margin:45px 0 20px 0;*margin-top:15px;position:relative;height:28px;line-height:28px}
+.half-login-field-news span{line-height:28px;_line-height:20px}
+.pswTips_halfLogin{margin-bottom:-10px}
+.sina_tip_halfLogin{padding:10px 0 25px 35px;height:74px;width:320px}
+.useOthers_halfLogin{margin-top:20px}
+.useOthers_halfLogin a{_line-height:20px}
+.half-login-field-news .maskKey-span{margin-left:5px;font-size:14px;font-family:Tahoma;font-weight:800;line-height:25px;_margin-top:-5px;width:148px;white-space:nowrap;overflow:hidden;-ms-text-overflow:ellipsis;text-overflow:ellipsis}
+.qrlayer{display:none;background-color:#f6f6f6;position:absolute;z-index:1;left:0;top:0;width:100%;height:100%}
+.qn_right .port-toggler{position:absolute;z-index:2;right:0;top:0;width:44px;height:44px;background:url(https://source.qunarzz.com/usercenter/login/qr-2.png) 0 0 no-repeat;-webkit-transition:all .2s;-o-transition:all .2s;transition:all .2s;display:block}
+.qn_right .port-toggler.normal{background-position:0 0}
+.qn_right .port-toggler.qrcode{background-position:-56px -56px}
+.qrlayer .qrcode-box{padding:70px 57px 18px}
+.qrlayer .qr-tit{color:#333;font-size:24px;text-align:center}
+.qrlayer .qr-scantip{text-align:center;font-size:12px;color:#212121}
+.qrlayer .qr-tip{display:none;position:absolute;left:86px;top:53px;*width:156px;padding:3px 12px;box-shadow:0 5px 40px -12px;background:#ffffeb;border:1px solid #fbd5a8;text-align:center}
+.qrlayer .qr-tip .qr-tip-relative{position:relative}
+.qrlayer .qr-tip .qr-tip-arrow,.qrlayer .qr-tip .qr-tip-arrow-overlay{position:absolute;left:73px;top:22px;*top:20px;border:4px solid transparent;*border-color:blue;*filter:chroma(color=blue);*font-size:0;*height:0;*overflow:hidden;border-bottom:0;border-top:4px solid #fbd5a8}
+.qrlayer .qr-tip .qr-tip-arrow-overlay{top:21px;*top:19px;border-top:4px solid #ffffeb}
+.qrlayer .qr-show{width:200px;height:200px;margin:20px auto}
+.qrlayer .txt{display:block;color:#11b4ca;font-size:12px;margin-left:-3px;position:relative;z-index:10}
+.qrlayer .helpbar{text-align:center;margin-top:25px;color:#555;position:relative;z-index:10}
+.qrlayer .helpbar a{color:#9e9e9e;cursor:pointer}
+.qrlayer .helpbar a:hover{color:#f60}
+.qrlayer .helpbar span{margin:0 10px}
+.qn_right .qrcode-detail-intro{position:absolute;z-index:3;top:44px;left:81px;width:200px;height:309px;background:url(https://source.qunarzz.com/usercenter/login/use_tips_4.png) 0 0 no-repeat;opacity:0;background-image:url(https://source.qunarzz.com/usercenter/login/use_tips_4_png8.png)\9;filter:alpha(opacity=0)}
+.qrlayer .downloadbar{margin-top:15px;text-align:center;color:#555;position:relative;z-index:10}
+.qn_right .qrcode-detail-intro .bubble{position:absolute;top:22px;left:79px;z-index:3;opacity:0;width:115px;height:101px;background:url(https://source.qunarzz.com/usercenter/login/use_tips_3_bubble.png) 0 0 no-repeat;filter:alpha(opacity=0);background-image:url(https://source.qunarzz.com/usercenter/login/use_tips_3_bubble_png8.png)\9}
+.qrlayer .qrcode-scan-success{position:absolute;left:0;top:0;right:0;bottom:0;background:#f6f6f6;display:none;_width:355px;_height:373px}
+.qrlayer .success-tips{position:absolute;z-index:4;top:166px;left:62px;width:380px}
+.qrlayer .success-tips h3{font-size:14px;color:#555;line-height:26px;font-weight:bold}
+.qrlayer .success-icon{width:48px;height:48px;background:url(https://source.qunarzz.com/usercenter/login/qr-2.png) 0 -115px no-repeat;float:left;margin-right:14px}
+.qrcode-login-ad{height:196px;padding-left:20px}
+.qrcode-login-ad .qrcode-login-ad-snap{background:url(https://source.qunarzz.com/usercenter/login/qrcode_login_ad.png) no-repeat;_background:url(https://source.qunarzz.com/usercenter/login/qrcode_login_ad_png8.png) no-repeat;width:144px;height:177px;float:left;padding-right:44px}
+.qn_left .left_txt .qrcode-login-ad dt{padding-top:26px;color:#009bb3;font-family:微软雅黑;font-size:20px;line-height:30px;font-weight:normal}
+.qn_left .left_txt .qrcode-login-ad dd{margin-top:12px;line-height:21px;color:#999}

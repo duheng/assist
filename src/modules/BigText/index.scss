@@ -13,7 +13,8 @@
     bottom: 0;
     right: 0;
     left: 0;
-    border-top: 1px solid #505050;
+    border-top: 1px solid #797F8D;
+    background-color: #FFFFFF;
     &-content {
         height: 100%;
         background-color: #FFFFFF;
@@ -21,5 +22,19 @@
         color: #333 !important;
         text-align: center;
         font-weight: bold;
+        width: 93%;
+        margin: 0 auto;
+    }
+
+    &-btn {
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        border-radius: 10px;
+        color: #FFFFFF;
+        cursor: pointer;
     }
 }

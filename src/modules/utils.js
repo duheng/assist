@@ -70,7 +70,8 @@ const removeEvent = (element, type, callback) => {
     }
 }
 const ruleType = (target) => {
-  const __role = !!target.getAttribute('role') && target.getAttribute('role').toUpperCase() 
+  const __role = !!target.getAttribute('role') && target.getAttribute('role').toUpperCase() || target.tagName.toUpperCase()
+ 
   const __roleName = {
     IMG: '图片',
     BUTTON: '按钮',
@@ -83,8 +84,16 @@ const ruleType = (target) => {
   if(__role == 'INPUT') {
     if(target.type == 'radio') {
         return '单选框';
-    }else if(target.type == 'checkbox') {
+    }else if(target.type == 'checkbox') { // button reset file
         return '复选框';
+    } else if(target.type == 'text') { // button reset file
+        return '文本框';
+    } else if(target.type == 'submit') {
+        return '提交按钮';
+    } else if(target.type == 'reset') {
+        return '重置按钮';
+    }  else if(target.type == 'password') {
+        return '密码输入框';
     } else {
         return '输入框';
     }
@@ -95,13 +104,13 @@ const ruleType = (target) => {
 const parseTagText = (target) => {
     const __name = ruleType(target)
     const __role = !!target.getAttribute('role') && target.getAttribute('role').toUpperCase() 
-
+  
     if (__role === 'A' || target.tagName === 'A') {
         console.log('这是一个链接:' + target.alt || target.title || target.innerText);
         return `链接 ${target.alt || target.title || target.innerText}`;
     }
 
-    if (target.children.length === 0  ){
+    if (target.children.length === 0){
         if (__role === 'IMG' ||target.tagName === 'IMG') {
             console.log('这是一张图片:' + target.alt || target.title);
             return `图片 ${target.alt || target.title}`;
@@ -115,6 +124,15 @@ const parseTagText = (target) => {
             return `${__name} ${target.alt || target.title || target.value}`;
         }
 
+        if (__role === 'LABEL' ||target.tagName === 'LABEL') {
+            const __linkId = target.getAttribute('for')
+            const __linkDom = document.getElementById(__linkId)
+           if(!!__linkDom && !!__linkDom.type && __linkDom.type == 'radio') {
+            console.log(`这是一个单选:` + target.alt || target.title || target.innerText);
+            return `单选 ${target.alt || target.title || target.innerText}`;
+           }
+        }
+
         if (target.alt || target.title || target.innerText){
             console.log(`${__name} ${target.alt || target.title || target.innerText}`);
             return `${__name} ${target.alt || target.title || target.innerText}`;
@@ -122,9 +140,9 @@ const parseTagText = (target) => {
         return ''
     } 
 
-    if (target.alt || target.title){
-        console.log(`${__name} ${target.alt || target.title}`);
-        return `${__name} ${target.alt || target.title}`;
+    if (target.alt || target.title || target.innerText){
+        console.log(`${__name} ${target.alt || target.title || target.innerText}`);
+        return `${__name} ${target.alt || target.title || target.innerText}`;
     }
     
     return ''
