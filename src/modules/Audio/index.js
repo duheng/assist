@@ -112,34 +112,27 @@ const Audio = {
     },
     playAudio(text) {
         const { namespace, AudioApi, isAudio, audio, speed, forceSafariPlayAudio } = Audio
+
         if(!isAudio) {
             return
         }
-        let __speed = speed == 'middle' ? -150 : 0
-
-        var __url = `https://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=${__speed}&text=${encodeURI(text)}`
-       // var __url2 = 'http://l-home2.wap.beta.cn0.qunar.com:8008/voice/testAudio'
+       
+       let __speed = speed == 'middle' ? -150 : 0
        let  AudioParam = `speed=${__speed}&text=${encodeURI(text)}`
        let AudioUrl = `${AudioApi}?${AudioParam}`
-        //  ajax.post(AudioApi, JSON.stringify({speed:__speed,content:'我爱你中国'}),(res)=>{
-        //      if(res) {
-                audio.src = AudioUrl
-                document.getElementById(`${namespace}-audio-source`).src =  AudioUrl
-                document.getElementById(`${namespace}-audio-embed`).src =  AudioUrl
-                let playPromise =  audio.play();
-                if(playPromise) {
-                    playPromise.then(_ => {
-                    // audio.pause();
-                        removeEvent(document,'click', forceSafariPlayAudio)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    });
-                }
-        //     }
-        // })
-      
-        
+        audio.src = AudioUrl
+        document.getElementById(`${namespace}-audio-source`).src =  AudioUrl
+        document.getElementById(`${namespace}-audio-embed`).src =  AudioUrl
+        let playPromise =  audio.play();
+        if(playPromise) {
+            playPromise.then(_ => {
+            // audio.pause();
+                removeEvent(document,'click', forceSafariPlayAudio)
+            })
+            .catch(error => {
+                console.log(error)
+            });
+        }
     },
     reset() {
         const { namespace } = Audio
