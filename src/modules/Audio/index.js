@@ -115,13 +115,12 @@ const Audio = {
         if(!isAudio) {
             return
         }
-        let __speed = speed == 'middle' ? 5 : 7
+        let __speed = speed == 'middle' ? -150 : 0
 
         var __url = `https://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=${__speed}&text=${encodeURI(text)}`
-        var __url2 = 'http://l-home2.wap.beta.cn0.qunar.com:8008/voice/stream'
-        console.log('url------', AudioApi)
-        ajax.post(AudioApi,JSON.stringify({speed:0,content:'我爱你中国'}),(res)=>{
-            console.log('res------', res)
+       // var __url2 = 'http://l-home2.wap.beta.cn0.qunar.com:8008/voice/testAudio'
+
+        ajax.get(AudioApi, JSON.stringify({speed:__speed,content:'我爱你中国'}),(res)=>{
             if(res) {
                 audio.src = res
                 document.getElementById(`${namespace}-audio-source`).src = res
@@ -137,7 +136,6 @@ const Audio = {
                     });
                 }
             }
-           
         })
       
         
