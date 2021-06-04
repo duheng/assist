@@ -95,6 +95,12 @@ const ruleType = (target) => {
 const parseTagText = (target) => {
     const __name = ruleType(target)
     const __role = !!target.getAttribute('role') && target.getAttribute('role').toUpperCase() 
+
+    if (__role === 'A' || target.tagName === 'A') {
+        console.log('这是一个链接:' + target.alt || target.title || target.innerText);
+        return `链接 ${target.alt || target.title || target.innerText}`;
+    }
+
     if (target.children.length === 0  ){
         if (__role === 'IMG' ||target.tagName === 'IMG') {
             console.log('这是一张图片:' + target.alt || target.title);
@@ -113,14 +119,8 @@ const parseTagText = (target) => {
             console.log(`${__name} ${target.alt || target.title || target.innerText}`);
             return `${__name} ${target.alt || target.title || target.innerText}`;
         }
-    
         return ''
     } 
-   
-    if (__role === 'A' || target.tagName === 'A') {
-        console.log('这是一个链接:' + target.alt || target.title || target.innerText);
-        return `链接 ${target.alt || target.title || target.innerText}`;
-    }
 
     if (target.alt || target.title){
         console.log(`${__name} ${target.alt || target.title}`);
