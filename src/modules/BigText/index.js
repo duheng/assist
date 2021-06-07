@@ -14,9 +14,11 @@ const BigText = {
     },
     setEvents(core) {
       const { namespace } = core.config
-      if(cookie.get('bigtext',namespace)) {
-        this.show(core)
-      }
+      addEvent(window,'DOMContentLoaded',()=>{
+        if(cookie.get('bigtext',namespace)) {
+            this.show(core)
+        }
+      })
       this.toggleBigText(core, namespace)
     },
     addEventMove() {
@@ -61,20 +63,22 @@ const BigText = {
     show(core) {
         const { namespace } = core.config
         const activeBtn =  document.getElementById(`${namespace}-bigtext-html`)
-        const tabBar = document.getElementById(namespace)
+        const tabBar = document.getElementById(`${namespace}-bigtext-bone`)
         activeBtn.style.display = 'block'
-        tabBar.style.marginTop = '151px'
+        tabBar.className = 'bigtext-html-bone'
         this.addEventMove()
         cookie.set('bigtext', true, namespace)
+        core.message.publish('bigTextState',true)
     },
     reset(core) {
         const { namespace } = core.config
         const activeBtn =  document.getElementById(`${namespace}-bigtext-html`)
-        const tabBar = document.getElementById(namespace)
+        const tabBar = document.getElementById(`${namespace}-bigtext-bone`)
         activeBtn.style.display = 'none'
-        tabBar.style.marginTop = '0px'
+        tabBar.className = ''
         this.removeEventMove()
         cookie.set('bigtext', false, namespace)
+        core.message.publish('bigTextState',false)
     }
 };
 
