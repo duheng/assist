@@ -40,7 +40,10 @@ export default class Base {
     registeOpen() {
       if(document.getElementById('assist-open')) {
         document.getElementById('assist-open').onclick = ()=> {
-          !this.existIgnore() && this.show()
+          if(!this.existIgnore()) {
+            this.show()
+            this.message.publish('openState',true)
+          }
         }
       }
     }
