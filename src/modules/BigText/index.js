@@ -3,14 +3,16 @@ import audioTabText from '../constans'
 import Audio from '../Audio';
 
 import styles from './index.scss'
-import tmpl from './index.tmpl.js'
+import { BigTextHtml, BigTextBone } from './index.tmpl.js'
+
 const BigText = {
     init(core) {
         const { namespace } = core.config
         this.body =  document.body
         this.namespace = namespace
         core.creatStyle('bigtext-style',styles)
-        core.creatHtml('bigtext-html',tmpl)
+        core.creatHtml('bigtext-html',BigTextHtml)
+        core.creatHtml('bigtext-bone',BigTextBone)
     },
     setEvents(core) {
       const { namespace } = core.config
@@ -65,7 +67,7 @@ const BigText = {
         const activeBtn =  document.getElementById(`${namespace}-bigtext-html`)
         const tabBar = document.getElementById(`${namespace}-bigtext-bone`)
         activeBtn.style.display = 'block'
-        tabBar.className = 'bigtext-html-bone'
+        tabBar.style.display = 'block'
         this.addEventMove()
         cookie.set('bigtext', true, namespace)
         core.message.publish('bigTextState',true)
@@ -75,7 +77,7 @@ const BigText = {
         const activeBtn =  document.getElementById(`${namespace}-bigtext-html`)
         const tabBar = document.getElementById(`${namespace}-bigtext-bone`)
         activeBtn.style.display = 'none'
-        tabBar.className = ''
+        tabBar.style.display = 'none'
         this.removeEventMove()
         cookie.set('bigtext', false, namespace)
         core.message.publish('bigTextState',false)
