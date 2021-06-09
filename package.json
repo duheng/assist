@@ -45,6 +45,7 @@
     "rollup-plugin-terser": "^7.0.2"
   },
   "dependencies": {
+    "@qnpm/qmark": "0.0.23",
     "js-cookie": "^2.2.1"
   }
 }

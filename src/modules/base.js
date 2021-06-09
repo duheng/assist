@@ -1,3 +1,4 @@
+import QMark from '@qnpm/qmark';
 import { cookie , addEvent, removeEvent } from './utils'
 import pubSub from './pubSub'
 
@@ -11,6 +12,7 @@ export default class Base {
       this.tmplStyle = []
       this.tmplHtml = []
       this.registeOpen()
+    
     }
 
     mergeConfig(opts) {
@@ -40,10 +42,21 @@ export default class Base {
     registeOpen() {
       if(document.getElementById('assist-open')) {
         document.getElementById('assist-open').onclick = ()=> {
+
           if(!this.existIgnore()) {
             this.show()
             this.message.publish('openState',true)
           }
+
+          QMark.log({
+              bizType: "rdc",
+              appcode: "qunar_common",
+              operType: "show",
+              page: "assist",
+              module: "open_assist",
+              title: "插件打开次数",
+              id: 'open_num',  
+          })
         }
       }
     }
