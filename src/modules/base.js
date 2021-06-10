@@ -57,6 +57,7 @@ export default class Base {
               title: "插件打开次数",
               id: 'open_num',  
           })
+          
         }
       }
     }
