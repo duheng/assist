@@ -217,6 +217,15 @@ const isIE11 = () => {
         return false;
     }
 }
+
+const isFirefox = () => {
+    const ua = navigator.userAgent
+    if(ua.indexOf('Firefox')) {
+        return true
+    }
+    return false
+}
+
 const removeNode = (item) => {
 　　if( isIE()||isIE11() ) {
         item.removeNode(true);
@@ -231,5 +240,6 @@ export {
     parseTagText,
     ajax,
     triggerEvent,
-    removeNode
+    removeNode,
+    isFirefox
 };
