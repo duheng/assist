@@ -220,7 +220,7 @@ const isIE11 = () => {
 
 const isFirefox = () => {
     const ua = navigator.userAgent
-    if(ua.indexOf('Firefox')) {
+    if(ua.indexOf('Firefox') > -1) {
         return true
     }
     return false

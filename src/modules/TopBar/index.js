@@ -1,4 +1,4 @@
-import { cookie, addEvent, removeEvent } from '../utils'
+import { cookie, addEvent,isFirefox,  removeEvent } from '../utils'
 import styles from './index.scss'
 import tmpl from './index.tmpl.js'
 const TopBar = {
@@ -20,6 +20,11 @@ const TopBar = {
 
         BtnReset.onclick = () => {
             core.resetAction()
+        }
+
+        if(isFirefox()) {
+            document.getElementById(`${namespace}-zoom-out`).style.display = 'none'
+            document.getElementById(`${namespace}-zoom-min`).style.display = 'none'
         }
 
         [].forEach.call( HoverItem.children, (el)=> {
