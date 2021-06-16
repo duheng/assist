@@ -1,5 +1,5 @@
 import { cookie, addEvent, removeEvent, parseTagText } from '../utils'
-import audioTabText from '../constans'
+import audioTabText,{ symbolsReg } from '../constans'
 import Audio from '../Audio';
 
 import styles from './index.scss'
@@ -55,12 +55,11 @@ const BigText = {
         var __parentNodeId  =  target.parentNode.id
         var __isAssist = __parentNodeId.indexOf(namespace) > -1
         const activeBtn = document.getElementById(`${namespace}-bigtext-content`)
-        activeBtn.innerText = parseTagText(target)
-        if(__isAssist) {
+        activeBtn.innerText = parseTagText(target).replace(symbolsReg,'');
+        if(__isAssist || activeBtn.innerText == '文本') {
             activeBtn.innerText = ''
             return
         }
-        activeBtn.innerText = parseTagText(target)
     },
     show(core) {
         const { namespace } = core.config

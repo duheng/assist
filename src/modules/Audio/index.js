@@ -1,5 +1,5 @@
-import { cookie, ajax, addEvent, removeEvent, parseTagText, triggerEvent } from '../utils'
-import audioTabText from '../constans'
+import { cookie, ajax, addEvent, removeEvent, parseTagText, triggerEvent, trim } from '../utils'
+import audioTabText,{ symbolsReg } from '../constans'
 
 import styles from './index.scss'
 import tmpl from './index.tmpl.js'
@@ -102,10 +102,11 @@ const Audio = {
     mouseOver(event){
         var event = window.event || event;
         var target = event.target || event.srcElement;
-        var __text = parseTagText(target)
+        var __text = parseTagText(target).replace(symbolsReg,'')
         var __parentNodeId  =  target.parentNode.id
         var __isAssist = __parentNodeId.indexOf(Audio.namespace) > -1
-        if(__text == '' || __isAssist ) {
+        
+        if(__text == '' || trim(__text) == '文本' || __isAssist ) {
             return
         }
         Audio.playAudio(__text)

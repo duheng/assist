@@ -26,7 +26,7 @@ function generateWebConfig(isBrowser,input) {
         output:  {
             dir: 'dist',
             format: isBrowser ? 'umd' : 'cjs',
-            name: 'Assist'
+            name: 'QunarAssist'
         },
         plugins: [
             sass(),

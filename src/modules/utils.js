@@ -153,6 +153,9 @@ const parseTagText = (target) => {
     
 }
 
+const trim = (s) => {
+    return s.replace(/(^\s*)|(\s*$)/g, "");
+}
 
 const triggerEvent = (element, eventType) =>{
     var e;
@@ -241,5 +244,6 @@ export {
     ajax,
     triggerEvent,
     removeNode,
-    isFirefox
+    isFirefox,
+    trim
 };
