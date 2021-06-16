@@ -1,4 +1,4 @@
-import QMark from '@qnpm/qmark';
+import QMark from './qmark';
 import { cookie , addEvent, removeEvent } from './utils'
 import pubSub from './pubSub'
 
