@@ -1,3 +1,4 @@
+/*bable不会转译全局属性如 Proxy 等*/
 import Proxy from 'es6-proxy-polyfill'
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};

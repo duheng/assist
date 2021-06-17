@@ -1,4 +1,4 @@
-
+import  './modules/hack';
 import Base from './modules/base';
 import TopBar from './modules/TopBar';
 import Audio from './modules/Audio';
