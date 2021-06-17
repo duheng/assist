@@ -144,7 +144,7 @@ const parseTagText = (target) => {
         return ''
     } 
 
-    if (target.alt || target.title || target.innerText){
+    if (target.children.length < 5 && (target.alt || target.title || target.innerText)){
         console.log(`${__name} ${target.alt || target.title || target.innerText}`);
         return `${__name} ${target.alt || target.title || target.innerText}`;
     }
