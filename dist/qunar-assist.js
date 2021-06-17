@@ -8317,9 +8317,6 @@
 
         var __key = "".concat(origin).concat(pathname);
 
-        console.log('namespace++++', cookie.getTag(namespace));
-        console.log('__key++++', __key);
-        console.log('existIgnore++++', cookie.getTag(namespace).includes(__key));
         return cookie.getTag(namespace).includes(__key);
       }
     }, {
@@ -8624,7 +8621,7 @@
     audioClose: '声音关闭',
     reset: '已重置'
   };
-  var symbolsReg = new RegExp("[]");
+  var symbolsReg = new RegExp("[]");
 
   var styles$3 = ".bigtext-html {\n  z-index: 99999999999;\n  height: 150px;\n  text-align: center;\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  left: 0;\n  border-top: 1px solid #505050;\n}\n.bigtext-html-content {\n  height: 100%;\n  background-color: #FFFFFF;\n  font-size: 53px;\n  color: #333 !important;\n  text-align: center;\n  font-weight: bold;\n}";
 

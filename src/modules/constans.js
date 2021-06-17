@@ -16,6 +16,6 @@ const audioTabText = {
     audioClose: '声音关闭',
     reset: '已重置',
 }
-export const symbolsReg = new RegExp("[]")
+export const symbolsReg = new RegExp("[]")
 export default audioTabText
 

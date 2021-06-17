@@ -78,9 +78,6 @@ export default class Base {
       const { namespace } = this.config
       const { origin, pathname } = location
       const __key = `${origin}${pathname}`
-      console.log('namespace++++',cookie.getTag(namespace))
-      console.log('__key++++',__key)
-      console.log('existIgnore++++',cookie.getTag(namespace).includes(__key))
       return cookie.getTag(namespace).includes(__key)
     }
 
