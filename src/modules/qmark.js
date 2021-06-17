@@ -1,4 +1,4 @@
-var Proxy = require('es6-proxy-polyfill');
+import Proxy from 'es6-proxy-polyfill'
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
