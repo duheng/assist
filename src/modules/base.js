@@ -42,12 +42,13 @@ export default class Base {
     registeOpen() {
       if(document.getElementById('assist-open')) {
         document.getElementById('assist-open').onclick = ()=> {
-
           if(!this.existIgnore()) {
             this.show()
             this.message.publish('openState',true)
+          } else {
+            const { namespace } = this.config
+            cookie.set('show',true, namespace)
           }
-
           QMark.log({
               bizType: "rdc",
               appcode: "qunar_common",
@@ -91,9 +92,8 @@ export default class Base {
 
     showTag() {
       const { namespace } = this.config
-      cookie.setTag(namespace)
-      cookie.set('show',true, namespace)
-      this.resetAction()
+      cookie.setTag(namespace) // 设置忽略
+      this.resetAction() // 重置插件状态
     }
 
     isShowTopBar(isShow) {
