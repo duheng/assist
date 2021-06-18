@@ -48,6 +48,8 @@ export default class Base {
           } else {
             const { namespace } = this.config
             cookie.set('show',true, namespace)
+            const __href = document.getElementById('assist-open').getAttribute('assist-href')
+            window.location.href = __href
           }
           QMark.log({
               bizType: "rdc",
