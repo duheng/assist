@@ -40,8 +40,10 @@ export default class Base {
     }
 
     registeOpen() {
-      if(document.getElementById('assist-open')) {
-        document.getElementById('assist-open').onclick = ()=> {
+      addEvent(document,'click',(event)=>{
+        var event = window.event || event;
+        var target = event.target || event.srcElement;
+        if(target.getAttribute('id') == 'assist-open') {
           if(!this.existIgnore()) {
             this.show()
             this.message.publish('openState',true)
@@ -60,9 +62,8 @@ export default class Base {
               title: "插件打开次数",
               id: 'open_num',  
           })
-          
         }
-      }
+      })
     }
 
     isShow() {
