@@ -108,11 +108,7 @@ export default class Base {
         cookie.set('show',true, namespace)
         this.hideModules()
       } else {
-        if(document.body.style.cssText) {
-          document.body.style.cssText = ''
-        } else {
-          document.body.style = ''
-        }
+        document.body.style.cssText = ''
         //activeBtn.style.display = 'none'
         cookie.remove(`${namespace}`)
         location.reload()
