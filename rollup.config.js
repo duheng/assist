@@ -20,10 +20,17 @@ const entry = {
     'assist-entry':'./src/assist-entry.js'
 }
 
+const mark = `/**
+* 欢迎来到墨子工程
+* 邮箱: duheng1100@163.com
+* github: https://github.com/duheng/
+**/`
+
 function generateWebConfig(isBrowser,input) {
     return {
         input,
         output:  {
+            banner: mark,
             dir: 'dist',
             format: isBrowser ? 'umd' : 'cjs',
             name: 'AssistEntry'

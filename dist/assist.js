@@ -1,7 +1,12 @@
+/**
+* 欢迎来到墨子工程
+* 邮箱: duheng1100@163.com
+* github: https://github.com/duheng/
+**/
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.QunarAssist = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.AssistEntry = factory());
 }(this, (function () { 'use strict';
 
   function ownKeys$1(object, enumerableOnly) {
