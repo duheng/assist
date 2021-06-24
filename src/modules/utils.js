@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie'
-
+import config from '../config.json';
+const __domain = config.domain
 const cookie = {
     set:(key,value, namespace) => {
      let memory = {
@@ -17,7 +18,7 @@ const cookie = {
         memory = JSON.parse(Cookies.get(namespace))
      }
      memory[key] = value
-     Cookies.set(namespace, JSON.stringify(memory) , { domain: '.qunar.com' })
+     Cookies.set(namespace, JSON.stringify(memory) , { domain: __domain })
     },
     get:(key, namespace)=> {
         let __key = ''
@@ -27,7 +28,7 @@ const cookie = {
        return __key
     },
     remove: (namespace) => {
-        Cookies.remove(namespace, { domain: '.qunar.com'})
+        Cookies.remove(namespace, { domain: __domain})
     },
     setTag: (namespace) => {
         const __key = `${namespace}-ignore`
@@ -38,7 +39,7 @@ const cookie = {
          const { origin, pathname } = location
          const __ignoreUrl = `${origin}${pathname}`
         !__data.includes(__ignoreUrl) && __data.push(`${origin}${pathname}`)
-        Cookies.set(__key, JSON.stringify(__data) , { domain: '.qunar.com' })
+        Cookies.set(__key, JSON.stringify(__data) , { domain: __domain })
     },
     getTag: (namespace) => {
         const __key = `${namespace}-ignore`

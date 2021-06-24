@@ -3584,6 +3584,8 @@
     return Assist;
   }(Base);
 
-  return Assist;
+  var AssistEntry = new Assist(config);
+
+  return AssistEntry;
 
 })));

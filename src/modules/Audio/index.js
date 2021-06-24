@@ -118,8 +118,8 @@ const Audio = {
             return
         }
        
-       let __speed = speed == 'middle' ? -150 : 0
-       let  AudioParam = `speed=${__speed}&text=${encodeURI(text)}`
+       let __speed = speed == 'middle' ? 5 : 7
+       let  AudioParam = `lan=zh&ie=UTF-8&spd=${__speed}&text=${encodeURI(text)}`
        let AudioUrl = `${AudioApi}?${AudioParam}`
         audio.src = AudioUrl
         document.getElementById(`${namespace}-audio-source`).src =  AudioUrl

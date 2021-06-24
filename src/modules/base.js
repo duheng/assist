@@ -1,4 +1,3 @@
-import QMark from './qmark';
 import { cookie , addEvent, removeEvent } from './utils'
 import pubSub from './pubSub'
 
@@ -6,6 +5,7 @@ export default class Base {
     constructor() {
       this.config = {
         namespace: 'mozi-assist',
+        domain: '.mozi.com',
         url: ''
       };
       this.message = pubSub
@@ -53,15 +53,6 @@ export default class Base {
             const __href = document.getElementById('assist-open').getAttribute('assist-href')
             window.location.href = __href
           }
-          QMark.log({
-              bizType: "rdc",
-              appcode: "qunar_common",
-              operType: "show",
-              page: "assist",
-              module: "open_assist",
-              title: "插件打开次数",
-              id: 'open_num',  
-          })
         }
       })
     }
