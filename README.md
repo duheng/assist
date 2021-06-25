@@ -1,5 +1,25 @@
 ## 无障碍插件
 > 这是一个针对于 有视障、听说障碍、读写障碍、肢体障碍，机体功能衰退的老年人群开发的一个辅助插件使用网站的js插件
+
+### 插件接入方式：
+*  1 - 在页面banner处加入id为 assist-open 的标签
+*  2 - 在页面底部 body 之前引入插件；
+*  3 - 如果需要特殊处理的地方使用后面的API做对应处理;
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>墨子工程</title>
+</head>
+<body>
+<div id='assist-open'>无障碍</div>
+<script type="text/javascript" src="dist/assist-entry.js"></script>
+</body>
+</html>
+```
+
 ## API
 
 - showTag;   用于打开无障碍标识，（点击无障碍后并不在当前页面打开，而是跳转到其他没有调用showTag的页面打开）
@@ -89,23 +109,6 @@
 </html>
 ```
 
-### 插件接入方式：
->  1 - 在页面banner处加入id为 assist-open 的标签
->  2 - 在页面底部 body 之前引入插件；
-
-```
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>墨子工程</title>
-</head>
-<body>
-<div id='assist-open'>无障碍</div>
-<script type="text/javascript" src="dist/assist-entry.js"></script>
-</body>
-</html>
-```
 
 ### 页面标注: 
 > 对于插件无法识别或识别不准的标签需业务自行标注，标注规范如下
