@@ -1970,7 +1970,7 @@
   });
 
   var namespace = "mozi-assist";
-  var domain = ".qunar.com";
+  var domain = "";
   var url = "//tts.baidu.com/text2audio";
   var config = {
   	namespace: namespace,

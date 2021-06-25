@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "盲人辅助工具",
   "scripts": {
-    "start": "rollup --config rollup.config.js --watch",
+    "start": "export ENV=development && rollup --config rollup.config.js --watch",
     "build": "rollup --config rollup.config.js"
   },
   "repository": {
@@ -42,6 +42,7 @@
     "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-hash": "^1.3.0",
     "rollup-plugin-sass": "^1.2.2",
+    "rollup-plugin-serve": "^1.1.0",
     "rollup-plugin-terser": "^7.0.2"
   },
   "dependencies": {

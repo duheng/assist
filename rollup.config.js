@@ -10,6 +10,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import image from '@rollup/plugin-image';
 import { terser } from "rollup-plugin-terser";
+import serve from "rollup-plugin-serve";
 
 // import hash from 'rollup-plugin-hash';
 
@@ -73,7 +74,11 @@ function generateWebConfig(isBrowser,input) {
                 targets: [
                   { src: 'src/assets/allaw.cur', dest: 'example' }
                 ]
-            })
+            }),
+            process.env.ENV === "development" ? serve({
+                port: 3000,
+                contentBase: ["./"], // 静态资源所在目录
+            }) : null
         ],
     };
 }
