@@ -7,7 +7,7 @@
 
 <p align="center">
 
-<img height="470" src="https://picbed.qunarzz.com/9d6a34976287a970676bb376cb62311b.jpeg" />
+<img height="420" src="https://picbed.qunarzz.com/9d6a34976287a970676bb376cb62311b.jpeg" />
 
 </p>
 
